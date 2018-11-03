@@ -1,0 +1,158 @@
+\documentclass[letterpaper]{article} % Feel free to change this
+\usepackage{epsfig}
+
+\begin{document}
+
+\title{ECE 350: Digital Systems Project Proposal}
+\author{Natalia Androsz, Mary Stuart Elder, and Stefani Vukajlovic} % Change this to your name
+\date{November 3, 2018} % Change this to the date you are submitting
+\maketitle
+
+\section{Introduction}
+
+By submitting this \LaTeX{} document, I affirm that
+\begin{enumerate}
+    \item I understand that each \texttt{git} commit I create in this repository is a submission
+    \item I affirm that each submission complies with the Duke Community Standard and the guidelines set forth for this assignment
+    \item I further acknowledge that any content not included in this commit under the version control system cannot be considered as a part of my submission.
+    \item Finally, I understand that a submission is considered submitted when it has been pushed to the server.
+\end{enumerate}
+
+\section{Introduction to Idea}
+We plan to create a Harry Potter inspired spell casting game. Users will be shown a pattern on a screen and they will have to trace it, as if they were casting a spell. They will trace patterns using custom built IR Wand controllers to give better game play experience. There will be various challenge opportunities, such as tracing a moving pattern, or tracing a pattern from memory. Additionally, there will be an option to "duel" another user. Keeping with the Harry Potter theme, users will be able to select their Hogwarts House at the beginning of the game, and contribute their score to a House Points leader board.
+
+
+\section{Tasks}
+
+\subsection{Game play features}
+\subsubsection{Custom IR Wand Controllers}
+    \begin{enumerate}
+        \item Custom 3D printed wands using IR communication to control user input.
+        \item This is a very difficult task.
+        \item We request 30 points.
+    \end{enumerate}
+    
+\subsubsection{dueling FPGAs on one screen}
+\begin{enumerate}
+    \item Have the option to add a second player in a wand "duel"
+    \item Two users would compete to trace spell patterns the fastest/most accurately through several rounds
+    \item This is a nontrivial task because we figure out how to run the program simultaneously on two different FPGAs but to keep data shared; figure out how to keep track of two different IR remotes locations on one screen
+    \item Input: switch
+    \item Output: multiple wand cursors on a screen
+    \item Processor use: extensive
+    \item We propose this item to be worth 30 points.
+\end{enumerate}
+
+\subsubsection{Multiple Options of Spells}
+    \begin{enumerate}
+        \item This is a significant portion of the game. Creating a series of traces for players to follow allows for variety and interesting game play.
+        \item This is a moderate task.
+        \item Input: user chooses a spell
+        \item Output: Specif trace appears on the VGA screen
+        \item Processor use: significant
+        \item We propose this item to be worth 10 points
+    \end{enumerate}
+    
+\subsubsection{Power-ups}
+    \begin{enumerate}
+        \item We would like to implement several power-ups, such as to make the line wider so it's easier to trace, increase time left to complete the spell, increase points generation, etc.
+        \item This is not a trivial task as we would have to keep track of previously obtained power-ups by user when adding new ones and we would need to update all components of the game that the power up affects
+        \item Input: Power-up
+        \item Output: Certain property change
+        \item Processor use: significant
+        \item We propose this item to be worth 20 points
+    \end{enumerate}
+
+\subsection{Graphics/Sound Features}
+\subsubsection{Display User Trace on Screen}
+    \begin{enumerate}
+        \item As the user follows the trace on the screen we want to show the users trace on the screen too
+        \item This is a non-trivial task as we need to process the inputs quickly and synchronously show the user trace on the screen
+        \item Input: Location user is pointing the remote
+        \item Output: User's trace on the screen
+        \item Processor use: significant
+        \item We propose this item to be worth 30 points
+    \end{enumerate}
+
+\subsubsection{"Glitter effect" for wand position on screen}
+\begin{enumerate}
+    \item User's screen cursor gives off "sparks" (like the end of a wand) on the screen
+    \item Glitter effect also happens when the user is tracing a pattern
+    \item This is a nontrivial task because we have to create an algorithm to randomly select pixels around the user's cursor location to color.
+    \item Input: where a user points their remote must be tracked
+    \item Output: the glitter effect must show up on the VGA screen
+    \item Processor use: extensive use of addition
+    \item We propose it should be worth 10 points.
+\end{enumerate}
+
+\subsubsection{allow users to select Hogwarts House (color scheme)}
+\begin{enumerate}
+    \item Allow user to select one of four Hogwarts houses to compete for
+    \item Their choice will entirely change the color scheme of the game
+    \item This is a nontrivial task because we must remap every pixel depending on user choice of House.
+    \item Input: user selects Hogwarts House
+    \item Output: color schema of VGA screen
+    \item Processor use: nothing significant
+    \item We propose this item to be worth 20 points.
+\end{enumerate}
+
+\subsubsection{Theme Music and Sound Effects}
+    \begin{enumerate}
+        \item We want to make the theme music for the game with different sound effects during trace and when trace is done. We would have different sound effect for different spells and the sounds would differ based on how far you are tracing from the line
+        \item This is a moderate task as we would have to make different sound effects and engage them by specific actions and properties, which is significantly more complicated then the laboratory on this topic.
+        \item Processor use: not significant
+        \item We propose this item to be worth 10 points
+    \end{enumerate}
+
+\subsection{Scoring Features}
+\subsubsection{Points based on \% of design correctly traced}
+\begin{enumerate}
+    \item A user's score is dependent on how accurately they trace a pattern given to them
+    \item We must track what percentage of the pattern's pixels the user hits.
+    \item This is a nontrivial task because we must track every location on the screen that the user moves the wand.
+    \item Input: location user is pointing the remote over time
+    \item Output: score
+    \item Processor use: extensive
+    \item We propose this item be worth 20 points.
+\end{enumerate}
+
+\subsection{Game Challenge Features}
+
+\subsubsection{Challenge: Time Limits for Spell Casting}
+    \begin{enumerate}
+        \item We want to be able to make the game more interesting by limiting the users time to cast the spell
+        \item This is a moderate task
+        \item Input: counter
+        \item Output: The spell trace would disappear
+        \item Processor use: not significant
+        \item We propose this item to be worth 10 points
+    \end{enumerate}
+
+\subsubsection{Challenge: Non-Static Trace}
+    \begin{enumerate}
+        \item We want to bring the game to upper level by making it harder to trace the line by making non Static traces
+        \item This is a non-trivial task, as we would have to implement algorithms for trace movement and we would need to keep track of new trace location as well as users to calculate scores
+        \item Input: Movement algorithm
+        \item Output: Non-static Trace
+        \item Processor use: extensive
+        \item We propose this item to be worth 20 points
+    \end{enumerate}
+    
+
+\section{Timeline}
+\textbf{11/08/2018 - PC6}\\
+For the first project check point we plan to start the integration of the task 1, custom IR Wand Controller. In addition, we will implement several spell traces to be displayed on the VGA screen(task 6). We will outline the different color schemes for different Hogwarts Houses(task 4).\\
+\\
+\textbf{11/15/2018 - PC7}\\
+For the second project check point we plan to finish the integration of the Wand Controller (task 1) and to display the user's trace on the screen as it points to it (task 7) . We will also add the glittering effect in this Project checkpoint(task 2). We will start the implementation of the task 5 - dueling FPGAs on one screen.\\
+\\
+\textbf{11/27/2018 - PC8}\\
+For this project checkpoint we plan to finish task 5 dueling FPGAs on one screen, implement scoring system (task 3), add theme music and sound effects (task 8). Additionally, we will implement time limits for spell casting and non-static traces (tasks 10 and 11).\\
+\\
+\textbf{12/06/2018 - PC9 Project Demo}\\
+Project Presentation.\\
+\\
+\textbf{12/07/2018 - PC10 Report}\\
+Project report and evaluations.\\
+\\
+\end{document}
