@@ -7,7 +7,9 @@ module graphics(
 	VGA_R,   														//	VGA Red[9:0]
 	VGA_G,	 														//	VGA Green[9:0]
 	VGA_B,															//	VGA Blue[9:0]
-	CLOCK_50);  													// 50 MHz clock
+	CLOCK_50,														// 50 MHz clock
+	G, S, H, R														// house color control
+	);  												
 		
 	////////////////////////	VGA	////////////////////////////
 	output			VGA_CLK;   				//	VGA Clock
@@ -19,6 +21,7 @@ module graphics(
 	output	[7:0]	VGA_G;	 				//	VGA Green[9:0]
 	output	[7:0]	VGA_B;   				//	VGA Blue[9:0]
 	input				CLOCK_50;
+	input 			G, S, H, R;				// house color controls
 	
 	wire			 clock;
 	
@@ -31,14 +34,18 @@ module graphics(
 		
 	// VGA
 	Reset_Delay			r0	(.iCLK(CLOCK_50),.oRESET(DLY_RST)	);
-	vga_controller vga_ins(.iRST_n(DLY_RST),
-								 .iVGA_CLK(VGA_CLK),
+	vga_controller vga_ins(.i_rst(DLY_RST),
+								 .clk(VGA_CLK),
 								 .oBLANK_n(VGA_BLANK),
-								 .oHS(VGA_HS),
-								 .oVS(VGA_VS),
+								 .o_hs(VGA_HS),
+								 .o_vs(VGA_VS),
 								 .b_data(VGA_B),
 								 .g_data(VGA_G),
-								 .r_data(VGA_R));
+								 .r_data(VGA_R),
+								 .gryffindor(G),
+								 .slytherin(S),
+								 .hufflepuff(H),
+								 .ravenclaw(R));
 	
 	
 endmodule

@@ -84,7 +84,7 @@ begin
   else if (in_trace == 1'b1)
 		color_index <= 8'd4;
   else 
-		color_index <= index;
+		color_index <= 8'd4;
 end
 
 //////Color table output

@@ -1,0 +1,633 @@
+// Copyright (C) 1991-2016 Altera Corporation. All rights reserved.
+// Your use of Altera Corporation's design tools, logic functions 
+// and other software and tools, and its AMPP partner logic 
+// functions, and any output files from any of the foregoing 
+// (including device programming or simulation files), and any 
+// associated documentation or information are expressly subject 
+// to the terms and conditions of the Altera Program License 
+// Subscription Agreement, the Altera Quartus Prime License Agreement,
+// the Altera MegaCore Function License Agreement, or other 
+// applicable license agreement, including, without limitation, 
+// that your use is for the sole purpose of programming logic 
+// devices manufactured by Altera and sold by Altera or its 
+// authorized distributors.  Please refer to the applicable 
+// agreement for further details.
+
+// VENDOR "Altera"
+// PROGRAM "Quartus Prime"
+// VERSION "Version 16.0.0 Build 211 04/27/2016 SJ Lite Edition"
+
+// DATE "11/08/2018 09:07:35"
+
+// 
+// Device: Altera EP4CE115F29C7 Package FBGA780
+// 
+
+// 
+// This Verilog file should be used for ModelSim-Altera (Verilog) only
+// 
+
+`timescale 1 ps/ 1 ps
+
+module graphics (
+	VGA_CLK,
+	VGA_HS,
+	VGA_VS,
+	VGA_BLANK,
+	VGA_SYNC,
+	VGA_R,
+	VGA_G,
+	VGA_B,
+	CLOCK_50,
+	G,
+	S,
+	H,
+	R);
+output 	VGA_CLK;
+output 	VGA_HS;
+output 	VGA_VS;
+output 	VGA_BLANK;
+output 	VGA_SYNC;
+output 	[7:0] VGA_R;
+output 	[7:0] VGA_G;
+output 	[7:0] VGA_B;
+input 	CLOCK_50;
+input 	G;
+input 	S;
+input 	H;
+input 	R;
+
+// Design Ports Information
+// VGA_CLK	=>  Location: PIN_A12,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// VGA_HS	=>  Location: PIN_G13,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// VGA_VS	=>  Location: PIN_C13,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// VGA_BLANK	=>  Location: PIN_F11,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// VGA_SYNC	=>  Location: PIN_C10,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// VGA_R[0]	=>  Location: PIN_E12,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// VGA_R[1]	=>  Location: PIN_E11,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// VGA_R[2]	=>  Location: PIN_D10,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// VGA_R[3]	=>  Location: PIN_F12,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// VGA_R[4]	=>  Location: PIN_G10,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// VGA_R[5]	=>  Location: PIN_J12,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// VGA_R[6]	=>  Location: PIN_H8,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// VGA_R[7]	=>  Location: PIN_H10,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// VGA_G[0]	=>  Location: PIN_G8,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// VGA_G[1]	=>  Location: PIN_G11,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// VGA_G[2]	=>  Location: PIN_F8,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// VGA_G[3]	=>  Location: PIN_H12,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// VGA_G[4]	=>  Location: PIN_C8,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// VGA_G[5]	=>  Location: PIN_B8,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// VGA_G[6]	=>  Location: PIN_F10,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// VGA_G[7]	=>  Location: PIN_C9,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// VGA_B[0]	=>  Location: PIN_B10,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// VGA_B[1]	=>  Location: PIN_A10,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// VGA_B[2]	=>  Location: PIN_C11,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// VGA_B[3]	=>  Location: PIN_B11,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// VGA_B[4]	=>  Location: PIN_A11,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// VGA_B[5]	=>  Location: PIN_C12,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// VGA_B[6]	=>  Location: PIN_D11,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// VGA_B[7]	=>  Location: PIN_D12,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// CLOCK_50	=>  Location: PIN_Y2,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// G	=>  Location: PIN_Y24,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// S	=>  Location: PIN_Y23,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// H	=>  Location: PIN_AA22,	 I/O Standard: 2.5 V,	 Current Strength: Default
+// R	=>  Location: PIN_AA23,	 I/O Standard: 2.5 V,	 Current Strength: Default
+
+
+wire gnd;
+wire vcc;
+wire unknown;
+
+assign gnd = 1'b0;
+assign vcc = 1'b1;
+assign unknown = 1'bx;
+
+tri1 devclrn;
+tri1 devpor;
+tri1 devoe;
+// synopsys translate_off
+initial $sdf_annotate("graphics_min_1200mv_0c_v_fast.sdo");
+// synopsys translate_on
+
+wire \CLOCK_50~input_o ;
+wire \G~input_o ;
+wire \S~input_o ;
+wire \H~input_o ;
+wire \R~input_o ;
+wire \VGA_CLK~output_o ;
+wire \VGA_HS~output_o ;
+wire \VGA_VS~output_o ;
+wire \VGA_BLANK~output_o ;
+wire \VGA_SYNC~output_o ;
+wire \VGA_R[0]~output_o ;
+wire \VGA_R[1]~output_o ;
+wire \VGA_R[2]~output_o ;
+wire \VGA_R[3]~output_o ;
+wire \VGA_R[4]~output_o ;
+wire \VGA_R[5]~output_o ;
+wire \VGA_R[6]~output_o ;
+wire \VGA_R[7]~output_o ;
+wire \VGA_G[0]~output_o ;
+wire \VGA_G[1]~output_o ;
+wire \VGA_G[2]~output_o ;
+wire \VGA_G[3]~output_o ;
+wire \VGA_G[4]~output_o ;
+wire \VGA_G[5]~output_o ;
+wire \VGA_G[6]~output_o ;
+wire \VGA_G[7]~output_o ;
+wire \VGA_B[0]~output_o ;
+wire \VGA_B[1]~output_o ;
+wire \VGA_B[2]~output_o ;
+wire \VGA_B[3]~output_o ;
+wire \VGA_B[4]~output_o ;
+wire \VGA_B[5]~output_o ;
+wire \VGA_B[6]~output_o ;
+wire \VGA_B[7]~output_o ;
+
+
+// Location: IOOBUF_X47_Y73_N2
+cycloneive_io_obuf \VGA_CLK~output (
+	.i(gnd),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\VGA_CLK~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \VGA_CLK~output .bus_hold = "false";
+defparam \VGA_CLK~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X38_Y73_N16
+cycloneive_io_obuf \VGA_HS~output (
+	.i(gnd),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\VGA_HS~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \VGA_HS~output .bus_hold = "false";
+defparam \VGA_HS~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X54_Y73_N2
+cycloneive_io_obuf \VGA_VS~output (
+	.i(gnd),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\VGA_VS~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \VGA_VS~output .bus_hold = "false";
+defparam \VGA_VS~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X31_Y73_N9
+cycloneive_io_obuf \VGA_BLANK~output (
+	.i(gnd),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\VGA_BLANK~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \VGA_BLANK~output .bus_hold = "false";
+defparam \VGA_BLANK~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X35_Y73_N16
+cycloneive_io_obuf \VGA_SYNC~output (
+	.i(gnd),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\VGA_SYNC~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \VGA_SYNC~output .bus_hold = "false";
+defparam \VGA_SYNC~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X33_Y73_N2
+cycloneive_io_obuf \VGA_R[0]~output (
+	.i(gnd),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\VGA_R[0]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \VGA_R[0]~output .bus_hold = "false";
+defparam \VGA_R[0]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X31_Y73_N2
+cycloneive_io_obuf \VGA_R[1]~output (
+	.i(gnd),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\VGA_R[1]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \VGA_R[1]~output .bus_hold = "false";
+defparam \VGA_R[1]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X35_Y73_N23
+cycloneive_io_obuf \VGA_R[2]~output (
+	.i(gnd),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\VGA_R[2]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \VGA_R[2]~output .bus_hold = "false";
+defparam \VGA_R[2]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X33_Y73_N9
+cycloneive_io_obuf \VGA_R[3]~output (
+	.i(gnd),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\VGA_R[3]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \VGA_R[3]~output .bus_hold = "false";
+defparam \VGA_R[3]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X20_Y73_N9
+cycloneive_io_obuf \VGA_R[4]~output (
+	.i(gnd),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\VGA_R[4]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \VGA_R[4]~output .bus_hold = "false";
+defparam \VGA_R[4]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X40_Y73_N9
+cycloneive_io_obuf \VGA_R[5]~output (
+	.i(gnd),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\VGA_R[5]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \VGA_R[5]~output .bus_hold = "false";
+defparam \VGA_R[5]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X11_Y73_N23
+cycloneive_io_obuf \VGA_R[6]~output (
+	.i(gnd),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\VGA_R[6]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \VGA_R[6]~output .bus_hold = "false";
+defparam \VGA_R[6]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X20_Y73_N16
+cycloneive_io_obuf \VGA_R[7]~output (
+	.i(gnd),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\VGA_R[7]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \VGA_R[7]~output .bus_hold = "false";
+defparam \VGA_R[7]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X11_Y73_N16
+cycloneive_io_obuf \VGA_G[0]~output (
+	.i(gnd),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\VGA_G[0]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \VGA_G[0]~output .bus_hold = "false";
+defparam \VGA_G[0]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X25_Y73_N16
+cycloneive_io_obuf \VGA_G[1]~output (
+	.i(gnd),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\VGA_G[1]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \VGA_G[1]~output .bus_hold = "false";
+defparam \VGA_G[1]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X11_Y73_N9
+cycloneive_io_obuf \VGA_G[2]~output (
+	.i(gnd),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\VGA_G[2]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \VGA_G[2]~output .bus_hold = "false";
+defparam \VGA_G[2]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X25_Y73_N23
+cycloneive_io_obuf \VGA_G[3]~output (
+	.i(gnd),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\VGA_G[3]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \VGA_G[3]~output .bus_hold = "false";
+defparam \VGA_G[3]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X16_Y73_N9
+cycloneive_io_obuf \VGA_G[4]~output (
+	.i(gnd),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\VGA_G[4]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \VGA_G[4]~output .bus_hold = "false";
+defparam \VGA_G[4]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X16_Y73_N2
+cycloneive_io_obuf \VGA_G[5]~output (
+	.i(gnd),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\VGA_G[5]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \VGA_G[5]~output .bus_hold = "false";
+defparam \VGA_G[5]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X20_Y73_N2
+cycloneive_io_obuf \VGA_G[6]~output (
+	.i(gnd),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\VGA_G[6]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \VGA_G[6]~output .bus_hold = "false";
+defparam \VGA_G[6]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X23_Y73_N16
+cycloneive_io_obuf \VGA_G[7]~output (
+	.i(gnd),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\VGA_G[7]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \VGA_G[7]~output .bus_hold = "false";
+defparam \VGA_G[7]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X38_Y73_N9
+cycloneive_io_obuf \VGA_B[0]~output (
+	.i(gnd),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\VGA_B[0]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \VGA_B[0]~output .bus_hold = "false";
+defparam \VGA_B[0]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X38_Y73_N2
+cycloneive_io_obuf \VGA_B[1]~output (
+	.i(gnd),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\VGA_B[1]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \VGA_B[1]~output .bus_hold = "false";
+defparam \VGA_B[1]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X23_Y73_N2
+cycloneive_io_obuf \VGA_B[2]~output (
+	.i(gnd),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\VGA_B[2]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \VGA_B[2]~output .bus_hold = "false";
+defparam \VGA_B[2]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X42_Y73_N9
+cycloneive_io_obuf \VGA_B[3]~output (
+	.i(gnd),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\VGA_B[3]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \VGA_B[3]~output .bus_hold = "false";
+defparam \VGA_B[3]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X42_Y73_N2
+cycloneive_io_obuf \VGA_B[4]~output (
+	.i(gnd),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\VGA_B[4]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \VGA_B[4]~output .bus_hold = "false";
+defparam \VGA_B[4]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X52_Y73_N16
+cycloneive_io_obuf \VGA_B[5]~output (
+	.i(gnd),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\VGA_B[5]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \VGA_B[5]~output .bus_hold = "false";
+defparam \VGA_B[5]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X23_Y73_N9
+cycloneive_io_obuf \VGA_B[6]~output (
+	.i(gnd),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\VGA_B[6]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \VGA_B[6]~output .bus_hold = "false";
+defparam \VGA_B[6]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOOBUF_X52_Y73_N23
+cycloneive_io_obuf \VGA_B[7]~output (
+	.i(gnd),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\VGA_B[7]~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \VGA_B[7]~output .bus_hold = "false";
+defparam \VGA_B[7]~output .open_drain_output = "false";
+// synopsys translate_on
+
+// Location: IOIBUF_X0_Y36_N15
+cycloneive_io_ibuf \CLOCK_50~input (
+	.i(CLOCK_50),
+	.ibar(gnd),
+	.o(\CLOCK_50~input_o ));
+// synopsys translate_off
+defparam \CLOCK_50~input .bus_hold = "false";
+defparam \CLOCK_50~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X115_Y13_N1
+cycloneive_io_ibuf \G~input (
+	.i(G),
+	.ibar(gnd),
+	.o(\G~input_o ));
+// synopsys translate_off
+defparam \G~input .bus_hold = "false";
+defparam \G~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X115_Y14_N8
+cycloneive_io_ibuf \S~input (
+	.i(S),
+	.ibar(gnd),
+	.o(\S~input_o ));
+// synopsys translate_off
+defparam \S~input .bus_hold = "false";
+defparam \S~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X115_Y6_N15
+cycloneive_io_ibuf \H~input (
+	.i(H),
+	.ibar(gnd),
+	.o(\H~input_o ));
+// synopsys translate_off
+defparam \H~input .bus_hold = "false";
+defparam \H~input .simulate_z_as = "z";
+// synopsys translate_on
+
+// Location: IOIBUF_X115_Y10_N8
+cycloneive_io_ibuf \R~input (
+	.i(R),
+	.ibar(gnd),
+	.o(\R~input_o ));
+// synopsys translate_off
+defparam \R~input .bus_hold = "false";
+defparam \R~input .simulate_z_as = "z";
+// synopsys translate_on
+
+assign VGA_CLK = \VGA_CLK~output_o ;
+
+assign VGA_HS = \VGA_HS~output_o ;
+
+assign VGA_VS = \VGA_VS~output_o ;
+
+assign VGA_BLANK = \VGA_BLANK~output_o ;
+
+assign VGA_SYNC = \VGA_SYNC~output_o ;
+
+assign VGA_R[0] = \VGA_R[0]~output_o ;
+
+assign VGA_R[1] = \VGA_R[1]~output_o ;
+
+assign VGA_R[2] = \VGA_R[2]~output_o ;
+
+assign VGA_R[3] = \VGA_R[3]~output_o ;
+
+assign VGA_R[4] = \VGA_R[4]~output_o ;
+
+assign VGA_R[5] = \VGA_R[5]~output_o ;
+
+assign VGA_R[6] = \VGA_R[6]~output_o ;
+
+assign VGA_R[7] = \VGA_R[7]~output_o ;
+
+assign VGA_G[0] = \VGA_G[0]~output_o ;
+
+assign VGA_G[1] = \VGA_G[1]~output_o ;
+
+assign VGA_G[2] = \VGA_G[2]~output_o ;
+
+assign VGA_G[3] = \VGA_G[3]~output_o ;
+
+assign VGA_G[4] = \VGA_G[4]~output_o ;
+
+assign VGA_G[5] = \VGA_G[5]~output_o ;
+
+assign VGA_G[6] = \VGA_G[6]~output_o ;
+
+assign VGA_G[7] = \VGA_G[7]~output_o ;
+
+assign VGA_B[0] = \VGA_B[0]~output_o ;
+
+assign VGA_B[1] = \VGA_B[1]~output_o ;
+
+assign VGA_B[2] = \VGA_B[2]~output_o ;
+
+assign VGA_B[3] = \VGA_B[3]~output_o ;
+
+assign VGA_B[4] = \VGA_B[4]~output_o ;
+
+assign VGA_B[5] = \VGA_B[5]~output_o ;
+
+assign VGA_B[6] = \VGA_B[6]~output_o ;
+
+assign VGA_B[7] = \VGA_B[7]~output_o ;
+
+endmodule
