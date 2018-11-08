@@ -44,19 +44,6 @@ begin
      ADDR<=ADDR+1;
 end
 
-// convert address to pixel row and column
-reg [8:0] row;
-reg [9:0] col;
-reg in_trace;
-always@(posedge clk)
-begin
-  row <= ADDR / 640;
-  col <= ADDR % 640;
-  if ((row >=40 || row < 439) && (col >=120 && col <= 519))
-		in_trace <= 1'b1;
-  else
-		in_trace <= 1'b0;
-end
 
 //////////////////////////
 //////INDEX addr.
@@ -70,8 +57,21 @@ img_data	img_data_inst (
 /////////////////////////
 //////Add switch-input logic here
 reg [7:0] color_index;
+reg [18:0] count;
+reg in_trace;
+reg [8:0] row;
+reg [9:0] col;
+
 always@(posedge clk)
 begin
+
+	row <= ADDR / 640;
+	col <= ADDR % 640;
+  if ((row >=40 && row <= 439) && (col >=120 && col <= 519))
+		in_trace <= 1'b1;
+  else
+		in_trace <= 1'b0;
+	
   // if not in trace set background color
   if(in_trace == 1'b0 && slytherin)
 		color_index <= 8'd0;
@@ -93,7 +93,7 @@ img_index	img_index_inst (
 	.clock ( clk ),
 	.q ( bgr_data_raw)
 	);	
-//////
+
 //////latch valid data at falling edge;
 always@(posedge VGA_CLK_n) bgr_data <= bgr_data_raw;
 assign b_data = bgr_data[23:16];

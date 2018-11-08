@@ -42,7 +42,7 @@ set_global_assignment -name DEVICE EP4CE115F29C7
 set_global_assignment -name TOP_LEVEL_ENTITY graphics
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 16.0.0
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "08:37:04  NOVEMBER 08, 2018"
-set_global_assignment -name LAST_QUARTUS_VERSION 16.0.0
+set_global_assignment -name LAST_QUARTUS_VERSION "17.1.0 Lite Edition"
 set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
 set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
 set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
@@ -54,20 +54,8 @@ set_global_assignment -name EDA_OUTPUT_DATA_FORMAT "VERILOG HDL" -section_id eda
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
-set_global_assignment -name QIP_FILE pll.qip
-set_global_assignment -name SOURCE_FILE pll.ppf
-set_global_assignment -name SOURCE_FILE pll.cmp
-set_global_assignment -name VERILOG_FILE vga_controller.v
-set_global_assignment -name VERILOG_FILE video_sync_generator.v
-set_global_assignment -name VERILOG_FILE img_index.v
-set_global_assignment -name VERILOG_FILE img_data.v
-set_global_assignment -name MIF_FILE color_mapping.mif
-set_global_assignment -name MIF_FILE pixel_mapping.mif
-set_global_assignment -name VERILOG_FILE graphics.v
-set_global_assignment -name VERILOG_FILE pll.v
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
-set_global_assignment -name VERILOG_FILE Reset_Delay.v
 set_location_assignment PIN_D12 -to VGA_B[7]
 set_location_assignment PIN_D11 -to VGA_B[6]
 set_location_assignment PIN_C12 -to VGA_B[5]
@@ -102,4 +90,16 @@ set_location_assignment PIN_Y24 -to G
 set_location_assignment PIN_Y23 -to S
 set_location_assignment PIN_AA22 -to H
 set_location_assignment PIN_AA23 -to R
+set_global_assignment -name QIP_FILE pll.qip
+set_global_assignment -name SOURCE_FILE pll.ppf
+set_global_assignment -name SOURCE_FILE pll.cmp
+set_global_assignment -name VERILOG_FILE vga_controller.v
+set_global_assignment -name VERILOG_FILE video_sync_generator.v
+set_global_assignment -name VERILOG_FILE img_index.v
+set_global_assignment -name VERILOG_FILE img_data.v
+set_global_assignment -name MIF_FILE color_mapping.mif
+set_global_assignment -name MIF_FILE pixel_mapping.mif
+set_global_assignment -name VERILOG_FILE graphics.v
+set_global_assignment -name VERILOG_FILE pll.v
+set_global_assignment -name VERILOG_FILE Reset_Delay.v
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
