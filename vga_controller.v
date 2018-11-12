@@ -94,10 +94,11 @@ background bckgrd(.G(gryffindor), .H(hufflepuff),
 							.color_index(bckgrd_color), .clk(iVGA_CLK));
 
 wire [7:0] cursor_color;
-wire cursor_here;					
+wire cursor_here, sparkle_here;					
 cursor	  crsr(.row(row), .col(col), .cursor_here(cursor_here), 
 					 .color_index(cursor_color), .clk(iVGA_CLK),
-					 .up(up), .down(down), .left(left), .right(right));
+					 .up(up), .down(down), .left(left), .right(right),
+					 .sparkle_here(sparkle_here));
 
 wire [7:0] box_color;
 wire traced;
@@ -114,11 +115,13 @@ four_by_four boxz(.row(row), .col(col),
 // background color					 
 assign color_index = ~in_trace ? bckgrd_color : 8'dz;
 // cursor location
-assign color_index = in_trace & cursor_here ? cursor_color : 8'dz;
+assign color_index = in_trace & cursor_here & ~sparkle_here ? cursor_color : 8'dz;
 // traced box
-assign color_index = in_trace & traced & ~cursor_here ? box_color : 8'dz;
+assign color_index = in_trace & traced & ~cursor_here & ~sparkle_here ? box_color : 8'dz;
+// sparkle effect
+assign color_index = sparkle_here ? 8'd5 : 8'dz;
 // otherwise
-assign color_index = ~cursor_here & ~traced ? 8'd0 : 8'dz;
+assign color_index = ~cursor_here & ~traced & ~sparkle_here ? 8'd0 : 8'dz;
 
 	
 //////Color table output
@@ -130,9 +133,9 @@ img_index	img_index_inst (
 //////
 //////latch valid data at falling edge;
 always@(posedge VGA_CLK_n) bgr_data <= bgr_data_raw;
-assign b_data = bgr_data[23:16];
+assign r_data = bgr_data[23:16];
 assign g_data = bgr_data[15:8];
-assign r_data = bgr_data[7:0]; 
+assign b_data = bgr_data[7:0]; 
 ///////////////////
 //////Delay the iHD, iVD,iDEN for one clock cycle;
 always@(negedge iVGA_CLK)

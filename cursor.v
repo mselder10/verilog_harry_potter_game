@@ -1,5 +1,5 @@
 module cursor(row, col, cursor_here, color_index, clk,
-					up, down, left, right);
+					up, down, left, right, sparkle_here);
 	
 	input up, down, left, right, clk;
 	input [8:0] row;
@@ -9,7 +9,7 @@ module cursor(row, col, cursor_here, color_index, clk,
 	reg [7:0] cursor_color;
 	reg cursor_is_here;
 	
-	output cursor_here;
+	output cursor_here, sparkle_here;
 	output [7:0] color_index;
 	
 	initial
@@ -48,5 +48,8 @@ module cursor(row, col, cursor_here, color_index, clk,
 	
 	assign color_index = cursor_color;
 	assign cursor_here = cursor_is_here;
+	
+	sparkle sprkz(.clk(clk), .sparkle(sparkle_here), 
+					  .x(x), .y(y), .row(row), .col(col));
 
 endmodule
