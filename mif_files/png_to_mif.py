@@ -265,11 +265,11 @@ color_sum = [0,
 13684944,
 14342874,
 15000804,
-978670,
+15658734
 ]
 
-input_filename = "ravenclaw.png"
-output_filename = "ravenclaw.mif"
+input_filename = "hogwarts_logo.png"
+output_filename = "hogwarts_logo.mif"
 
 im = Image.open(input_filename)
 
