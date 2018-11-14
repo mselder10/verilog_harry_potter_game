@@ -1,5 +1,4 @@
 import sys
-import array
 
 header = """
 WIDTH=24;
@@ -8,28 +7,23 @@ ADDRESS_RADIX = HEX;
 DATA_RADIX = HEX;
 CONTENT BEGIN\n"""
 
+input_filename = "color_table"
 output_filename = "colors.mif"
 
-f = open(output_filename, 'w');
+read = open(input_filename, 'r');
+write = open(output_filename, 'w');
 print("Writing to colors.mif");
-f.write(header)
-red = 0
-green = 0
-blue = 0
 
+write.write(header)
+index = 0
 for x in range(0,256):
-  hex_red = "{:02x}".format(red)
-  hex_green = "{:02x}".format(green)
-  hex_blue = "{:02x}".format(blue)
-  hex_color = hex_red+hex_green+hex_blue
+  line = read.readline()
+  hex_color = line[9:-4]
+  write.write(hex(index)[2:] + ":\t" + hex_color + ";\n")
+  index+=1
+write.write("END;")
+print("DONE")
 
-  f.write(hex(x)[2:] + ":\t" + hex_color + ";\n")
 
-  red = red + 1
-  green = green + 1
-  blue = blue + 1
 
-f.write("END;")
-
-print(">>> DONE");
 
