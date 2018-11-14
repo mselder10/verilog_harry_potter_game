@@ -68,6 +68,7 @@ reg [8:0] cursor_row;
 reg [9:0] cursor_col;
 // what color to output
 wire [7:0] color_index;
+reg[18:0] in_trace_pixel;
 
 always@(posedge iVGA_CLK)
 begin
@@ -80,49 +81,65 @@ begin
   else
 		in_trace <= 1'b0;
 		
-  if (cursor_here == 1)
-  begin
-		cursor_row <= row;
-		cursor_col <= col;
-  end
+	if(in_trace_pixel == 160000)
+		in_trace_pixel <= 0;
+	
+	if(in_trace)
+		in_trace_pixel <= in_trace_pixel+1;
+//  if (cursor_here == 1)
+//  begin
+//		cursor_row <= row;
+//		cursor_col <= col;
+//  end
 		
 end
 
-wire [7:0] bckgrd_color;
-background bckgrd(.G(gryffindor), .H(hufflepuff), 
-							.S(slytherin), .R(ravenclaw), 
-							.color_index(bckgrd_color), .clk(iVGA_CLK));
+//wire [7:0] bckgrd_color;
+//background bckgrd(.G(gryffindor), .H(hufflepuff), 
+//							.S(slytherin), .R(ravenclaw), 
+//							.color_index(bckgrd_color), .clk(iVGA_CLK));
+//
+//wire [7:0] cursor_color;
+//wire cursor_here, sparkle_here;					
+//cursor	  crsr(.row(row), .col(col), .cursor_here(cursor_here), 
+//					 .color_index(cursor_color), .clk(iVGA_CLK),
+//					 .up(up), .down(down), .left(left), .right(right),
+//					 .sparkle_here(sparkle_here));
+//
+//wire [7:0] fade_color;
+//wire fade;		 
+//fade_block block(.row(row), .col(col), .clk(iVGA_CLK), .here(fade), .color(fade_color));
+//
+//wire [7:0] box_color;
+//wire traced;
+///*two_by_two boxz(.row(row), .col(col), 
+//					 .cursor_row(cursor_row), .cursor_col(cursor_col), 
+//					 .in_trace(in_trace), .color_in_box(color_in_box), 
+//					 .box_color(box_color), .clk(iVGA_CLK));*/
+//					 
+//four_by_four boxz(.row(row), .col(col),  
+//						.color_in_box(traced), .box_color(box_color), 
+//						.clk(iVGA_CLK), .ir_in(ir_in));
+//					 
+//
+//// background color					 
+//assign color_index = ~in_trace & ~fade ? bckgrd_color : 8'dz;
+//// cursor location
+//assign color_index = in_trace & cursor_here /*& ~sparkle_here*/ ? cursor_color : 8'dz;
+//// traced box
+//assign color_index = in_trace & traced & ~cursor_here /*& ~sparkle_here*/ ? box_color : 8'dz;
+//// sparkle effect
+////assign color_index = sparkle_here ? 8'd5 : 8'dz;
+//assign color_index = fade & ~in_trace ? fade_color : 8'dz;
+//// otherwise
+//assign color_index = ~cursor_here & ~traced /*& ~sparkle_here*/ ? 8'd0 : 8'dz;
+//
+//	
 
-wire [7:0] cursor_color;
-wire cursor_here, sparkle_here;					
-cursor	  crsr(.row(row), .col(col), .cursor_here(cursor_here), 
-					 .color_index(cursor_color), .clk(iVGA_CLK),
-					 .up(up), .down(down), .left(left), .right(right),
-					 .sparkle_here(sparkle_here));
-
-wire [7:0] box_color;
-wire traced;
-/*two_by_two boxz(.row(row), .col(col), 
-					 .cursor_row(cursor_row), .cursor_col(cursor_col), 
-					 .in_trace(in_trace), .color_in_box(color_in_box), 
-					 .box_color(box_color), .clk(iVGA_CLK));*/
-					 
-four_by_four boxz(.row(row), .col(col),  
-						.color_in_box(traced), .box_color(box_color), 
-						.clk(iVGA_CLK), .ir_in(ir_in));
-					 
-
-// background color					 
-assign color_index = ~in_trace ? bckgrd_color : 8'dz;
-// cursor location
-assign color_index = in_trace & cursor_here & ~sparkle_here ? cursor_color : 8'dz;
-// traced box
-assign color_index = in_trace & traced & ~cursor_here & ~sparkle_here ? box_color : 8'dz;
-// sparkle effect
-assign color_index = sparkle_here ? 8'd5 : 8'dz;
-// otherwise
-assign color_index = ~cursor_here & ~traced & ~sparkle_here ? 8'd0 : 8'dz;
-
+hogwarts_logo logo(
+	.address(in_trace_pixel),
+	.clock(iVGA_CLK),
+	.q(color_index));
 	
 //////Color table output
 img_index	img_index_inst (
@@ -130,7 +147,8 @@ img_index	img_index_inst (
 	.clock ( iVGA_CLK ),
 	.q ( bgr_data_raw)
 	);	
-//////
+////
+
 //////latch valid data at falling edge;
 always@(posedge VGA_CLK_n) bgr_data <= bgr_data_raw;
 assign r_data = bgr_data[23:16];

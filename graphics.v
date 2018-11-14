@@ -1,7 +1,4 @@
 module graphics(resetn, 
-	ps2_clock, ps2_data, 										// ps2 related I/O
-	debug_data_in, debug_addr, leds, 						// extra debugging ports
-	lcd_data, lcd_rw, lcd_en, lcd_rs, lcd_on, lcd_blon,// LCD info
 	VGA_CLK,   														//	VGA Clock
 	VGA_HS,															//	VGA H_SYNC
 	VGA_VS,															//	VGA V_SYNC
@@ -32,13 +29,9 @@ module graphics(resetn,
 
 	////////////////////////	PS2	////////////////////////////
 	input 			resetn;
-	inout 			ps2_data, ps2_clock;
-	
+
 	////////////////////////	LCD and Seven Segment	////////////////////////////
-	output 			   lcd_rw, lcd_en, lcd_rs, lcd_on, lcd_blon;
-	output 	[7:0] 	leds, lcd_data;
-	output 	[31:0] 	debug_data_in;
-	output   [11:0]   debug_addr;
+
 	
 	
 	
@@ -62,10 +55,10 @@ module graphics(resetn,
 	//processor myprocessor(clock, ~resetn, /*ps2_key_pressed, ps2_out, lcd_write_en, lcd_write_data,*/ debug_data_in, debug_addr);
 	
 	// keyboard controller
-	PS2_Interface myps2(clock, resetn, ps2_clock, ps2_data, ps2_key_data, ps2_key_pressed, ps2_out);
+	//PS2_Interface myps2(clock, resetn, ps2_clock, ps2_data, ps2_key_data, ps2_key_pressed, ps2_out);
 	
 	// lcd controller
-	lcd mylcd(clock, ~resetn, 1'b1, ps2_out, lcd_data, lcd_rw, lcd_en, lcd_rs, lcd_on, lcd_blon);
+	//lcd mylcd(clock, ~resetn, 1'b1, ps2_out, lcd_data, lcd_rw, lcd_en, lcd_rs, lcd_on, lcd_blon);
 	
 	// some LEDs that you could use for debugging if you wanted
 	assign leds = 8'b00101011;
