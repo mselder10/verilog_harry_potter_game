@@ -10,9 +10,9 @@ CONTENT BEGIN\n"""
 input_filename = "color_table"
 output_filename = "colors.mif"
 
-read = open(input_filename, 'r');
-write = open(output_filename, 'w');
-print("Writing to colors.mif");
+read = open(input_filename, 'r')
+write = open(output_filename, 'w')
+print("Writing to colors.mif")
 
 write.write(header)
 index = 0

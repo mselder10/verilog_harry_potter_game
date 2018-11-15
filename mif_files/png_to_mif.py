@@ -268,12 +268,12 @@ color_sum = [0,
 15658734
 ]
 
-input_filename = "hogwarts_logo.png"
+input_filename = "./images/hogwarts_logo.png"
 output_filename = "hogwarts_logo.mif"
 
 im = Image.open(input_filename)
 
-f = open(output_filename, 'w');
+f = open(output_filename, 'w')
 
 print("> Image size: ")
 print(im.size)
@@ -287,13 +287,13 @@ f.write(header)
 f.write(str(w*h))
 f.write(header_2)
 
-pixel_index = 0;
+pixel_index = 0
 
 rgb_im = im.convert('RGB')
 
 for x in range(0, w):
   for y in range(0, h):
-    r, g, b = rgb_im.getpixel((x,y))
+    r, g, b = rgb_im.getpixel((y,x))
 
     hexr = "{:02x}".format(r)
     hexg = "{:02x}".format(g)
@@ -301,8 +301,8 @@ for x in range(0, w):
 
     pixel_color = hexr + hexg + hexb
     total = int(pixel_color, 16)
-    min_dif = 1000000000;
-    color_index = 0;
+    min_dif = 1000000000
+    color_index = 0
     for index in range(0,256):
       color = color_sum[index]
       if(abs(color-total)<min_dif):
@@ -315,4 +315,4 @@ for x in range(0, w):
 
 f.write("END;")
 
-print(">>> DONE");
+print(">>> DONE")
