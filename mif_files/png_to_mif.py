@@ -299,7 +299,7 @@ for x in range(0, w):
     hexg = "{:02x}".format(g)
     hexb = "{:02x}".format(b)
 
-    pixel_color = hexr + hexg + hexb
+    pixel_color = hexb + hexr + hexg
     total = int(pixel_color, 16)
     #print(total)
     min_dif = 1000000000
