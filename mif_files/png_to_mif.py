@@ -293,7 +293,7 @@ rgb_im = im.convert('RGB')
 
 for x in range(0, w):
   for y in range(0, h):
-    r, g, b = rgb_im.getpixel((y,x))
+    r, g, b = rgb_im.getpixel((x,y))
 
     hexr = "{:02x}".format(r)
     hexg = "{:02x}".format(g)
