@@ -2,7 +2,7 @@ import sys
 from PIL import Image
 
 header = """
-WIDTH =  24
+WIDTH =  24;
 DEPTH =  """
 
 header_2 = """;
@@ -293,7 +293,7 @@ rgb_im = im.convert('RGB')
 
 for x in range(0, w):
   for y in range(0, h):
-    r, g, b = rgb_im.getpixel((x,y))
+    r, g, b = rgb_im.getpixel((y,x))
 
     hexr = "{:02x}".format(r)
     hexg = "{:02x}".format(g)
