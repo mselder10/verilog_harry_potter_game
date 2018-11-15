@@ -299,9 +299,9 @@ for x in range(0, w):
     hexg = "{:02x}".format(g)
     hexb = "{:02x}".format(b)
 
-    pixel_color = hexb + hexg + hexr
+    pixel_color = hexr + hexg + hexb
     total = int(pixel_color, 16)
-    #print(total)
+   # print(total)
     min_dif = 1000000000
     color_index = 0
     for index in range(0,256):
