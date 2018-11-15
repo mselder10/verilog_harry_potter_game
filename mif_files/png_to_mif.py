@@ -301,14 +301,16 @@ for x in range(0, w):
 
     pixel_color = hexr + hexg + hexb
     total = int(pixel_color, 16)
+    #print(total)
     min_dif = 1000000000
     color_index = 0
     for index in range(0,256):
       color = color_sum[index]
       if(abs(color-total)<min_dif):
-          min_dif = abs(y-total)
+          min_dif = abs(color-total) #abs(y-total)
           color_index = index
     hex_color_index = "{:02x}".format(color_index)
+    #print(color_index)
     f.write(hex(pixel_index)[2:] + ":\t" + hex_color_index + ";\n")
 
     pixel_index += 1
