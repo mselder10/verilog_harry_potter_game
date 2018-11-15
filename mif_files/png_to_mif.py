@@ -306,7 +306,7 @@ for x in range(0, w):
     for index in range(0,256):
       color = color_sum[index]
       if(abs(color-total)<min_dif):
-          min_dif = abs(x-total)
+          min_dif = abs(y-total)
           color_index = index
     hex_color_index = "{:02x}".format(color_index)
     f.write(hex(pixel_index)[2:] + ":\t" + hex_color_index + ";\n")
