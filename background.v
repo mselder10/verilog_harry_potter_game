@@ -9,15 +9,15 @@ module background(G, H, S, R, color_index, clk);
 	always@(posedge clk)
 	begin
 		if(S)
-			index <= 8'd1;
+			index <= 8'hf;
 		else if (G)
-			index <= 8'd2;
+			index <= 8'hf;
 		else if (H)
-			index <= 8'd3;
+			index <= 8'hf;
 		else if (R)
-			index <= 8'd4;
+			index <= 8'hf;
 		else 
-			index <= 8'd0;
+			index <= 8'hf;
 	end
 	
 	assign color_index = index;

@@ -1,0 +1,6 @@
+module fade_block(clk);
+
+	input clk;
+	output block;
+
+endmodule 
