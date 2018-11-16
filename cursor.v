@@ -32,10 +32,13 @@ module cursor(row, col, cursor_here, color_index, clk,
 				y <= y - 10;
 			else if (~down)
 				y <= y + 10;
-				counter <= 32'd0;
+				counter <= 32'd0;				
 		end
 		else
+			begin
 			counter <= 	counter + 1;
+			
+			end
 		
 		if ((row > y) && (row < y + 19'd10) && (col > x) && (col < x + 19'd10))
 		begin

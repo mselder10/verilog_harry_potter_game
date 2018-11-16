@@ -77,21 +77,22 @@ begin
 	row <= ADDR / 640;
 	col <= ADDR % 640;
 	
-	
-  if ((row >=40 && row <= 439) && (col >=120 && col <= 519))
+	// logic for trace location
+	if ((row >=40 && row <= 439) && (col >=120 && col <= 519))
 		in_trace <= 1'b1;
-  else
+	else
 		in_trace <= 1'b0;
-		
-	if ((row >=9 && row <= 108) && (col >=9 && col <= 108) & ~logo)
+	
+	// logic for crest location 
+	if ((row >=10 && row <= 109) && (col >=10 && col <= 109) & ~logo)
 		crest <= 1'b1;
 	else
 		crest <= 1'b0;
 		
-	if(crest)
+	if(crest & ~logo)
 		crest_pixel <= crest_pixel + 1;
 	
-	if(crest_pixel == 9999)
+	if(crest_pixel == 9999 | logo)
 		crest_pixel <= 0;
 		
 	if(in_trace_pixel == 160000)
@@ -100,12 +101,13 @@ begin
 	if(in_trace)
 		in_trace_pixel <= in_trace_pixel+1;
 		
-	if(counter < 5000000000)
-		logo <= 1'b0;
+	if(counter < 250000000)
+		logo <= 1'b1;
 	else
 		logo <= 1'b0;
 	
 	counter <= counter +1;
+
 //  if (cursor_here == 1)
 //  begin
 //		cursor_row <= row;
@@ -156,7 +158,7 @@ assign color_index = fade & ~in_trace ? fade_color : 8'dz;
 
 	
 
-hogwarts_logo logoz(
+opening logoz(
 	.address(in_trace_pixel),
 	.clock(iVGA_CLK),
 	.q(logo_index));
