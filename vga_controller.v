@@ -156,7 +156,7 @@ assign color_index = fade & ~in_trace ? fade_color : 8'dz;
 
 	
 
-hogwarts_logo logoz(
+opening logoz(
 	.address(in_trace_pixel),
 	.clock(iVGA_CLK),
 	.q(logo_index));

@@ -41,7 +41,7 @@ set_global_assignment -name DEVICE EP4CE115F29C7
 set_global_assignment -name TOP_LEVEL_ENTITY graphics
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 17.1.0
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "09:15:27  NOVEMBER 11, 2018"
-set_global_assignment -name LAST_QUARTUS_VERSION "17.1.0 Lite Edition"
+set_global_assignment -name LAST_QUARTUS_VERSION 16.0.0
 set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
 set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
 set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
@@ -147,7 +147,6 @@ set_global_assignment -name VERILOG_FILE Hexadecimal_To_Seven_Segment.v
 set_global_assignment -name VERILOG_FILE dmem.v
 set_global_assignment -name VERILOG_FILE Altera_UP_PS2_Data_In.v
 set_global_assignment -name VERILOG_FILE Altera_UP_PS2_Command_Out.v
-set_global_assignment -name SYSTEMVERILOG_FILE lcd.sv
 set_global_assignment -name QIP_FILE pll.qip
 set_global_assignment -name QIP_FILE imem.qip
 set_global_assignment -name QIP_FILE dmem.qip
@@ -161,8 +160,6 @@ set_global_assignment -name VERILOG_FILE two_by_two.v
 set_global_assignment -name VERILOG_FILE four_by_four.v
 set_global_assignment -name VERILOG_FILE sparkle.v
 set_global_assignment -name VERILOG_FILE fade_block.v
-set_global_assignment -name QIP_FILE hogwarts_logo.qip
-set_global_assignment -name MIF_FILE gryffindor_crest.mif
 set_global_assignment -name QIP_FILE crests.qip
 set_location_assignment PIN_AD22 -to ir_in[13]
 set_location_assignment PIN_AF24 -to ir_in[14]
@@ -171,10 +168,5 @@ set_global_assignment -name MIF_FILE gryf.mif
 set_global_assignment -name QIP_FILE gryf.qip
 set_global_assignment -name MIF_FILE numbers.mif
 set_global_assignment -name VERILOG_FILE crests.v
-set_global_assignment -name MIF_FILE huff.mif
-set_global_assignment -name MIF_FILE rave.mif
-set_global_assignment -name MIF_FILE slyt.mif
-set_global_assignment -name QIP_FILE huff.qip
-set_global_assignment -name QIP_FILE slyth.qip
-set_global_assignment -name QIP_FILE rave.qip
+set_global_assignment -name QIP_FILE opening.qip
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
