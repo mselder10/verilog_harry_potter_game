@@ -1,0 +1,6 @@
+module cursor(row, col, color_index, clk);
+
+	input [8:0] row;
+	input [9:0] col;
+
+endmodule
