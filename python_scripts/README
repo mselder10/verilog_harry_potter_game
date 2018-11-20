@@ -1,0 +1,35 @@
+How to use the oython scripts in this folder
+USE ONLY SQUARE IMAGES
+
+BW_1bit
+  what it does:
+    creates a mif img with image_lengthximage_width indexable locations that each store 1 bit: : if pixel is black (0) or 
+    white(1)
+  use for images:
+    -that have just 1 color
+  STEPS
+    1. change input filename to <image_name>.png
+    2. change output filename to <image_name>.mif
+    3. run
+
+BW_2bit
+  what it does:
+    creates a mif img with image_lengthximage_width indexable locations that each store 2 bits: bit[1] specifies a background     pixel (please use 0xc0c0c0 for background color); bit[0] specifies if pixel is black (0) or white(1)
+  use for images:
+    -that have 2 colors & a background
+  STEPS
+    1. change input filename to <image_name>.png
+    2. change output filename to <image_name>.mif
+    3. run
+
+BW_multifile
+  what it does:
+    creates a mif img with image_lengthximage_widthx#_of_files indexable locations that each store 1 bit: if pixel is black       (0) or white(1)
+  use for:
+    -concatenating multiple png images into a single mif file (think #s or letters)
+  STEPS:
+    1. change input_filename array to contain all the files you want analyzed
+    2. LINE 19, change the f.write(str(...)) command to write in the full size of the mif file you want (lengthxwidthx#files, 
+    so for 0-9#s, this was 30x30x10 = 900)
+    3. change output_filename to <name>.mif
+
