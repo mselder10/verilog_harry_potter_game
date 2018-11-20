@@ -10,7 +10,8 @@ BW_1bit
   STEPS
     1. change input filename to <image_name>.png
     2. change output filename to <image_name>.mif
-    3. run
+    3. in lines 23-24 chanes the w & h variable to the width and height of your image
+    4. run
 
 BW_2bit
   what it does:
@@ -20,7 +21,8 @@ BW_2bit
   STEPS
     1. change input filename to <image_name>.png
     2. change output filename to <image_name>.mif
-    3. run
+    3. in lines 23-24 chanes the w & h variable to the width and height of your image
+    4. run
 
 BW_multifile
   what it does:
@@ -32,4 +34,5 @@ BW_multifile
     2. LINE 19, change the f.write(str(...)) command to write in the full size of the mif file you want (lengthxwidthx#files, 
     so for 0-9#s, this was 30x30x10 = 900)
     3. change output_filename to <name>.mif
+    4. run
 
