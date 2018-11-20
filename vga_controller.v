@@ -15,7 +15,7 @@ input iRST_n;
 input iVGA_CLK;
 input gryffindor, slytherin, hufflepuff, ravenclaw;
 input up, down, left, right;
-input[15:0] ir_in;
+input[24:0] ir_in;
 output reg oBLANK_n;
 output reg oHS;
 output reg oVS;
@@ -71,7 +71,7 @@ wire [7:0] color_index, crest_index, logo_index, file_index;
 reg [31:0] counter;
 reg ones, tens, hundreds, thousands;
 // element internal counters
-reg [12:0] num_pixel;
+reg [12:0] num_pixel_ones, num_pixel_tens, num_pixel_hundreds, num_pixel_thousands;
 reg[18:0] in_trace_pixel, crest_pixel;
 
 always@(posedge iVGA_CLK)
@@ -108,12 +108,12 @@ begin
 	// logic for numbers
 	// ones digit
 	if ((row >=0 && row <30))
-		begin
+	begin
 		//ones digit
 		if((col >=610 && col < 640))
 			begin
 			ones <= 1'b1;
-			num_pixel <= num_pixel;
+			num_pixel_ones <= num_pixel_ones + 1;
 			end
 		else 
 			ones <= 1'b0;
@@ -121,18 +121,40 @@ begin
 		if((col >=580 && col < 610))
 			begin
 			tens <= 1'b1;
-			num_pixel <= num_pixel + 1;
+			num_pixel_tens <= num_pixel_tens + 1;
 			end
 		else
 			tens <= 1'b0;
-		end
+
+		if((col >=550 && col < 580))
+			begin
+			hundreds <= 1'b1;
+			num_pixel_hundreds <= num_pixel_hundreds + 1;
+			end
+		else
+			hundreds <= 1'b0;
+
+		if((col >=520 && col < 550))
+			begin
+			thousands <= 1'b1;
+			num_pixel_thousands <= num_pixel_thousands + 1;
+			end
+		else
+			thousands <= 1'b0;
+	end
 	
-	if(num_pixel == 899 | logo)
-		num_pixel <= 0;
+	if(num_pixel_ones == 899 | logo)
+		num_pixel_ones <= 0;
+	if(num_pixel_tens == 899 | logo)
+		num_pixel_tens <= 0;
+	if(num_pixel_hundreds == 899 | logo)
+		num_pixel_hundreds <= 0;
+	if(num_pixel_thousands == 899 | logo)
+		num_pixel_thousands <= 0;
 	
 	// counter for opening screen (will be moved to processor)
 	if(counter < 250000000)
-		logo <= 1'b1;
+		logo <= 1'b0;
 	else
 		logo <= 1'b0;
 	
@@ -171,7 +193,14 @@ wire traced;
 					 
 four_by_four boxz(.row(row), .col(col),  
 						.color_in_box(traced), .box_color(box_color), 
-						.clk(iVGA_CLK), .ir_in(ir_in));
+						.clk(iVGA_CLK), .ir_in(ir_in),
+						.R(ravenclaw), .S(slytherin), .G(gryffindor), 
+						.H(hufflepuff));
+
+/*five_by_five boxz(.row(row), .col(col), .color_in_box(traced), 
+					.box_color(box_color), .clk(iVGA_CLK), .ir_in(ir_in),
+					.R(ravenclaw), .S(slytherin), .G(gryffindor), 
+					.H(hufflepuff));*/
 					 
 
 // background color					 
@@ -200,15 +229,25 @@ crest crestz(.clk(iVGA_CLK), .R(ravenclaw), .G(gryffindor),
 					.ADDR(crest_pixel), .crest(crest_out));
 
 // instantiate numbers ROM
-wire one, ten;
-number num0(.clk(iVGA_CLK), .ADDR(num_pixel), .num(one), .display_num(4'd2));
-number num1(.clk(iVGA_CLK), .ADDR(num_pixel), .num(ten), .display_num(4'd3));
+wire num;
+number numz(.ADDR_ones(num_pixel_ones), 
+			.ADDR_tens(num_pixel_tens), 
+			.ADDR_hundreds(num_pixel_hundreds), 
+			.ADDR_thousands(num_pixel_thousands), 
+			.clk(iVGA_CLK), .num(num), 
+			.display_ones     (4'd8), 
+			.display_tens     (4'd0), 
+			.display_hundreds (4'd0), 
+			.display_thousands(4'd0), 
+			.ones(ones), 
+			.tens(tens), 
+			.hundreds(hundreds), 
+			.thousands(thousands));
 	
 assign file_index = logo ? logo_index : 8'dz;
 assign file_index = crest & crest_out ? crest_index : 8'dz;
-assign file_index = ones & ~one ? one : 8'dz;
-assign file_index = tens & ~ten ? ten : 8'dz;
-assign file_index = ~logo & ~crest_out & one & ten ? color_index : 8'dz;
+assign file_index = ~num ? num : 8'dz;
+assign file_index = ~logo & ~crest_out & num ? color_index : 8'dz;
 
 //////Color table output
 img_index	img_index_inst (

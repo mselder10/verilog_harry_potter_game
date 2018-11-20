@@ -25,7 +25,7 @@ module graphics(resetn,
 	input				CLOCK_50;
 	input 			G, S, H, R;				// house color controls
 	input up, down, left, right;			// cursor controls
-	input [15:0] ir_in;						// ir readings
+	input [24:0] ir_in;						// ir readings
 
 	////////////////////////	PS2	////////////////////////////
 	input 			resetn;
