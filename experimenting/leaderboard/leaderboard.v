@@ -1,0 +1,277 @@
+module leaderboard(G, H, R, S, row, col, clk, leaderboard, crest, 
+	 one, ten, hundred, thousand, tthousand, hthousand, ones_val, tens_val, hundreds_val, thousands_val, tthousands_val, hthousands_val,
+	 pixel, G_HP, R_HP, H_HP, S_HP);
+	
+	input clk, leaderboard, crest;
+	input [24:0] G_HP, R_HP, H_HP, S_HP;
+	input [8:0] row;
+	input [9:0] col;
+
+	reg Gr, Hr, Rr, Sr, rcrest;
+	reg [12:0] score_pixel;
+	reg ones, tens, hundreds, thousands, tthousands, hthousands;
+
+	output one, ten, hundred, thousand, tthousand, hthousand;
+	output [12:0] pixel;
+	output G, H, R, S;
+	output [4:0] ones_val, tens_val, hundreds_val, thousands_val, tthousands_val, hthousands_val;
+
+	// ASSIGN OUTPUTS
+	// flags for place value
+		assign one = ones;
+		assign ten = tens;
+		assign hundred = hundreds;
+		assign thousand = thousands;
+		assign tthousand = tthousands;
+		assign hthousands = hthousands;
+
+	// assign value per place value
+		assign ones_val = G ? G_ones : 5'dz;
+		assign ones_val = S ? S_ones : 5'dz;
+		assign ones_val = R ? R_ones : 5'dz;
+		assign ones_val = H ? H_ones : 5'dz;
+
+		assign tens_val = G ? G_tens : 5'dz;
+		assign tens_val = S ? S_tens : 5'dz;
+		assign tens_val = R ? R_tens : 5'dz;
+		assign tens_val = H ? H_tens : 5'dz;
+
+		assign hundreds_val = G ? G_hundreds : 5'dz;
+		assign hundreds_val = S ? S_hundreds : 5'dz;
+		assign hundreds_val = R ? R_hundreds : 5'dz;
+		assign hundreds_val = H ? H_hundreds : 5'dz;
+
+		assign thousands_val = G ? G_thousands : 5'dz;
+		assign thousands_val = S ? S_thousands : 5'dz;
+		assign thousands_val = R ? R_thousands : 5'dz;
+		assign thousands_val = H ? H_thousands : 5'dz;
+
+		assign tthousands_val= G ? G_tthousands : 5'dz;
+		assign tthousands_val= S ? S_tthousands : 5'dz;
+		assign tthousands_val= R ? R_tthousands : 5'dz;
+		assign tthousands_val= H ? H_tthousands : 5'dz;
+
+		assign hthousands_val= G ? G_hthousands : 5'dz;
+		assign hthousands_val= S ? S_hthousands : 5'dz;
+		assign hthousands_val= R ? R_hthousands : 5'dz;
+		assign hthousands_val= H ? H_hthousands : 5'dz;
+
+	// assign pixel counter
+		assign pixel = score_pixel;
+
+	// assign crest color logic
+		assign G = Gr;
+		assign H = Hr;
+		assign R = Rr;
+		assign S = Sr;
+
+
+	// calculate house points by place value
+	reg [4:0] G_ones, G_tens, G_hundreds, G_thousands, G_tthousands, G_hthousands;
+	reg [4:0] S_ones, S_tens, S_hundreds, S_thousands, S_tthousands, S_hthousands;
+	reg [4:0] R_ones, R_tens, R_hundreds, R_thousands, R_tthousands, R_hthousands;
+	reg [4:0] H_ones, H_tens, H_hundreds, H_thousands, H_tthousands, H_hthousands;
+
+	house_points gryfz( .score(G_HP), 
+				  		.leaderboard(leaderboard), .clk(clk), 
+				   		.ones(G_ones), .tens(G_tens), 
+				   		.hundreds(G_hundreds), .thousands(G_thousands),
+				   		.tthousands(G_tthousands), .hhousands(G_hthousands));
+	house_points slythz(.score(S_HP), 
+				  		 .leaderboard(leaderboard), .clk(clk), 
+				  		 .ones(S_ones), .tens(S_tens), 
+				  		 .hundreds(S_hundreds), .thousands(S_thousands),
+				  		 .tthousands(S_tthousands), .hhousands(S_hthousands));
+	house_points ravez(.score(R_HP), 
+				   		.leaderboard(leaderboard), .clk(clk), 
+				   		.ones(R_ones), .tens(R_tens), 
+				   		.hundreds(R_hundreds), .thousands(R_thousands),
+				   		.tthousands(R_tthousands), .hhousands(R_hthousands));
+	house_points huffz(.score(H_HP), 
+				   		.leaderboard(leaderboard), .clk(clk), 
+				   		.ones(H_ones), .tens(H_tens), 
+				   		.hundreds(H_hundreds), .thousands(H_thousands),
+				   		.tthousands(H_tthousands), .hhousands(H_hthousands));
+
+	always@(posedge clk)
+	begin
+
+		// CRESTS
+		if(leaderboard & (col >=120 && col < 220) & (row >=40 & row < 340))
+			rcrest <= 1'b1;
+		else 
+			rcrest <= 1'b0;
+
+		if (leaderboard & (row >=40 && row < 140))
+			begin
+				Gr <= 1'b1;
+				Hr <= 1'b0;
+				Sr <= 1'b0;
+				Rr <= 1'b0;
+			end
+		if (leaderboard & (row >=140 && row < 240))
+			begin
+				Sr <= 1'b1;
+				Gr <= 1'b0;
+				Hr <= 1'b0;
+				Rr <= 1'b0;
+			end
+		if (leaderboard & (row >=240 && row < 340))
+			begin
+				Rr <= 1'b1;
+				Gr <= 1'b0;
+				Hr <= 1'b0;
+				Sr <= 1'b0;
+			end
+		if (leaderboard & (row >=340 && row < 440))
+			begin
+				Hr <= 1'b1;
+				Gr <= 1'b0;
+				Sr <= 1'b0;
+				Rr <= 1'b0;
+			end
+
+		// place value logic
+		// hundred thousands
+		if (leaderboard & (col >=280 && col < 310) & 
+			((row >=75 && row <105) | (row >=175 && row <205) |
+			 (row >=275 && row <305) | (row >=375 && row <405))
+			 begin
+			 	ones <= 1'b0;
+			 	tens <= 1'b0;
+			 	hundreds <= 1'b0;
+			 	thousands <= 1'b0;
+			 	tthousands <= 1'b0;
+			 	hthousands <= 1'b1;
+			 end
+
+		// ten thousands
+		if (leaderboard & (col >=310 && col < 340) & 
+			((row >=75 && row <105) | (row >=175 && row <205) |
+			 (row >=275 && row <305) | (row >=375 && row <405))
+			 begin
+			 	ones <= 1'b0;
+			 	tens <= 1'b0;
+			 	hundreds <= 1'b0;
+			 	thousands <= 1'b0;
+			 	tthousands <= 1'b1;
+			 	hthousands <= 1'b0;
+			 end
+
+		// thousands
+		if (leaderboard & (col >=340 && col <370) & 
+			((row >=75 && row <105) | (row >=175 && row <205) |
+			 (row >=275 && row <305) | (row >=375 && row <405))
+			 begin
+			 	ones <= 1'b0;
+			 	tens <= 1'b0;
+			 	hundreds <= 1'b0;
+			 	thousands <= 1'b1;
+			 	tthousands <= 1'b0;
+			 	hthousands <= 1'b0;
+			 end
+
+		// hundreds
+		if (leaderboard & (col >=370 && col < 400) & 
+			((row >=75 && row <105) | (row >=175 && row <205) |
+			 (row >=275 && row <305) | (row >=375 && row <405))
+			 begin
+			 	ones <= 1'b0;
+			 	tens <= 1'b0;
+			 	hundreds <= 1'b1;
+			 	thousands <= 1'b0;
+			 	tthousands <= 1'b0;
+			 	hthousands <= 1'b0;
+			 end
+
+		// tens
+		if (leaderboard & (col >=400 && col < 430) & 
+			((row >=75 && row <105) | (row >=175 && row <205) |
+			 (row >=275 && row <305) | (row >=375 && row <405))
+			 begin
+			 	ones <= 1'b0;
+			 	tens <= 1'b1;
+			 	hundreds <= 1'b0;
+			 	thousands <= 1'b0;
+			 	tthousands <= 1'b0;
+			 	hthousands <= 1'b0;
+			 end
+
+		// ones
+		if (leaderboard & (col >=430 && col < 460) & 
+			((row >=75 && row <105) | (row >=175 && row <205) |
+			 (row >=275 && row <305) | (row >=375 && row <405))
+			 begin
+			 	ones <= 1'b1;
+			 	tens <= 1'b0;
+			 	hundreds <= 1'b0;
+			 	thousands <= 1'b0;
+			 	tthousands <= 1'b0;
+			 	hthousands <= 1'b0;
+			 end
+		
+		//gryffindor
+		if (leaderboard & (row >=75 && row <105) & 
+			 (col >=280 && col <460 ) )
+		begin
+			if (score_pixel% 30 == 0 | logo) // might have to be 29
+				score_pixel <= 30*(row%75);
+			else
+				score_pixel <= score_pixel + 1;
+		end
+
+		//slytherin
+		if (leaderboard & (row >=175 && row <205) &
+			(col >=280 && col <460 ))
+		begin
+			if (score_pixel% 30 == 0 | logo) // might have to be 29
+				score_pixel <= 30*(row%175);
+			else
+				score_pixel <= score_pixel + 1;
+		end
+
+		// ravenclaw
+		if (leaderboard & (row >=275 && row <305) &
+			(col >=280 && col <460 ) )
+		begin
+			if (score_pixel% 30 == 0 | logo) // might have to be 29
+				score_pixel <= 30*(row%275);
+			else
+				score_pixel <= score_pixel + 1;
+		end
+
+		// hufflepuff
+		if (leaderboard & (row >=375 && row <405) &
+			(col >=280 && col <460 ) )
+		begin
+			if (score_pixel% 30 == 0 | logo) // might have to be 29
+				score_pixel <= 30*(row%375);
+			else
+				score_pixel <= score_pixel + 1;
+		end
+
+
+		// reset house point counters
+		
+		/*if(Gscore_pixel == 900) // might have to be 899
+			Gscore_pixel <= 0; // MIGHT HAVE TO RESET THIS TO 870
+		if (score_pixel% 30 == 0 | logo) // might have to be 29
+			score_pixel <= 30*(row%75);
+
+		if(Rscore_pixel == 900) // might have to be 899
+			Rscore_pixel <= 0;
+		if (Rscore_pixel% 30 == 0 | logo) // might have to be 29
+			Rscore_pixel <= 30*(row%175);
+
+		if(Sscore_pixel == 900) // might have to be 899
+			Sscore_pixel <= 0;
+		if (Sscore_pixel% 30 == 0 | logo) // might have to be 29
+			Sscore_pixel <= 30*(row%275);
+
+		if(Hscore_pixel == 900) // might have to be 899
+			Sscore_pixel <= 0; 
+		if (Hscore_pixel% 30 == 0 | logo) // might have to be 29
+			Sscore_pixel <= 30*(row%375);*/
+	end
+
+endmodule
