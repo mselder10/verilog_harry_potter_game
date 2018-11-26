@@ -1,0 +1,14 @@
+Analysis & Synthesis Status : Successful - Sun Nov 25 23:49:30 2018
+Quartus Prime Version : 16.0.0 Build 211 04/27/2016 SJ Lite Edition
+Revision Name : graphics
+Top-level Entity Name : checkDown
+Family : Cyclone IV E
+Total logic elements : 964
+    Total combinational functions : 963
+    Dedicated logic registers : 512
+Total registers : 512
+Total pins : 557
+Total virtual pins : 0
+Total memory bits : 0
+Embedded Multiplier 9-bit elements : 0
+Total PLLs : 0

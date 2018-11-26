@@ -1,0 +1,34 @@
+module orderTrace(inTrace, order);
+
+input [24:0] inTrace;
+output [124:0] order;
+
+wire [4:0] counter = 5'b0;
+
+while(counter<25) begin
+
+
+assign counter = counter+1;
+end
+/*
+always@(posedge iVGA_CLK)
+begin
+
+	row <= ADDR / 640;
+	col <= ADDR % 640;
+	
+  if ((row >=40 && row <= 439) && (col >=120 && col <= 519))
+		in_trace <= 1'b1;
+  else
+		in_trace <= 1'b0;
+		
+  if (cursor_here == 1)
+  begin
+		cursor_row <= row;
+		cursor_col <= col;
+  end
+		
+end*/
+assign order = 125'b0;
+
+endmodule

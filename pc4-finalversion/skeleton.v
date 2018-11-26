@@ -9,10 +9,11 @@
  * inspect which signals the processor tries to assert when.
  */
 
-module skeleton(clock, reset, ALU_out_result, data, mult_result, div_result, A, B);
+module skeleton(clock, reset, data_writeReg,ctrl_writeReg);
     
-	 input clock, reset;
-    output [31:0] ALU_out_result, mult_result, div_result, A, B;
+	  input clock, reset;
+    //output [31:0] ALU_out_result, mult_result, div_result, A, B;
+	 
     /** IMEM **/
     // Figure out how to generate a Quartus syncram component and commit the generated verilog file.
     // Make sure you configure it correctly!
@@ -28,7 +29,7 @@ module skeleton(clock, reset, ALU_out_result, data, mult_result, div_result, A, 
     // Figure out how to generate a Quartus syncram component and commit the generated verilog file.
     // Make sure you configure it correctly!
     wire [11:0] address_dmem;
-    output [31:0] data;
+    wire [31:0] data;
     wire wren;
     wire [31:0] q_dmem;
     dmem my_dmem(
@@ -42,8 +43,9 @@ module skeleton(clock, reset, ALU_out_result, data, mult_result, div_result, A, 
     /** REGFILE **/
     // Instantiate your regfile
     wire ctrl_writeEnable;
-    wire [4:0] ctrl_writeReg, ctrl_readRegA, ctrl_readRegB;
-    wire [31:0] data_writeReg;
+    wire [4:0] ctrl_readRegA, ctrl_readRegB;
+	 output [4:0] ctrl_writeReg;
+    output [31:0] data_writeReg;
     wire [31:0] data_readRegA, data_readRegB;
     regfile my_regfile(
         ~clock,
@@ -82,8 +84,7 @@ module skeleton(clock, reset, ALU_out_result, data, mult_result, div_result, A, 
         data_writeReg,                  // O: Data to write to for regfile
         data_readRegA,                  // I: Data from port A of regfile
         data_readRegB,                   // I: Data from port B of regfile
-		  ALU_out_result,
-		  mult_result, div_result, A, B
+		  
 
     );
 

@@ -1,0 +1,20 @@
+module ordering(trace, order);
+input [24:0] trace;
+output order;
+reg [4:0] array [24:0];
+reg [4:0] next [24:0];
+reg [4:0] row;
+reg [4:0] col;
+
+function [9:0] checkOrder; 
+    input [4:0] ar [24:0];
+	 input [4:0] n [24:0];
+	 input [4:0] r, c, i;
+    reg [4:0] S, COUT; 
+    begin 
+       S = r+c+i;
+	    COUT = n[2];	 
+      checkOrder = {COUT, S}; 
+    end 
+  endfunction 
+endmodule

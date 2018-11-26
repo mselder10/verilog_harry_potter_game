@@ -1,0 +1,19 @@
+module checkOrder(clk, next, trace, order, current, row, col, index, next_out, order_out, index_out);
+/*this module checks the neigbors of the block and if they are one it gives them order and adds them to the next,
+    next acts as a stack to keep track of the connected blocks*/
+	 input clk;
+	 input [4:0] row, col, index, current;
+	 input [24:0] trace;
+	 input [124:0] next, order;
+	 
+   /*if(row-1>=0 && trace[(row-1)*5+col]==1 && order[(row-1)*5+col]==0) {
+			order[(row-1)*5+col]= current;
+			current++;
+			int n = (row-1)*5+col;
+			System.out.println("I am in row-1");
+			next.add(n);
+		}*/
+   /* Check above */
+   reg [4:0] rowAbove = row - 4'b1;
+	reg [4:0] entryInTrace = rowAbove*5 + col;
+endmodule

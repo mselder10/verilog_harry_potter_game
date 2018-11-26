@@ -53,13 +53,17 @@ module graphics(resetn,
 	
 	// clock divider (by 5, i.e., 10 MHz)
 	pll div(CLOCK_50,inclock);
-	assign clock = CLOCK_50;
+	//assign clock = CLOCK_50;
 	
 	// UNCOMMENT FOLLOWING LINE AND COMMENT ABOVE LINE TO RUN AT 50 MHz
-	//assign clock = inclock;
+	assign clock = inclock;
 	
 	// your processor
+	wire ctrl_WE;
+	wire [4:0] ctrl_WR;
+	wire [31:0] data_WR;
 	//processor myprocessor(clock, ~resetn, /*ps2_key_pressed, ps2_out, lcd_write_en, lcd_write_data,*/ debug_data_in, debug_addr);
+	  processingUnit myProcessingUnit(clock, resetn, ctrl_WE, ctrl_WR, data_WR);
 	
 	// keyboard controller
 	PS2_Interface myps2(clock, resetn, ps2_clock, ps2_data, ps2_key_data, ps2_key_pressed, ps2_out);

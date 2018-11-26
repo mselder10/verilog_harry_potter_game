@@ -70,8 +70,7 @@ module processor(
     data_writeReg,                  // O: Data to write to for regfile
     data_readRegA,                  // I: Data from port A of regfile
     data_readRegB,                   // I: Data from port B of regfile
-	 ALU_out_result,
-	 mult_result, div_result, A, B
+
 
 );
     // Control signals
@@ -155,7 +154,7 @@ module processor(
 	 // instantiate DX pipeline register
 	 wire [1:0] dx_type;
 	 wire [31:0] A_read, B_read, extended_N, pc_dx,ir_dx;
-	 output [31:0] B;
+	 wire [31:0] B;
 	 DX dx(.outA(A_read), .outB(B_read), .pc_out(pc_dx), .ir_out(ir_dx), 
 			 .immediate_out(extended_N), .immediate_in(extended_immediate),
 		    .inA(tempA), .inB(tempB), 
@@ -187,7 +186,7 @@ module processor(
 	 
 	 // determine ALU A and tB inputs 
 	 // (tB vs. immediate decided in DX_control)
-	 output [31:0] A;
+	 wire [31:0] A;
 	 mux31 muxA(.out(A), .e0(~ctrl_bypassA[1] & ~ctrl_bypassA[0]), 
 								.in0(A_read),
 								.e1(ctrl_bypassA[0]), .in1(data_writeReg),
@@ -205,7 +204,7 @@ module processor(
 				.isNotEqual(INE), .isLessThan(ILT), .overflow(OVF));
 	 
 	 //check if it is a multiplication or division if so output should come from there
-	 wire mult, div;
+	 /*wire mult, div;
 	 wire [31:0]  ALU_out_result1;
 	 
 	 output [31:0] ALU_out_result,mult_result, div_result;
@@ -227,7 +226,7 @@ module processor(
 	 assign mult_result = r1; //$signedA*B;
 	 assign div_result = r2; //A/B;
 	 assign ALU_out_result1 = ctrl_MULT ? mult_result : ALU_out;
-	 assign ALU_out_result = ctrl_DIV ? div_result : ALU_out_result1;
+	 assign ALU_out_result = ctrl_DIV ? div_result : ALU_out_result1;*/
 	 
 	 // determine if special case (setx, jal) or ALU output
 	 wire [31:0] DX_out;
@@ -239,7 +238,7 @@ module processor(
 /***********************************************************************
 											MULTDIV
 *************************************************************************/	 
-	/* wire mdexp, multdiv_resultRDY, multdiv_on;
+	 wire mdexp, multdiv_resultRDY, multdiv_on;
 	 wire [2:0] md_rstatus;
 	 wire [4:0] multdiv_rd;
 	 wire [31:0] A_md, B_md, multdiv_out;
@@ -258,7 +257,7 @@ module processor(
 								.write(ctrl_MULT | ctrl_DIV),
 								.reset(reset), .clock(clock), 
 								.ctrl_MULT(ctrl_MULT), 
-								.exception(mdexp), .md_rstatus(md_rstatus));*/
+								.exception(mdexp), .md_rstatus(md_rstatus));
 								
 /***********************************************************************
 										MEMORY STAGE

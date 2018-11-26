@@ -1,0 +1,392 @@
+Analysis & Synthesis report for graphics
+Sun Nov 25 23:49:30 2018
+Quartus Prime Version 16.0.0 Build 211 04/27/2016 SJ Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. General Register Statistics
+  9. Inverted Register Statistics
+ 10. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 11. Post-Synthesis Netlist Statistics for Top Partition
+ 12. Elapsed Time Per Partition
+ 13. Analysis & Synthesis Messages
+ 14. Analysis & Synthesis Suppressed Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2016 Altera Corporation. All rights reserved.
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, the Altera Quartus Prime License Agreement,
+the Altera MegaCore Function License Agreement, or other 
+applicable license agreement, including, without limitation, 
+that your use is for the sole purpose of programming logic 
+devices manufactured by Altera and sold by Altera or its 
+authorized distributors.  Please refer to the applicable 
+agreement for further details.
+
+
+
++----------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                     ;
++------------------------------------+---------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Sun Nov 25 23:49:30 2018       ;
+; Quartus Prime Version              ; 16.0.0 Build 211 04/27/2016 SJ Lite Edition ;
+; Revision Name                      ; graphics                                    ;
+; Top-level Entity Name              ; checkDown                                   ;
+; Family                             ; Cyclone IV E                                ;
+; Total logic elements               ; 964                                         ;
+;     Total combinational functions  ; 963                                         ;
+;     Dedicated logic registers      ; 512                                         ;
+; Total registers                    ; 512                                         ;
+; Total pins                         ; 557                                         ;
+; Total virtual pins                 ; 0                                           ;
+; Total memory bits                  ; 0                                           ;
+; Embedded Multiplier 9-bit elements ; 0                                           ;
+; Total PLLs                         ; 0                                           ;
++------------------------------------+---------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                        ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                                     ; Setting            ; Default Value      ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                                     ; EP4CE115F29C7      ;                    ;
+; Top-level entity name                                                      ; checkDown          ; graphics           ;
+; Family name                                                                ; Cyclone IV E       ; Cyclone IV GX      ;
+; Use smart compilation                                                      ; Off                ; Off                ;
+; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                                ; Off                ; Off                ;
+; Restructure Multiplexers                                                   ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                                        ; Off                ; Off                ;
+; Preserve fewer node names                                                  ; On                 ; On                 ;
+; Disable OpenCore Plus hardware evaluation                                  ; Off                ; Off                ;
+; Verilog Version                                                            ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                               ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                                   ; Auto               ; Auto               ;
+; Safe State Machine                                                         ; Off                ; Off                ;
+; Extract Verilog State Machines                                             ; On                 ; On                 ;
+; Extract VHDL State Machines                                                ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                          ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                                 ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                             ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                                    ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                                  ; On                 ; On                 ;
+; Parallel Synthesis                                                         ; On                 ; On                 ;
+; DSP Block Balancing                                                        ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                                         ; On                 ; On                 ;
+; Power-Up Don't Care                                                        ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                               ; Off                ; Off                ;
+; Remove Duplicate Registers                                                 ; On                 ; On                 ;
+; Ignore CARRY Buffers                                                       ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                                     ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                                      ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                                  ; Off                ; Off                ;
+; Ignore LCELL Buffers                                                       ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                        ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                             ; Off                ; Off                ;
+; Optimization Technique                                                     ; Balanced           ; Balanced           ;
+; Carry Chain Length                                                         ; 70                 ; 70                 ;
+; Auto Carry Chains                                                          ; On                 ; On                 ;
+; Auto Open-Drain Pins                                                       ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                                      ; Off                ; Off                ;
+; Auto ROM Replacement                                                       ; On                 ; On                 ;
+; Auto RAM Replacement                                                       ; On                 ; On                 ;
+; Auto DSP Block Replacement                                                 ; On                 ; On                 ;
+; Auto Shift Register Replacement                                            ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                            ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                              ; On                 ; On                 ;
+; Strict RAM Replacement                                                     ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                          ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                                     ; Off                ; Off                ;
+; Auto RAM Block Balancing                                                   ; On                 ; On                 ;
+; Auto RAM to Logic Cell Conversion                                          ; Off                ; Off                ;
+; Auto Resource Sharing                                                      ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                              ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing                        ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                          ; Off                ; Off                ;
+; Timing-Driven Synthesis                                                    ; On                 ; On                 ;
+; Report Parameter Settings                                                  ; On                 ; On                 ;
+; Report Source Assignments                                                  ; On                 ; On                 ;
+; Report Connectivity Checks                                                 ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                         ; Off                ; Off                ;
+; Synchronization Register Chain Length                                      ; 2                  ; 2                  ;
+; PowerPlay Power Optimization During Synthesis                              ; Normal compilation ; Normal compilation ;
+; HDL message level                                                          ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                            ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report                   ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report                         ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report                  ; 100                ; 100                ;
+; Clock MUX Protection                                                       ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                                ; Off                ; Off                ;
+; Block Design Naming                                                        ; Auto               ; Auto               ;
+; SDC constraint protection                                                  ; Off                ; Off                ;
+; Synthesis Effort                                                           ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal               ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                                       ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                                         ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                                ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                                     ; On                 ; On                 ;
+; Synthesis Seed                                                             ; 1                  ; 1                  ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 8           ;
+; Maximum allowed            ; 4           ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 4           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
+;     Processor 2            ;   0.0%      ;
+;     Processor 3            ;   0.0%      ;
+;     Processor 4            ;   0.0%      ;
++----------------------------+-------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                    ;
++----------------------------------+-----------------+------------------------+---------------------------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path                                                                      ; Library ;
++----------------------------------+-----------------+------------------------+---------------------------------------------------------------------------------------------------+---------+
+; checkDown.v                      ; yes             ; User Verilog HDL File  ; C:/altera_lite/16.0/ECE350/ProjectFolder/final_project/final-project-s18-nat-mar-stef/checkDown.v ;         ;
++----------------------------------+-----------------+------------------------+---------------------------------------------------------------------------------------------------+---------+
+
+
++---------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary             ;
++---------------------------------------------+-----------+
+; Resource                                    ; Usage     ;
++---------------------------------------------+-----------+
+; Estimated Total logic elements              ; 964       ;
+;                                             ;           ;
+; Total combinational functions               ; 963       ;
+; Logic element usage by number of LUT inputs ;           ;
+;     -- 4 input functions                    ; 458       ;
+;     -- 3 input functions                    ; 233       ;
+;     -- <=2 input functions                  ; 272       ;
+;                                             ;           ;
+; Logic elements by mode                      ;           ;
+;     -- normal mode                          ; 937       ;
+;     -- arithmetic mode                      ; 26        ;
+;                                             ;           ;
+; Total registers                             ; 512       ;
+;     -- Dedicated logic registers            ; 512       ;
+;     -- I/O registers                        ; 0         ;
+;                                             ;           ;
+; I/O pins                                    ; 557       ;
+;                                             ;           ;
+; Embedded Multiplier 9-bit elements          ; 0         ;
+;                                             ;           ;
+; Maximum fan-out node                        ; clk~input ;
+; Maximum fan-out                             ; 512       ;
+; Total fan-out                               ; 5903      ;
+; Average fan-out                             ; 2.28      ;
++---------------------------------------------+-----------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                       ;
++----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+-------------+--------------+
+; Compilation Hierarchy Node ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name ; Entity Name ; Library Name ;
++----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+-------------+--------------+
+; |checkDown                 ; 963 (963)         ; 512 (512)    ; 0           ; 0            ; 0       ; 0         ; 557  ; 0            ; |checkDown          ; checkDown   ; work         ;
++----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+-------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 512   ;
+; Number of registers using Synchronous Clear  ; 0     ;
+; Number of registers using Synchronous Load   ; 244   ;
+; Number of registers using Asynchronous Clear ; 0     ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 504   ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++--------------------------------------------------+
+; Inverted Register Statistics                     ;
++----------------------------------------+---------+
+; Inverted Register                      ; Fan out ;
++----------------------------------------+---------+
+; counter                                ; 2       ;
+; Total number of inverted registers = 1 ;         ;
++----------------------------------------+---------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                           ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
+; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |checkDown|Mux1            ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 6 LEs                ; 2 LEs                  ; No         ; |checkDown|Mux1            ;
+; 8:1                ; 4 bits    ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; No         ; |checkDown|Mux1            ;
+; 16:1               ; 4 bits    ; 40 LEs        ; 40 LEs               ; 0 LEs                  ; No         ; |checkDown|Mux1            ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
+
+
++-----------------------------------------------------+
+; Post-Synthesis Netlist Statistics for Top Partition ;
++-----------------------+-----------------------------+
+; Type                  ; Count                       ;
++-----------------------+-----------------------------+
+; boundary_port         ; 557                         ;
+; cycloneiii_ff         ; 512                         ;
+;     ENA               ; 260                         ;
+;     ENA SLD           ; 244                         ;
+;     plain             ; 8                           ;
+; cycloneiii_lcell_comb ; 963                         ;
+;     arith             ; 26                          ;
+;         2 data inputs ; 5                           ;
+;         3 data inputs ; 21                          ;
+;     normal            ; 937                         ;
+;         1 data inputs ; 6                           ;
+;         2 data inputs ; 261                         ;
+;         3 data inputs ; 212                         ;
+;         4 data inputs ; 458                         ;
+;                       ;                             ;
+; Max LUT depth         ; 17.20                       ;
+; Average LUT depth     ; 5.59                        ;
++-----------------------+-----------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:03     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime Analysis & Synthesis
+    Info: Version 16.0.0 Build 211 04/27/2016 SJ Lite Edition
+    Info: Processing started: Sun Nov 25 23:49:11 2018
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off graphics -c graphics
+Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
+Info (12021): Found 1 design units, including 1 entities, in source file video_sync_generator.v
+    Info (12023): Found entity 1: video_sync_generator File: C:/altera_lite/16.0/ECE350/ProjectFolder/final_project/final-project-s18-nat-mar-stef/video_sync_generator.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file vga_controller.v
+    Info (12023): Found entity 1: vga_controller File: C:/altera_lite/16.0/ECE350/ProjectFolder/final_project/final-project-s18-nat-mar-stef/vga_controller.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file vga_audio_pll.v
+    Info (12023): Found entity 1: VGA_Audio_PLL File: C:/altera_lite/16.0/ECE350/ProjectFolder/final_project/final-project-s18-nat-mar-stef/VGA_Audio_PLL.v Line: 39
+Info (12021): Found 1 design units, including 1 entities, in source file reset_delay.v
+    Info (12023): Found entity 1: Reset_Delay File: C:/altera_lite/16.0/ECE350/ProjectFolder/final_project/final-project-s18-nat-mar-stef/Reset_Delay.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file ps2_interface.v
+    Info (12023): Found entity 1: PS2_Interface File: C:/altera_lite/16.0/ECE350/ProjectFolder/final_project/final-project-s18-nat-mar-stef/PS2_Interface.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file ps2_controller.v
+    Info (12023): Found entity 1: PS2_Controller File: C:/altera_lite/16.0/ECE350/ProjectFolder/final_project/final-project-s18-nat-mar-stef/PS2_Controller.v Line: 9
+Info (12021): Found 1 design units, including 1 entities, in source file processor.v
+    Info (12023): Found entity 1: processor File: C:/altera_lite/16.0/ECE350/ProjectFolder/final_project/final-project-s18-nat-mar-stef/processor.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file pll.v
+    Info (12023): Found entity 1: pll File: C:/altera_lite/16.0/ECE350/ProjectFolder/final_project/final-project-s18-nat-mar-stef/pll.v Line: 39
+Info (12021): Found 1 design units, including 1 entities, in source file img_index.v
+    Info (12023): Found entity 1: img_index File: C:/altera_lite/16.0/ECE350/ProjectFolder/final_project/final-project-s18-nat-mar-stef/img_index.v Line: 40
+Info (12021): Found 1 design units, including 1 entities, in source file img_data.v
+    Info (12023): Found entity 1: img_data File: C:/altera_lite/16.0/ECE350/ProjectFolder/final_project/final-project-s18-nat-mar-stef/img_data.v Line: 39
+Info (12021): Found 1 design units, including 1 entities, in source file imem.v
+    Info (12023): Found entity 1: imem File: C:/altera_lite/16.0/ECE350/ProjectFolder/final_project/final-project-s18-nat-mar-stef/imem.v Line: 39
+Info (12021): Found 1 design units, including 1 entities, in source file hexadecimal_to_seven_segment.v
+    Info (12023): Found entity 1: Hexadecimal_To_Seven_Segment File: C:/altera_lite/16.0/ECE350/ProjectFolder/final_project/final-project-s18-nat-mar-stef/Hexadecimal_To_Seven_Segment.v Line: 9
+Info (12021): Found 1 design units, including 1 entities, in source file dmem.v
+    Info (12023): Found entity 1: dmem File: C:/altera_lite/16.0/ECE350/ProjectFolder/final_project/final-project-s18-nat-mar-stef/dmem.v Line: 39
+Info (12021): Found 1 design units, including 1 entities, in source file altera_up_ps2_data_in.v
+    Info (12023): Found entity 1: Altera_UP_PS2_Data_In File: C:/altera_lite/16.0/ECE350/ProjectFolder/final_project/final-project-s18-nat-mar-stef/Altera_UP_PS2_Data_In.v Line: 10
+Info (12021): Found 1 design units, including 1 entities, in source file altera_up_ps2_command_out.v
+    Info (12023): Found entity 1: Altera_UP_PS2_Command_Out File: C:/altera_lite/16.0/ECE350/ProjectFolder/final_project/final-project-s18-nat-mar-stef/Altera_UP_PS2_Command_Out.v Line: 10
+Info (12021): Found 1 design units, including 1 entities, in source file lcd.sv
+    Info (12023): Found entity 1: lcd File: C:/altera_lite/16.0/ECE350/ProjectFolder/final_project/final-project-s18-nat-mar-stef/lcd.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file graphics.v
+    Info (12023): Found entity 1: graphics File: C:/altera_lite/16.0/ECE350/ProjectFolder/final_project/final-project-s18-nat-mar-stef/graphics.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file background.v
+    Info (12023): Found entity 1: background File: C:/altera_lite/16.0/ECE350/ProjectFolder/final_project/final-project-s18-nat-mar-stef/background.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file cursor.v
+    Info (12023): Found entity 1: cursor File: C:/altera_lite/16.0/ECE350/ProjectFolder/final_project/final-project-s18-nat-mar-stef/cursor.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file two_by_two.v
+    Info (12023): Found entity 1: two_by_two File: C:/altera_lite/16.0/ECE350/ProjectFolder/final_project/final-project-s18-nat-mar-stef/two_by_two.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file four_by_four.v
+    Info (12023): Found entity 1: four_by_four File: C:/altera_lite/16.0/ECE350/ProjectFolder/final_project/final-project-s18-nat-mar-stef/four_by_four.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file sparkle.v
+    Info (12023): Found entity 1: sparkle File: C:/altera_lite/16.0/ECE350/ProjectFolder/final_project/final-project-s18-nat-mar-stef/sparkle.v Line: 1
+Info (12021): Found 2 design units, including 2 entities, in source file processingunit.v
+    Info (12023): Found entity 1: skeleton File: C:/altera_lite/16.0/ECE350/ProjectFolder/final_project/final-project-s18-nat-mar-stef/pc4/skeleton.v Line: 12
+    Info (12023): Found entity 2: processingUnit File: C:/altera_lite/16.0/ECE350/ProjectFolder/final_project/final-project-s18-nat-mar-stef/processingUnit.v Line: 5
+Info (12021): Found 1 design units, including 1 entities, in source file ordertrace.v
+    Info (12023): Found entity 1: orderTrace File: C:/altera_lite/16.0/ECE350/ProjectFolder/final_project/final-project-s18-nat-mar-stef/orderTrace.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file ordering.v
+    Info (12023): Found entity 1: ordering File: C:/altera_lite/16.0/ECE350/ProjectFolder/final_project/final-project-s18-nat-mar-stef/ordering.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file checkorder.v
+    Info (12023): Found entity 1: checkOrder File: C:/altera_lite/16.0/ECE350/ProjectFolder/final_project/final-project-s18-nat-mar-stef/checkOrder.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file test.v
+    Info (12023): Found entity 1: test File: C:/altera_lite/16.0/ECE350/ProjectFolder/final_project/final-project-s18-nat-mar-stef/test.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file checkright.v
+    Info (12023): Found entity 1: checkRight File: C:/altera_lite/16.0/ECE350/ProjectFolder/final_project/final-project-s18-nat-mar-stef/checkRight.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file checkleft.v
+    Info (12023): Found entity 1: checkLeft File: C:/altera_lite/16.0/ECE350/ProjectFolder/final_project/final-project-s18-nat-mar-stef/checkLeft.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file checkdown.v
+    Info (12023): Found entity 1: checkDown File: C:/altera_lite/16.0/ECE350/ProjectFolder/final_project/final-project-s18-nat-mar-stef/checkDown.v Line: 1
+Warning (10236): Verilog HDL Implicit Net warning at processor.v(29): created implicit net for "debug_data" File: C:/altera_lite/16.0/ECE350/ProjectFolder/final_project/final-project-s18-nat-mar-stef/processor.v Line: 29
+Warning (10236): Verilog HDL Implicit Net warning at graphics.v(55): created implicit net for "inclock" File: C:/altera_lite/16.0/ECE350/ProjectFolder/final_project/final-project-s18-nat-mar-stef/graphics.v Line: 55
+Warning (10236): Verilog HDL Implicit Net warning at graphics.v(78): created implicit net for "DLY_RST" File: C:/altera_lite/16.0/ECE350/ProjectFolder/final_project/final-project-s18-nat-mar-stef/graphics.v Line: 78
+Warning (10236): Verilog HDL Implicit Net warning at graphics.v(79): created implicit net for "VGA_CTRL_CLK" File: C:/altera_lite/16.0/ECE350/ProjectFolder/final_project/final-project-s18-nat-mar-stef/graphics.v Line: 79
+Warning (10236): Verilog HDL Implicit Net warning at graphics.v(79): created implicit net for "AUD_CTRL_CLK" File: C:/altera_lite/16.0/ECE350/ProjectFolder/final_project/final-project-s18-nat-mar-stef/graphics.v Line: 79
+Warning (10236): Verilog HDL Implicit Net warning at two_by_two.v(49): created implicit net for "box_cursor_color" File: C:/altera_lite/16.0/ECE350/ProjectFolder/final_project/final-project-s18-nat-mar-stef/two_by_two.v Line: 49
+Info (12127): Elaborating entity "checkDown" for the top level hierarchy
+Info (286030): Timing-Driven Synthesis is running
+Info (144001): Generated suppressed messages file C:/altera_lite/16.0/ECE350/ProjectFolder/final_project/final-project-s18-nat-mar-stef/output_files/graphics.map.smsg
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Info (21057): Implemented 1522 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 296 input pins
+    Info (21059): Implemented 261 output pins
+    Info (21061): Implemented 965 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 7 warnings
+    Info: Peak virtual memory: 5023 megabytes
+    Info: Processing ended: Sun Nov 25 23:49:30 2018
+    Info: Elapsed time: 00:00:19
+    Info: Total CPU time (on all processors): 00:00:39
+
+
++------------------------------------------+
+; Analysis & Synthesis Suppressed Messages ;
++------------------------------------------+
+The suppressed messages can be found in C:/altera_lite/16.0/ECE350/ProjectFolder/final_project/final-project-s18-nat-mar-stef/output_files/graphics.map.smsg.
+
+
