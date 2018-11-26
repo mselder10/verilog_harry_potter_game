@@ -7,22 +7,27 @@ module vga_controller(iRST_n,
                       g_data,
                       r_data,
 							 ir_in,
-							 gryffindor, slytherin, hufflepuff, ravenclaw,
-							 up, down, left, right);
+							 gryffindor, slytherin, hufflepuff, ravenclaw);
 
 	
 input iRST_n;
 input iVGA_CLK;
+
+// house customization
 input gryffindor, slytherin, hufflepuff, ravenclaw;
-input up, down, left, right;
+
+// wand inputs
 input[24:0] ir_in;
+
+// VGA stuff
 output reg oBLANK_n;
 output reg oHS;
 output reg oVS;
 output [7:0] b_data;
 output [7:0] g_data;  
-output [7:0] r_data;                        
-///////// ////                     
+output [7:0] r_data; 
+
+// where am I on the screem                  
 reg [18:0] ADDR;
 reg [23:0] bgr_data;
 wire VGA_CLK_n;
@@ -56,32 +61,36 @@ img_data	img_data_inst (
 	.q ( index )
 	);
 	
-/////////////////////////
-//////Add switch-input logic here
 
+// states
 reg in_trace, crest, logo, OPENINGSCREEN;
+
 // tracking pixel being updated
 reg [8:0] row;
 reg [9:0] col;
-// tracking where user cursor is
-reg [8:0] cursor_row;
-reg [9:0] cursor_col;
+
 // what color to output
 wire [7:0] color_index, crest_index, logo_index, file_index;
+
+// global counter
 reg [31:0] counter;
+
+// flags for score number display
 reg ones, tens, hundreds, thousands;
+
 // element internal counters
-reg [12:0] num_pixel_ones, num_pixel_tens, num_pixel_hundreds, num_pixel_thousands;
+reg [12:0] num_pixel;
 reg[18:0] in_trace_pixel, crest_pixel;
+reg [12:0] Gscore_pixel, Sscore_pixel, Hscore_pixel, Rscore_pixel;
 
 always@(posedge iVGA_CLK)
 begin
 	
-	// where am I?
+	// where am I by row x col
 	row <= ADDR / 640;
 	col <= ADDR % 640;
 	
-	// logic for trace location
+	/********** TRACE LOCATION **********/
 	if ((row >=40 && row <= 439) && (col >=120 && col <= 519))
 		in_trace <= 1'b1;
 	else
@@ -93,7 +102,7 @@ begin
 	if(in_trace)
 		in_trace_pixel <= in_trace_pixel+1;
 	
-	// logic for crest location 
+	/********** HOUSE CREST GAMEPLAY **********/
 	if ((row >=10 && row <= 109) && (col >=10 && col <= 109) & ~logo)
 		crest <= 1'b1;
 	else
@@ -105,7 +114,7 @@ begin
 	if(crest_pixel == 9999 | logo)
 		crest_pixel <= 0;
 		
-	// logic for numbers
+	/********** SCORING GAMEPLAY **********/
 	// ones digit
 	if ((row >=0 && row <30))
 	begin
@@ -113,7 +122,7 @@ begin
 		if((col >=610 && col < 640))
 			begin
 			ones <= 1'b1;
-			num_pixel_ones <= num_pixel_ones + 1;
+			num_pixel <= num_pixel + 1;
 			end
 		else 
 			ones <= 1'b0;
@@ -121,7 +130,7 @@ begin
 		if((col >=580 && col < 610))
 			begin
 			tens <= 1'b1;
-			num_pixel_tens <= num_pixel_tens + 1;
+			num_pixel <= num_pixel + 1;
 			end
 		else
 			tens <= 1'b0;
@@ -129,7 +138,7 @@ begin
 		if((col >=550 && col < 580))
 			begin
 			hundreds <= 1'b1;
-			num_pixel_hundreds <= num_pixel_hundreds + 1;
+			num_pixel <= num_pixel + 1;
 			end
 		else
 			hundreds <= 1'b0;
@@ -137,20 +146,15 @@ begin
 		if((col >=520 && col < 550))
 			begin
 			thousands <= 1'b1;
-			num_pixel_thousands <= num_pixel_thousands + 1;
+			num_pixel <= num_pixel + 1;
 			end
 		else
 			thousands <= 1'b0;
 	end
 	
-	if(num_pixel_ones == 899 | logo)
-		num_pixel_ones <= 0;
-	if(num_pixel_tens == 899 | logo)
-		num_pixel_tens <= 0;
-	if(num_pixel_hundreds == 899 | logo)
-		num_pixel_hundreds <= 0;
-	if(num_pixel_thousands == 899 | logo)
-		num_pixel_thousands <= 0;
+	// reset score pixel counter
+	if((num_pixel+1) % 30 == 0 | logo) // might have to be 29
+		num_pixel <= row*30;
 	
 	// counter for opening screen (will be moved to processor)
 	if(counter < 250000000)
@@ -159,37 +163,16 @@ begin
 		logo <= 1'b0;
 	
 	counter <= counter +1;
-
-//  if (cursor_here == 1)
-//  begin
-//		cursor_row <= row;
-//		cursor_col <= col;
-//  end
 		
 end
 
 wire [7:0] bckgrd_color;
 background bckgrd(.G(gryffindor), .H(hufflepuff), 
-							.S(slytherin), .R(ravenclaw), 
-							.color_index(bckgrd_color), .clk(iVGA_CLK));
-
-wire [7:0] cursor_color;
-wire cursor_here, sparkle_here;					
-cursor	  crsr(.row(row), .col(col), .cursor_here(cursor_here), 
-					 .color_index(cursor_color), .clk(iVGA_CLK),
-					 .up(up), .down(down), .left(left), .right(right),
-					 .sparkle_here(sparkle_here));
-
-wire [7:0] fade_color;
-wire fade;		 
-//fade_block block(.row(row), .col(col), .clk(iVGA_CLK), .here(fade), .color(fade_color));
+				  .S(slytherin), .R(ravenclaw), 
+				  .color_index(bckgrd_color), .clk(iVGA_CLK));
 
 wire [7:0] box_color;
 wire traced;
-/*two_by_two boxz(.row(row), .col(col), 
-					 .cursor_row(cursor_row), .cursor_col(cursor_col), 
-					 .in_trace(in_trace), .color_in_box(color_in_box), 
-					 .box_color(box_color), .clk(iVGA_CLK));*/
 					 
 four_by_four boxz(.row(row), .col(col),  
 						.color_in_box(traced), .box_color(box_color), 
@@ -204,16 +187,11 @@ four_by_four boxz(.row(row), .col(col),
 					 
 
 // background color					 
-assign color_index = ~in_trace & ~fade ? bckgrd_color : 8'dz;
-// cursor location
-assign color_index = in_trace & cursor_here /*& ~sparkle_here*/ ? cursor_color : 8'dz;
+assign color_index = ~in_trace ? bckgrd_color : 8'dz;
 // traced box
-assign color_index = in_trace & traced & ~cursor_here /*& ~sparkle_here*/ ? box_color : 8'dz;
-// sparkle effect
-//assign color_index = sparkle_here ? 8'd5 : 8'dz;
-assign color_index = fade & ~in_trace ? fade_color : 8'dz;
+assign color_index = in_trace & traced  ? box_color : 8'dz;
 // otherwise
-//assign color_index = ~cursor_here & ~traced /*& ~sparkle_here*/ ? 8'd0 : 8'dz;
+//assign color_index = ~traced  ? 8'd0 : 8'dz;
 
 	
 // instantiate logo ROM
@@ -230,20 +208,17 @@ crest crestz(.clk(iVGA_CLK), .R(ravenclaw), .G(gryffindor),
 
 // instantiate numbers ROM
 wire num;
-number numz(.ADDR_ones(num_pixel_ones), 
-			.ADDR_tens(num_pixel_tens), 
-			.ADDR_hundreds(num_pixel_hundreds), 
-			.ADDR_thousands(num_pixel_thousands), 
+number numz(.ADDR(num_pixel), 
 			.clk(iVGA_CLK), .num(num), 
-			.display_ones     (4'd8), 
+			.display_ones     (4'd0), 
 			.display_tens     (4'd0), 
-			.display_hundreds (4'd0), 
+			.display_hundreds (4'd2), 
 			.display_thousands(4'd0), 
 			.ones(ones), 
 			.tens(tens), 
 			.hundreds(hundreds), 
 			.thousands(thousands));
-	
+
 assign file_index = logo ? logo_index : 8'dz;
 assign file_index = crest & crest_out ? crest_index : 8'dz;
 assign file_index = ~num ? num : 8'dz;
@@ -271,4 +246,4 @@ begin
   oBLANK_n<=cBLANK_n;
 end
 
-endmodule 
+endmodule
