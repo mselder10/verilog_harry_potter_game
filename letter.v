@@ -34,19 +34,43 @@ module letter(letter, clk, row, col,
 	assign ADDR = leaderboard   ? house_cup_ADDR : 12'dz;*/
 
 	// find letter offset in mif file
+	reg [4:0]  tletter;
 	always @(posedge clk)
 	begin
-		if((row>= 0 & row < 50) & (col>=120 & col < 270))
+		if((row>= 0 & row < 50) & ((col>=95 & col < 345) || (col>=395 & col < 545)))
 			begin
 				ADDR <= ADDR + 1;
 				if(((ADDR+1) % 50) == 0)
 					ADDR <= row*50;
 			end
+		
+		// H
+		if((col>=95 & col <145) & leaderboard)
+			tletter <= 5'd7;
+		// O
+		if((col>=145 & col <195) & leaderboard)
+			tletter <= 5'd14;
+		// U
+		if(((col>=195 & col <245) || (col>=445 & col <495)) & leaderboard)
+			tletter <= 5'd20;
+		// S
+		if((col>=245 & col <295) & leaderboard)
+			tletter <= 5'd18;
+		// E (for now A)
+		if((col>=295 & col <345) & leaderboard)
+			tletter <= 5'd25;	
+		// SPACE
+		// C
+		if((col>=395 & col <445) & leaderboard)
+			tletter <= 5'd2;
+		// P
+		if((col>=495 & col <545) & leaderboard)
+			tletter <= 5'd15;
+		
 	end
 	
-	wire [4:0]  tletter;
-	assign tletter = (col>=120 & col <170) ? 5'd2 : 5'dz;
-	assign tletter = (col>=170 & col <220) ? 5'd3 : 5'dz;
+	//assign tletter = (col>=95 & col <145) ? 5'd7 : 5'dz;
+	//assign tletter = (col>=145 & col <195) ? 5'd14 : 5'dz;
 	//assign tletter = (col>=220 & col <270) ? 5'd4 : 5'dz;
 	
 	assign offset_ADDR = ADDR + tletter*2500;

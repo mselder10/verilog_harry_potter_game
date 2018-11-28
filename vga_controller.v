@@ -74,7 +74,7 @@ img_data	img_data_inst (
 	
 
 // states
-reg in_trace, crest, logo, OPENINGSCREEN;
+reg in_trace, crest, logo, OPENINGSCREEN/*, leader_crest*/;
 
 // tracking pixel being updated
 reg [8:0] row;
@@ -91,8 +91,11 @@ reg ones, tens, hundreds, thousands;
 
 // element internal counters
 reg [12:0] num_pixel;
-reg[18:0] in_trace_pixel, crest_pixel;
+reg[18:0] in_trace_pixel, crest_pixel/*, leader_crest_pixel*/;
 reg [12:0] Gscore_pixel, Sscore_pixel, Hscore_pixel, Rscore_pixel;
+
+// leaderboard stuff
+reg Gr, Hr, Rr, Sr;
 
 always@(posedge iVGA_CLK)
 begin
@@ -114,20 +117,21 @@ begin
 		in_trace_pixel <= in_trace_pixel+1;
 	
 	/********** HOUSE CREST GAMEPLAY **********/
-	if ((row >=10 && row <= 109) && (col >=10 && col <= 109) 
-		& ~logo & ~(leaderboard | get_ready | times_up))
+	if (((row >=10 && row <= 109) && (col >=10 && col <= 109) 
+		& ~logo & ~(leaderboard | get_ready | times_up)))
 		crest <= 1'b1;
 	else
 		crest <= 1'b0;
 		
-	if(crest & ~logo)
+	if((crest & ~logo))
 		crest_pixel <= crest_pixel + 1;
-	
-	if(crest_pixel == 9999 | logo)
+		
+	if((row == 10 && col == 10))
 		crest_pixel <= 0;
+	else if((crest_pixel+1) % 100 == 0)
+		crest_pixel <= (row-10)*100;
 		
 	/********** SCORING GAMEPLAY **********/
-
 	if ((row >=0 && row <30) & ~(leaderboard | get_ready | times_up))
 	begin
 		//ones digit
@@ -170,7 +174,7 @@ begin
 	
 	// counter for opening screen (will be moved to processor)
 	if(counter < 250000000)
-		logo <= 1'b0;
+		logo <= 1'b1;
 	else
 		logo <= 1'b0;
 	
@@ -200,6 +204,8 @@ four_by_four boxz(.row(row), .col(col),
 
 // background color					 
 assign color_index = ~in_trace ? bckgrd_color : 8'dz;
+// untraced box
+assign color_index = in_trace & ~traced ? 8'd7 : 8'dz;
 // traced box
 assign color_index = in_trace & traced & ~(leaderboard | get_ready | times_up)  ? box_color : 8'dz;
 // otherwise
@@ -211,12 +217,22 @@ opening logoz(
 	.address(in_trace_pixel),
 	.clock(iVGA_CLK),
 	.q(logo_index));
+	
+/*******ADDED**********/
+wire Gl, Hl, Rl, Sl, crestl;
+wire [18:0] leader_crest_pixel;
+wire leader_crest;
+leaderboard ledaerz(.G(Gl), .H(Hl), .R(Rl), .S(Sl), 
+						  .row(row), .col(col), .clk(iVGA_CLK), .leaderboard(leaderboard), .logo(logo),
+							.crest(leader_crest), .crest_ADDR(leader_crest_pixel));
+/**********************/
 
 // instantiate crest ROM
 wire crest_out;
-crest crestz(.clk(iVGA_CLK), .R(ravenclaw), .G(gryffindor), 
-					.S(slytherin), .H(hufflepuff), .crest_index(crest_index), 
-					.ADDR(crest_pixel), .crest(crest_out));
+crest crestz(.clk(iVGA_CLK), .R(ravenclaw ^ Rl), .G(gryffindor ^ Gl), 
+					.S(slytherin ^ Sl), .H(hufflepuff ^ Hl), .crest_index(crest_index), 
+					.ADDR(crest_pixel), .crest(crest_out), 
+					.leaderboard(leaderboard), .leader_ADDR(leader_crest_pixel));
 
 // instantiate numbers ROM
 wire num;
@@ -238,11 +254,12 @@ letter letterz(.letter(letter), .clk(iVGA_CLK), .row(row), .col(col),
 /**********************/
 
 assign file_index = logo ? logo_index : 8'dz;
-assign file_index = crest & crest_out ? crest_index : 8'dz;
+assign file_index = (crest | leader_crest) & crest_out ? crest_index : 8'dz;
 assign file_index = ~num ? num : 8'dz;
 /*******ADDED**********/
 assign file_index = ~letter & (leaderboard | get_ready | times_up) ? letter : 8'dz;
-assign file_index = ~logo & ~crest_out & num ? color_index : 8'dz;
+assign file_index = ~logo & ~crest_out & num & ~leaderboard ? color_index : 8'dz;
+assign file_index = letter & ~crest_out & leaderboard ? 8'd1 : 8'dz;
 /**********************/
 
 //////Color table output
