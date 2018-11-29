@@ -1,12 +1,13 @@
-module four_by_four(row, col, color_in_box, box_color, clk, ir_in, R, S, G, H);
+module four_by_four(row, col, color_in_box, box_color, clk, ir_in, R, S, G, H, trace, user_traced);
 
 	input clk, R, S, G, H;
 	input [8:0] row;
 	input [9:0] col;
+	input [15:0] trace;
 	
 	reg color_in;
 	input [15:0] ir_in;
-	//reg [15:0] //already_traced[;
+	reg [15:0] already_traced;
 	
 	output color_in_box;
 	output [7:0] box_color;
@@ -16,7 +17,8 @@ module four_by_four(row, col, color_in_box, box_color, clk, ir_in, R, S, G, H);
 	begin
 		//already_traced[ <= 16'd0;
 	end*/
-	
+	output [15:0] user_traced;
+		assign user_traced = already_traced;
 	always@(posedge clk)
 	begin
 	// ROW 0
@@ -26,7 +28,7 @@ module four_by_four(row, col, color_in_box, box_color, clk, ir_in, R, S, G, H);
 					col >= 120 & col < 220)
 			begin
 			color_in <= 1'b1;
-			//already_traced[0] <= 1;
+			already_traced[0] <= 1;
 			end
 		// box 1
 		else if ( ir_in[1] & //~already_traced[1] &
@@ -34,7 +36,7 @@ module four_by_four(row, col, color_in_box, box_color, clk, ir_in, R, S, G, H);
 					col >= 220 & col < 320)
 			begin
 			color_in <= 1'b1;
-			//already_traced[1] <= 1;
+			already_traced[1] <= 1;
 			end
 		// box 2
 		else if ( ir_in[2] & //~already_traced[2] &
@@ -42,7 +44,7 @@ module four_by_four(row, col, color_in_box, box_color, clk, ir_in, R, S, G, H);
 					col >= 320 & col < 420)
 			begin
 			color_in <= 1'b1;
-			//already_traced[2] <= 1;
+			already_traced[2] <= 1;
 			end
 		// box 3
 		else if ( ir_in[3] & //~already_traced[3] &
@@ -50,7 +52,7 @@ module four_by_four(row, col, color_in_box, box_color, clk, ir_in, R, S, G, H);
 					col >= 420 & col < 520)
 			begin
 			color_in <= 1'b1;
-			//already_traced[3] <= 1;
+			already_traced[3] <= 1;
 			end
 	// ROW 1
 		// box 4
@@ -59,7 +61,7 @@ module four_by_four(row, col, color_in_box, box_color, clk, ir_in, R, S, G, H);
 					col >= 120 & col < 220)
 			begin
 			color_in <= 1'b1;
-			//already_traced[4] <= 1;
+			already_traced[4] <= 1;
 			end
 		// box 5
 		else if ( ir_in[5] & //~already_traced[5] &
@@ -67,7 +69,7 @@ module four_by_four(row, col, color_in_box, box_color, clk, ir_in, R, S, G, H);
 					col >= 220 & col < 320)
 			begin
 			color_in <= 1'b1;
-			//already_traced[5] <= 1;
+			already_traced[5] <= 1;
 			end
 		// box 6
 		else if ( ir_in[6] & //~already_traced[6] &
@@ -75,7 +77,7 @@ module four_by_four(row, col, color_in_box, box_color, clk, ir_in, R, S, G, H);
 					col >= 320 & col < 420)
 			begin
 			color_in <= 1'b1;
-			//already_traced[6] <= 1;
+			already_traced[6] <= 1;
 			end
 		// box 7
 		else if ( ir_in[7] & //~already_traced[7] &
@@ -83,7 +85,7 @@ module four_by_four(row, col, color_in_box, box_color, clk, ir_in, R, S, G, H);
 					col >= 420 & col < 520)
 			begin
 			color_in <= 1'b1;
-			//already_traced[7] <= 1;
+			already_traced[7] <= 1;
 			end
 	// ROW 2
 		// box 8
@@ -92,7 +94,7 @@ module four_by_four(row, col, color_in_box, box_color, clk, ir_in, R, S, G, H);
 					col >= 120 & col < 220)
 			begin
 			color_in <= 1'b1;
-			//already_traced[8] <= 1;
+			already_traced[8] <= 1;
 			end
 		// box 9
 		else if ( ir_in[9] & //~already_traced[9]  &
@@ -100,7 +102,7 @@ module four_by_four(row, col, color_in_box, box_color, clk, ir_in, R, S, G, H);
 					col >= 220 & col < 320)
 			begin
 			color_in <= 1'b1;
-			//already_traced[9] <= 1;
+			already_traced[9] <= 1;
 			end
 		// box 10
 		else if ( ir_in[10] & //~already_traced[10] &
@@ -108,7 +110,7 @@ module four_by_four(row, col, color_in_box, box_color, clk, ir_in, R, S, G, H);
 					col >= 320 & col < 420)
 			begin
 			color_in <= 1'b1;
-			//already_traced[10] <= 1;
+			already_traced[10] <= 1;
 			end
 		// box 11
 		else if ( ir_in[11] & //~already_traced[11] &
@@ -116,7 +118,7 @@ module four_by_four(row, col, color_in_box, box_color, clk, ir_in, R, S, G, H);
 					col >= 420 & col < 520)
 			begin
 			color_in <= 1'b1;
-			//already_traced[11] <= 1;
+			already_traced[11] <= 1;
 			end
 	// ROW 3
 		// box 12
@@ -125,7 +127,7 @@ module four_by_four(row, col, color_in_box, box_color, clk, ir_in, R, S, G, H);
 					col >= 120 & col < 220)
 			begin
 			color_in <= 1'b1;
-			//already_traced[12] <= 1;
+			already_traced[12] <= 1;
 			end
 		// box 13
 		else if ( ir_in[13] & //~already_traced[13] &
@@ -133,7 +135,7 @@ module four_by_four(row, col, color_in_box, box_color, clk, ir_in, R, S, G, H);
 					col >= 220 & col < 320)
 			begin
 			color_in <= 1'b1;
-			//already_traced[13] <= 1;
+			already_traced[13] <= 1;
 			end
 		// box 14
 		else if ( ir_in[14] & //~already_traced[14] &
@@ -141,7 +143,7 @@ module four_by_four(row, col, color_in_box, box_color, clk, ir_in, R, S, G, H);
 					col >= 320 & col < 420)
 			begin
 			color_in <= 1'b1;
-			//already_traced[14] <= 1;
+			already_traced[14] <= 1;
 			end
 		// box 15
 		else if ( ir_in[15] & //~already_traced[15] &
@@ -149,7 +151,7 @@ module four_by_four(row, col, color_in_box, box_color, clk, ir_in, R, S, G, H);
 					col >= 420 & col < 520)
 			begin
 			color_in <= 1'b1;
-			//already_traced[15] <= 1;
+			already_traced[15] <= 1;
 			end
 		else 
 			color_in <= 1'b0;

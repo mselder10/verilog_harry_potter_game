@@ -46,17 +46,11 @@ module graphics(resetn,
 	pll div(CLOCK_50,inclock);
 	assign clock = CLOCK_50;
 	
-	// UNCOMMENT FOLLOWING LINE AND COMMENT ABOVE LINE TO RUN AT 50 MHz
-	//assign clock = inclock;
-	
-	// your processor
-	//processor myprocessor(clock, ~resetn, /*ps2_key_pressed, ps2_out, lcd_write_en, lcd_write_data,*/ debug_data_in, debug_addr);
-	
-	// keyboard controller
-	//PS2_Interface myps2(clock, resetn, ps2_clock, ps2_data, ps2_key_data, ps2_key_pressed, ps2_out);
-	
-	// lcd controller
-	//lcd mylcd(clock, ~resetn, 1'b1, ps2_out, lcd_data, lcd_rw, lcd_en, lcd_rs, lcd_on, lcd_blon);
+	wire [1:0] screen;
+	wire [31:0] seconds;
+	wire EOG;
+	screenTimer timez(.clock(clock), .total_screens(4'd4), .curr_screen(screen), 
+							.time_out(seconds), .end_of_game(EOG));
 	
 	// some LEDs that you could use for debugging if you wanted
 	assign leds = 8'b00101011;
@@ -77,8 +71,9 @@ module graphics(resetn,
 								 .slytherin(S),
 								 .hufflepuff(H),
 								 .ravenclaw(R),
-								 .leaderboard(leaderboard), 
-								 .get_ready(get_ready), .times_up(times_up)
+								 .leaderboard(1'b1), 
+								 .get_ready(1'b0), .times_up(1'b0),
+								 .logo(screen[0])
 								 );
 	
 	

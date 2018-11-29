@@ -48,7 +48,7 @@ always @(posedge clock) begin
 	 end	
 	 //displaying a message?
 	 else if(curr_screen % 2 == 1 && curr_screen < total_screens ) begin
-	      if(cycle_count >= 2500000000) begin
+	      if(cycle_count == 2500000000) begin
 				//sec_count <= sec_count +1;
 				cycle_count<=0;
 				curr_screen <= curr_screen + 4'b1;
