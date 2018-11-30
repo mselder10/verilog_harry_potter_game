@@ -7,22 +7,27 @@ module vga_controller(iRST_n,
                       g_data,
                       r_data,
 							 ir_in,
-							 gryffindor, slytherin, hufflepuff, ravenclaw,
-					  leaderboard, get_ready, times_up);
+							 gryffindor1, slytherin1, hufflepuff1, ravenclaw1,
+							 gryffindor2, slytherin2, hufflepuff2, ravenclaw2,
+							 two_player_mode,
+					  leaderboard, get_ready, times_up, logo,
+					  crest_out, crest_index);
 
 	
 input iRST_n;
 input iVGA_CLK;
 
-// house customization
-input gryffindor, slytherin, hufflepuff, ravenclaw;
-
+// house customization (player 1 and 2)
+input two_player_mode;
+input gryffindor1, slytherin1, hufflepuff1, ravenclaw1;
+input gryffindor2, slytherin2, hufflepuff2, ravenclaw2;
+reg player;
 // wand inputs
 input[24:0] ir_in;
 
 /*******ADDED**********/
 // leaderboard inputs
-input leaderboard;
+input leaderboard, logo;
 /**********************/
 
 /*******ADDED**********/
@@ -74,14 +79,15 @@ img_data	img_data_inst (
 	
 
 // states
-reg in_trace, crest, logo, OPENINGSCREEN/*, leader_crest*/;
+reg in_trace, crest1, crest2 /*, leader_crest*/;
 
 // tracking pixel being updated
 reg [8:0] row;
 reg [9:0] col;
 
 // what color to output
-wire [7:0] color_index, crest_index, logo_index, file_index;
+wire [7:0] color_index, logo_index, file_index;
+output [7:0] crest_index;
 
 // global counter
 reg [31:0] counter;
@@ -103,7 +109,12 @@ begin
 	// where am I by row x col
 	row <= ADDR / 640;
 	col <= ADDR % 640;
-	
+	/********** PLAYER SCREEN **********/
+	if (col >= 340 & two_player_mode)
+		player <= 1'b1;
+	else
+		player <= 1'b0;
+		
 	/********** TRACE LOCATION **********/
 	if ((row >=40 && row <= 439) && (col >=120 && col <= 519))
 		in_trace <= 1'b1;
@@ -117,25 +128,50 @@ begin
 		in_trace_pixel <= in_trace_pixel+1;
 	
 	/********** HOUSE CREST GAMEPLAY **********/
-	if (((row >=10 && row <= 109) && (col >=10 && col <= 109) 
-		& ~logo & ~(leaderboard | get_ready | times_up)))
-		crest <= 1'b1;
+	// player 1
+	if (((row >=10 && row <= 109) && (col >=10 && col <= 109))
+		& ~logo & ~leaderboard)
+		crest1 <= 1'b1;
 	else
-		crest <= 1'b0;
+		crest1 <= 1'b0;
 		
-	if((crest & ~logo))
+	if((crest1 & ~logo))
 		crest_pixel <= crest_pixel + 1;
 		
-	if((row == 10 && col == 10))
+//	if((row == 10 && col == 10))
+//		crest_pixel <= 0;
+//	else if((crest_pixel+1) % 100 == 0)
+//		crest_pixel <= (row-10)*100;
+	
+	//	player 2
+	if (((row >=10 && row <= 109) && (col >=530 && col <= 629) & two_player_mode)
+		& ~logo & ~leaderboard)
+		crest2 <= 1'b1;
+	else
+		crest2 <= 1'b0;
+		
+	if((crest2 & ~logo))
+		crest_pixel <= crest_pixel + 1;
+		
+	if((row == 10 && col == 530))
 		crest_pixel <= 0;
 	else if((crest_pixel+1) % 100 == 0)
 		crest_pixel <= (row-10)*100;
-		
 	/********** SCORING GAMEPLAY **********/
 	if ((row >=0 && row <30) & ~(leaderboard | get_ready | times_up))
 	begin
 		//ones digit
-		if((col >=610 && col < 640))
+		if((col >=610 && col < 640) & ~two_player_mode)
+			begin
+			ones <= 1'b1;
+			num_pixel <= num_pixel + 1;
+			end
+		else if((col >=180 && col < 210) & two_player_mode & ~player)
+			begin
+			ones <= 1'b1;
+			num_pixel <= num_pixel + 1;
+			end
+		else if((col >=490 && col < 520) & two_player_mode & player)
 			begin
 			ones <= 1'b1;
 			num_pixel <= num_pixel + 1;
@@ -143,7 +179,17 @@ begin
 		else 
 			ones <= 1'b0;
 			
-		if((col >=580 && col < 610))
+		if((col >=580 && col < 610) & ~two_player_mode)
+			begin
+			tens <= 1'b1;
+			num_pixel <= num_pixel + 1;
+			end
+		else if((col >=150 && col < 180) & two_player_mode & ~player)
+			begin
+			tens <= 1'b1;
+			num_pixel <= num_pixel + 1;
+			end
+		else if((col >=460 && col < 490) & two_player_mode & player)
 			begin
 			tens <= 1'b1;
 			num_pixel <= num_pixel + 1;
@@ -151,7 +197,17 @@ begin
 		else
 			tens <= 1'b0;
 
-		if((col >=550 && col < 580))
+		if((col >=550 && col < 580) & ~two_player_mode)
+			begin
+			hundreds <= 1'b1;
+			num_pixel <= num_pixel + 1;
+			end
+		else if((col >=120 && col < 180) & two_player_mode & ~player)
+			begin
+			hundreds <= 1'b1;
+			num_pixel <= num_pixel + 1;
+			end
+		else if((col >=430 && col < 460) & two_player_mode & player)
 			begin
 			hundreds <= 1'b1;
 			num_pixel <= num_pixel + 1;
@@ -159,7 +215,7 @@ begin
 		else
 			hundreds <= 1'b0;
 
-		if((col >=520 && col < 550))
+		if((col >=520 && col < 550) & ~two_player_mode)
 			begin
 			thousands <= 1'b1;
 			num_pixel <= num_pixel + 1;
@@ -169,22 +225,16 @@ begin
 	end
 	
 	// reset score pixel counter
-	if((num_pixel+1) % 30 == 0 | logo) // might have to be 29
+	if((num_pixel+1) % 30 == 0 | logo)
 		num_pixel <= row*30;
-	
-	// counter for opening screen (will be moved to processor)
-	if(counter < 250000000)
-		logo <= 1'b1;
-	else
-		logo <= 1'b0;
 	
 	counter <= counter +1;
 		
 end
 
 wire [7:0] bckgrd_color;
-background bckgrd(.G(gryffindor), .H(hufflepuff), 
-				  .S(slytherin), .R(ravenclaw), 
+background bckgrd(.G(gryffindor1), .H(hufflepuff1), 
+				  .S(slytherin1), .R(ravenclaw1), 
 				  .color_index(bckgrd_color), .clk(iVGA_CLK));
 
 wire [7:0] box_color;
@@ -193,8 +243,8 @@ wire traced;
 four_by_four boxz(.row(row), .col(col),  
 						.color_in_box(traced), .box_color(box_color), 
 						.clk(iVGA_CLK), .ir_in(ir_in),
-						.R(ravenclaw), .S(slytherin), .G(gryffindor), 
-						.H(hufflepuff));
+						.R(ravenclaw1), .S(slytherin1), .G(gryffindor1), 
+						.H(hufflepuff1));
 
 /*five_by_five boxz(.row(row), .col(col), .color_in_box(traced), 
 					.box_color(box_color), .clk(iVGA_CLK), .ir_in(ir_in),
@@ -221,45 +271,110 @@ opening logoz(
 /*******ADDED**********/
 wire Gl, Hl, Rl, Sl, crestl;
 wire [18:0] leader_crest_pixel;
+wire [12:0] leaderboard_score_pixel;
 wire leader_crest;
+wire [2:0] leaderboard_score;
 leaderboard ledaerz(.G(Gl), .H(Hl), .R(Rl), .S(Sl), 
 						  .row(row), .col(col), .clk(iVGA_CLK), .leaderboard(leaderboard), .logo(logo),
-							.crest(leader_crest), .crest_ADDR(leader_crest_pixel));
+							.crest(leader_crest), .crest_ADDR(leader_crest_pixel), .score(leaderboard_score),
+							.score_ADDR(leaderboard_score_pixel));
+/**********************/
+
+/*******ADDED**********/
+//wire border;
+//border borderz(.border(border), .row(row), .col(col), .clk(iVGA_CLK));
 /**********************/
 
 // instantiate crest ROM
-wire crest_out;
-crest crestz(.clk(iVGA_CLK), .R(ravenclaw ^ Rl), .G(gryffindor ^ Gl), 
-					.S(slytherin ^ Sl), .H(hufflepuff ^ Hl), .crest_index(crest_index), 
+output crest_out;
+crest crestz(.clk(iVGA_CLK), .R1(ravenclaw1), .G1(gryffindor1), 
+					.S1(slytherin1), .H1(hufflepuff1),
+					.R2(ravenclaw2), .G2(gryffindor2), 
+					.S2(slytherin2), .H2(hufflepuff2), 
+					.Rl(Rl), .Gl(Gl), 
+					.Sl(Sl), .Hl(Hl), 
+					.player(player),
+					.crest_index(crest_index),
 					.ADDR(crest_pixel), .crest(crest_out), 
 					.leaderboard(leaderboard), .leader_ADDR(leader_crest_pixel));
 
-// instantiate numbers ROM
+// SCORE DISPLAY
 wire num;
-number numz(.ADDR(num_pixel), 
+wire [12:0] number_ADDR;
+assign number_ADDR = leaderboard ? leaderboard_score_pixel : num_pixel;
+wire [3:0] ones_place, tens_place, hundreds_place, thousands_place, ten_thousands_place, hundred_thousands_place;
+// gryffindor house points	
+assign ones_place 					= leaderboard & row < 140 ? 4'd0 : 4'bz;
+assign tens_place 					= leaderboard & row < 140 ? 4'd1 : 4'bz;
+assign hundreds_place				= leaderboard & row < 140 ? 4'd0 : 4'bz;
+assign thousands_place 				= leaderboard & row < 140 ? 4'd0 : 4'bz;
+assign ten_thousands_place 		= leaderboard & row < 140 ? 4'd0 : 4'bz;
+assign hundred_thousands_place 	= leaderboard & row < 140 ? 4'd0 : 4'bz;
+// slytherin house points
+assign ones_place 					= leaderboard & row > 140 & row < 240 ? 4'd0 : 4'bz;
+assign tens_place 					= leaderboard & row > 140 & row < 240 ? 4'd7 : 4'bz;
+assign hundreds_place				= leaderboard & row > 140 & row < 240 ? 4'd0 : 4'bz;
+assign thousands_place 				= leaderboard & row > 140 & row < 240 ? 4'd2 : 4'bz;
+assign ten_thousands_place 		= leaderboard & row > 140 & row < 240 ? 4'd0 : 4'bz;
+assign hundred_thousands_place 	= leaderboard & row > 140 & row < 240 ? 4'd0 : 4'bz;
+// ravenclaw house points
+assign ones_place 					= leaderboard & row > 240 & row < 340 ? 4'd1 : 4'bz;
+assign tens_place 					= leaderboard & row > 240 & row < 340 ? 4'd3 : 4'bz;
+assign hundreds_place				= leaderboard & row > 240 & row < 340 ? 4'd8 : 4'bz;
+assign thousands_place 				= leaderboard & row > 240 & row < 340 ? 4'd0 : 4'bz;
+assign ten_thousands_place 		= leaderboard & row > 240 & row < 340 ? 4'd3 : 4'bz;
+assign hundred_thousands_place 	= leaderboard & row > 240 & row < 340 ? 4'd0 : 4'bz;
+// hufflepuff house points
+assign ones_place 					= leaderboard & row > 340 ? 4'd0 : 4'bz;
+assign tens_place 					= leaderboard & row > 340 ? 4'd5 : 4'bz;
+assign hundreds_place				= leaderboard & row > 340 ? 4'd7 : 4'bz;
+assign thousands_place 				= leaderboard & row > 340 ? 4'd0 : 4'bz;
+assign ten_thousands_place 		= leaderboard & row > 340 ? 4'd8 : 4'bz;
+assign hundred_thousands_place 	= leaderboard & row > 340 ? 4'd0 : 4'bz;
+// GAMEPLAY SCORE
+// player 1
+assign ones_place 				= ~leaderboard & ~player ? 4'd1 : 4'bz;
+assign tens_place 				= ~leaderboard & ~player ? 4'd2 : 4'bz;
+assign hundreds_place			= ~leaderboard & ~player ? 4'd3 : 4'bz;
+assign thousands_place 			= ~leaderboard & ~player & ~two_player_mode ? 4'd4 : 4'bz;
+// player 2
+assign ones_place 				= ~leaderboard & player ? 4'd5 : 4'bz;
+assign tens_place 				= ~leaderboard & player ? 4'd6 : 4'bz;
+assign hundreds_place			= ~leaderboard & player ? 4'd7 : 4'bz;
+
+number numz(.ADDR(number_ADDR), 
 			.clk(iVGA_CLK), .num(num), 
-			.display_ones     (4'd0), 
-			.display_tens     (4'd0), 
-			.display_hundreds (4'd2), 
-			.display_thousands(4'd0), 
-			.ones(ones), 
-			.tens(tens), 
-			.hundreds(hundreds), 
-			.thousands(thousands));
+			.display_ones     (ones_place), 
+			.display_tens     (tens_place), 
+			.display_hundreds (hundreds_place), 
+			.display_thousands(thousands_place), 
+			.display_ten_thousands(ten_thousands_place),
+			.display_hundred_thousands(hundred_thousands_place),
+			.ones(ones | (leaderboard_score == 3'b001)), 
+			.tens(tens | (leaderboard_score == 3'b010)), 
+			.hundreds(hundreds | (leaderboard_score == 3'b011)), 
+			.thousands(thousands | (leaderboard_score == 3'b100)),
+			.ten_thousands(leaderboard_score == 3'b101),
+			.hundred_thousands(leaderboard_score == 3'b110));
 			
 /*******ADDED**********/
 wire letter;
 letter letterz(.letter(letter), .clk(iVGA_CLK), .row(row), .col(col),
-			  	.get_ready(get_ready), .times_up(times_up), .leaderboard(leaderboard));
+			  	.leaderboard(leaderboard));
+				
+//wire messageLetter;
+//message_letter letterm(.letter(messageLetter), .clk(iVGA_CLK), .row(row), .col(col),
+//			  	.get_ready(get_ready), .times_up(times_up));
 /**********************/
 
 assign file_index = logo ? logo_index : 8'dz;
-assign file_index = (crest | leader_crest) & crest_out ? crest_index : 8'dz;
+assign file_index = (crest1 | crest2 | leader_crest) & crest_out ? crest_index : 8'dz;
 assign file_index = ~num ? num : 8'dz;
 /*******ADDED**********/
+//assign file_index = ~border & ~logo & ~leaderboard ? border : 8'dz;
 assign file_index = ~letter & (leaderboard | get_ready | times_up) ? letter : 8'dz;
 assign file_index = ~logo & ~crest_out & num & ~leaderboard ? color_index : 8'dz;
-assign file_index = letter & ~crest_out & leaderboard ? 8'd1 : 8'dz;
+assign file_index = letter & ~crest_out & leaderboard & get_ready ? 8'd1 : 8'dz;
 /**********************/
 
 //////Color table output

@@ -8,8 +8,10 @@ module graphics(resetn,
 	VGA_G,	 														//	VGA Green[9:0]
 	VGA_B,															//	VGA Blue[9:0]
 	CLOCK_50,  														// 50 MHz clock
-	ir_in,															// ir_reciever readings
-	G, S, H, R,														// house color control
+	ir_in_p1, ir_in_p2,												// ir_reciever readings
+	G1, S1, H1, R1,												// house color control player 1
+	G2, S2, H2, R2,												// house color control player 2
+	two_player_mode,												// dual mode
 	leaderboard, get_ready, times_up);
 		
 	////////////////////////	VGA	////////////////////////////
@@ -22,25 +24,17 @@ module graphics(resetn,
 	output	[7:0]	VGA_G;	 				//	VGA Green[9:0]
 	output	[7:0]	VGA_B;   				//	VGA Blue[9:0]
 	input				CLOCK_50;
-	input 			G, S, H, R;				// house color controls
-	input [24:0] ir_in;						// ir readings
+	input 			G2, S2, H2, R2;				// house color controls player 2
+	input 			G1, S1, H1, R1;				// house color controls player 1
+	input				two_player_mode;				// two players
+	input [15:0] ir_in_p1, ir_in_p2;						// ir readings for player 1 and 2
 
 	////////////////////////	PS2	////////////////////////////
 	input 			resetn;
 
-	////////////////////////	Controls (to be sent from processor)	////////////////////////////
+	////////////////////////	Controls (sent from processor)	////////////////////////////
 	input leaderboard, get_ready, times_up;
-	
-	
-	
-	
-	
 	wire			 clock;
-	wire			 lcd_write_en;
-	wire 	[31:0] lcd_write_data;
-	wire	[7:0]	 ps2_key_data;
-	wire			 ps2_key_pressed;
-	wire	[7:0]	 ps2_out;	
 	
 	// clock divider (by 5, i.e., 10 MHz)
 	pll div(CLOCK_50,inclock);
@@ -67,11 +61,16 @@ module graphics(resetn,
 								 .g_data(VGA_G),
 								 .r_data(VGA_R),
 								 .ir_in(ir_in),
-								 .gryffindor(G),
-								 .slytherin(S),
-								 .hufflepuff(H),
-								 .ravenclaw(R),
-								 .leaderboard(1'b1), 
+								 .gryffindor1(G1),
+								 .slytherin1(S1),
+								 .hufflepuff1(H1),
+								 .ravenclaw1(R1),
+								 .two_player_mode(two_player_mode),
+								 .gryffindor2(G2),
+								 .slytherin2(S2),
+								 .hufflepuff2(H2),
+								 .ravenclaw2(R2),
+								 .leaderboard(EOG), 
 								 .get_ready(1'b0), .times_up(1'b0),
 								 .logo(screen[0])
 								 );
