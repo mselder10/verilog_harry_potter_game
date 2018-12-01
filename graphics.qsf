@@ -186,4 +186,5 @@ set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_global_assignment -name MIF_FILE snitch.mif
 set_global_assignment -name VERILOG_FILE snitch.v
 set_global_assignment -name QIP_FILE snitched.qip
+set_global_assignment -name VERILOG_FILE display_trace.v
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

@@ -266,7 +266,10 @@ four_by_four boxz(.row(row), .col(col),
 						.R(ravenclaw1), .S(slytherin1), .G(gryffindor1), 
 						.H(hufflepuff1),
 						.already_traced(p1_trace));
-
+wire trace_color;
+display_trace tracez(.row(row), .col(col), .trace(16'hf99f), 
+							.trace_color(trace_color), .clk(iVGA_CLK));
+							
 /*five_by_five boxz(.row(row), .col(col), .color_in_box(traced), 
 					.box_color(box_color), .clk(iVGA_CLK), .ir_in(ir_in),
 					.R(ravenclaw), .S(slytherin), .G(gryffindor), 
@@ -276,9 +279,11 @@ four_by_four boxz(.row(row), .col(col),
 // background color					 
 assign color_index = ~in_trace ? bckgrd_color : 8'dz;
 // untraced box
-assign color_index = in_trace & ~traced ? 8'd7 : 8'dz;
+assign color_index = in_trace & ~traced & ~trace_color ? 8'd7 : 8'dz;
 // traced box
 assign color_index = in_trace & traced & ~(leaderboard)  ? box_color : 8'dz;
+// display trace pattern
+assign color_index = in_trace & trace_color & ~traced & ~leaderboard ? 8'd0 : 8'dz;
 // otherwise
 //assign color_index = ~traced  ? 8'd0 : 8'dz;
 

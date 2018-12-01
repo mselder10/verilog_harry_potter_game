@@ -71,9 +71,9 @@ module graphics(resetn,
 								 .hufflepuff2(H2),
 								 .ravenclaw2(R2),
 								 .snitch_powerup(1'b0),
-								 .leaderboard(1'b0), 
+								 .leaderboard(EOG), 
 								 .get_ready(1'b0), .times_up(1'b0),
-								 .logo(/*screen[0]*/ 1'b0)
+								 .logo(screen[0] /*1'b0*/)
 								 );
 	
 	
