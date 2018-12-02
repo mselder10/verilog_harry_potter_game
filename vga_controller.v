@@ -6,7 +6,7 @@ module vga_controller(iRST_n,
                       b_data,
                       g_data,
                       r_data,
-							 ir_in,
+							 ir_in_p1, ir_in_p2,
 							 gryffindor1, slytherin1, hufflepuff1, ravenclaw1,
 							 gryffindor2, slytherin2, hufflepuff2, ravenclaw2,
 							 two_player_mode,
@@ -24,7 +24,7 @@ input gryffindor1, slytherin1, hufflepuff1, ravenclaw1;
 input gryffindor2, slytherin2, hufflepuff2, ravenclaw2;
 reg player;
 // wand inputs
-input[24:0] ir_in;
+input[15:0] ir_in_p1, ir_in_p2;
 // powerup flag
 input snitch_powerup;
 
@@ -256,21 +256,34 @@ background bckgrd(.G(gryffindor1), .H(hufflepuff1),
 				  .S(slytherin1), .R(ravenclaw1), 
 				  .color_index(bckgrd_color), .clk(iVGA_CLK));
 
-wire [7:0] box_color;
-wire traced;
 
+// player 1
+wire [7:0] p1_box_color;
+wire p1_traced;
 wire [15:0] p1_trace;
-four_by_four boxz(.row(row), .col(col),  
-						.color_in_box(traced), .box_color(box_color), 
-						.clk(iVGA_CLK), .ir_in(ir_in),
+four_by_four boxp1(.row(row), .col(col),  
+						.color_in_box(p1_traced), .box_color(p1_box_color), 
+						.clk(iVGA_CLK), .ir_in(ir_in_p1),
 						.R(ravenclaw1), .S(slytherin1), .G(gryffindor1), 
 						.H(hufflepuff1),
 						.already_traced(p1_trace));
+					
+// player 2
+wire [7:0] p2_box_color;
+wire p2_traced;
+wire [15:0] p2_trace;
+four_by_four boxp2(.row(row), .col(col),  
+						.color_in_box(p2_traced), .box_color(p2_box_color), 
+						.clk(iVGA_CLK), .ir_in(ir_in_p2),
+						.R(ravenclaw2), .S(slytherin2), .G(gryffindor2), 
+						.H(hufflepuff2),
+						.already_traced(p2_trace));
+
 wire trace_color;
 display_trace tracez(.row(row), .col(col), .trace(16'hf99f), 
 							.trace_color(trace_color), .clk(iVGA_CLK));
 							
-/*five_by_five boxz(.row(row), .col(col), .color_in_box(traced), 
+/*five_by_five boxz(.row(row), .col(col), .color_in_box(p1_traced), 
 					.box_color(box_color), .clk(iVGA_CLK), .ir_in(ir_in),
 					.R(ravenclaw), .S(slytherin), .G(gryffindor), 
 					.H(hufflepuff));*/
@@ -279,11 +292,14 @@ display_trace tracez(.row(row), .col(col), .trace(16'hf99f),
 // background color					 
 assign color_index = ~in_trace ? bckgrd_color : 8'dz;
 // untraced box
-assign color_index = in_trace & ~traced & ~trace_color ? 8'd7 : 8'dz;
+assign color_index = in_trace & ~p1_traced & ~trace_color ? 8'd7 : 8'dz;
 // traced box
-assign color_index = in_trace & traced & ~(leaderboard)  ? box_color : 8'dz;
+assign color_index = ~two_player_mode & in_trace & p1_traced & ~(leaderboard)  ? p1_box_color : 8'dz;
+assign color_index = two_player_mode & in_trace & p1_traced & ~p2_traced & ~(leaderboard)  ? p1_box_color : 8'dz;
+assign color_index = two_player_mode & in_trace & ~p1_traced & p2_traced & ~(leaderboard)  ? p2_box_color : 8'dz;
+assign color_index = two_player_mode & in_trace & p1_traced & p2_traced & ~(leaderboard)  ? 8'd1 : 8'dz;
 // display trace pattern
-assign color_index = in_trace & trace_color & ~traced & ~leaderboard ? 8'd0 : 8'dz;
+assign color_index = in_trace & trace_color & ~p1_traced & ~p2_traced & ~leaderboard ? 8'd0 : 8'dz;
 // otherwise
 //assign color_index = ~traced  ? 8'd0 : 8'dz;
 
@@ -388,7 +404,7 @@ wire [7:0] snitch_color;
 wire snitch_here;
 snitch snitchd(.row(row), .col(col), .clk(iVGA_CLK), .in_trace(in_trace), 
 					.snitch_color(snitch_color), .snitch(snitch_here), 
-					.snitch_powerup(snitch_powerup));
+					.snitch_powerup(snitch_powerup & ~logo & ~leaderboard));
 /*******ADDED**********/
 wire letter;
 letter letterz(.letter(letter), .clk(iVGA_CLK), .row(row), .col(col),
