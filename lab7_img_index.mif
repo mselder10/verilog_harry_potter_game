@@ -61,7 +61,7 @@ CONTENT BEGIN
 	025  :   00AFAF;
 	026  :   00AFD7;
 	027  :   00AFFF;
-	028  :   A7A7A7;
+	028  :   00D700;
 	029  :   00D75F;
 	02A  :   00D787;
 	02B  :   00D7AF;
@@ -101,7 +101,7 @@ CONTENT BEGIN
 	04D  :   5FD75F;
 	04E  :   5FD787;
 	04F  :   5FD7AF;
-	050  :   E5BB00;
+	050  :   5FD7D7;
 	051  :   5FD7FF;
 	052  :   2E2D7F;
 	053  :   5FFF5F;

@@ -1,3 +1,4 @@
+
 module graphics(resetn, 
 	VGA_CLK,   														//	VGA Clock
 	VGA_HS,															//	VGA H_SYNC
@@ -42,9 +43,27 @@ module graphics(resetn,
 	
 	wire [1:0] screen;
 	wire [31:0] seconds;
-	wire EOG, snitch_powerup;
+	wire EOG;
+	wire [31:0] score_player1, score_player2, score_player3, score_player4;
+	wire [31:0] data_readReg1, data_readReg2, data_readReg3, data_readReg4;
+	wire [2:0] powerUp1, powerUp2, powerUp3, powerUp4;
+	wire scoreOption1, scoreOption2, scoreOption3, scoreOption4;
+	wire inTrace1, inTrace2, inTrace3, inTrace4;
+	///////////////////// Screen Timer ////////////////////////////////////////
 	screenTimer timez(.clock(clock), .total_screens(4'd4), .curr_screen(screen), 
-							.time_out(seconds), .end_of_game(EOG), .snitch_powerup(snitch_powerup));
+							.time_out(seconds), .end_of_game(EOG));
+							
+							
+	////////////////////// Processor /////////////////////////////////////////
+   skeleton processor(clock, resetn, score_player1, score_player2, score_player3, score_player4, data_readReg1, data_readReg2,
+	data_readReg3, data_readReg4);	
+	
+	
+	/////////////////////// Score Calculation //////////////////////////////
+	scoreCalc s1(inTrace, scoreOption1, powerUp1, score_player1);
+	scoreCalc s2(inTrace, scoreOption2, powerUp2, score_player2);
+	scoreCalc s3(inTrace, scoreOption3, powerUp3, score_player3);
+	scoreCalc s4(inTrace, scoreOption4, powerUp4, score_player4);
 	
 	// some LEDs that you could use for debugging if you wanted
 	assign leds = 8'b00101011;
@@ -60,8 +79,7 @@ module graphics(resetn,
 								 .b_data(VGA_B),
 								 .g_data(VGA_G),
 								 .r_data(VGA_R),
-								 .ir_in_p1(ir_in_p1),
-								 .ir_in_p2(ir_in_p2),
+								 .ir_in(ir_in),
 								 .gryffindor1(G1),
 								 .slytherin1(S1),
 								 .hufflepuff1(H1),
@@ -71,13 +89,9 @@ module graphics(resetn,
 								 .slytherin2(S2),
 								 .hufflepuff2(H2),
 								 .ravenclaw2(R2),
-								 .snitch_powerup(1'b1),
-								 .time_turner_powerup(1'b0), 
-								 .lightning_powerup(1'b0), 
-								 .broom_powerup(1'b1),
-								 .leaderboard(1'b0), 
+								 .leaderboard(EOG), 
 								 .get_ready(1'b0), .times_up(1'b0),
-								 .logo(/*screen[0]*/ 1'b0)
+								 .logo(screen[0])
 								 );
 	
 	

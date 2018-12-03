@@ -1,0 +1,15 @@
+module scoreCalc(inTrace, scoreOption, powerUp);
+
+
+input inTrace, scoreoption;
+input [2:0] powerUp;
+
+
+reg [31:0] positive_points, negative_points;
+
+initial begin
+positive_points = 32'd300;
+negative_points = 32'd100;
+end
+
+endmodule

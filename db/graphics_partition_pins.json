@@ -1,0 +1,285 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "VGA_HS",
+					"strict" : false
+				},
+				{
+					"name" : "VGA_VS",
+					"strict" : false
+				},
+				{
+					"name" : "VGA_BLANK",
+					"strict" : false
+				},
+				{
+					"name" : "VGA_R[0]",
+					"strict" : false
+				},
+				{
+					"name" : "VGA_R[1]",
+					"strict" : false
+				},
+				{
+					"name" : "VGA_R[2]",
+					"strict" : false
+				},
+				{
+					"name" : "VGA_R[3]",
+					"strict" : false
+				},
+				{
+					"name" : "VGA_R[4]",
+					"strict" : false
+				},
+				{
+					"name" : "VGA_R[5]",
+					"strict" : false
+				},
+				{
+					"name" : "VGA_R[6]",
+					"strict" : false
+				},
+				{
+					"name" : "VGA_R[7]",
+					"strict" : false
+				},
+				{
+					"name" : "VGA_G[0]",
+					"strict" : false
+				},
+				{
+					"name" : "VGA_G[1]",
+					"strict" : false
+				},
+				{
+					"name" : "VGA_G[2]",
+					"strict" : false
+				},
+				{
+					"name" : "VGA_G[3]",
+					"strict" : false
+				},
+				{
+					"name" : "VGA_G[4]",
+					"strict" : false
+				},
+				{
+					"name" : "VGA_G[5]",
+					"strict" : false
+				},
+				{
+					"name" : "VGA_G[6]",
+					"strict" : false
+				},
+				{
+					"name" : "VGA_G[7]",
+					"strict" : false
+				},
+				{
+					"name" : "VGA_B[0]",
+					"strict" : false
+				},
+				{
+					"name" : "VGA_B[1]",
+					"strict" : false
+				},
+				{
+					"name" : "VGA_B[2]",
+					"strict" : false
+				},
+				{
+					"name" : "VGA_B[3]",
+					"strict" : false
+				},
+				{
+					"name" : "VGA_B[4]",
+					"strict" : false
+				},
+				{
+					"name" : "VGA_B[5]",
+					"strict" : false
+				},
+				{
+					"name" : "VGA_B[6]",
+					"strict" : false
+				},
+				{
+					"name" : "VGA_B[7]",
+					"strict" : false
+				},
+				{
+					"name" : "CLOCK_50",
+					"strict" : false
+				},
+				{
+					"name" : "H2",
+					"strict" : false
+				},
+				{
+					"name" : "R2",
+					"strict" : false
+				},
+				{
+					"name" : "G2",
+					"strict" : false
+				},
+				{
+					"name" : "S2",
+					"strict" : false
+				},
+				{
+					"name" : "two_player_mode",
+					"strict" : false
+				},
+				{
+					"name" : "H1",
+					"strict" : false
+				},
+				{
+					"name" : "S1",
+					"strict" : false
+				},
+				{
+					"name" : "R1",
+					"strict" : false
+				},
+				{
+					"name" : "G1",
+					"strict" : false
+				},
+				{
+					"name" : "ir_in_p1[7]",
+					"strict" : false
+				},
+				{
+					"name" : "ir_in_p1[6]",
+					"strict" : false
+				},
+				{
+					"name" : "ir_in_p1[14]",
+					"strict" : false
+				},
+				{
+					"name" : "ir_in_p1[12]",
+					"strict" : false
+				},
+				{
+					"name" : "ir_in_p1[13]",
+					"strict" : false
+				},
+				{
+					"name" : "ir_in_p1[15]",
+					"strict" : false
+				},
+				{
+					"name" : "ir_in_p1[8]",
+					"strict" : false
+				},
+				{
+					"name" : "ir_in_p1[9]",
+					"strict" : false
+				},
+				{
+					"name" : "ir_in_p1[4]",
+					"strict" : false
+				},
+				{
+					"name" : "ir_in_p1[5]",
+					"strict" : false
+				},
+				{
+					"name" : "ir_in_p1[11]",
+					"strict" : false
+				},
+				{
+					"name" : "ir_in_p1[10]",
+					"strict" : false
+				},
+				{
+					"name" : "ir_in_p1[3]",
+					"strict" : false
+				},
+				{
+					"name" : "ir_in_p1[0]",
+					"strict" : false
+				},
+				{
+					"name" : "ir_in_p1[1]",
+					"strict" : false
+				},
+				{
+					"name" : "ir_in_p1[2]",
+					"strict" : false
+				},
+				{
+					"name" : "ir_in_p2[4]",
+					"strict" : false
+				},
+				{
+					"name" : "ir_in_p2[5]",
+					"strict" : false
+				},
+				{
+					"name" : "ir_in_p2[0]",
+					"strict" : false
+				},
+				{
+					"name" : "ir_in_p2[1]",
+					"strict" : false
+				},
+				{
+					"name" : "ir_in_p2[9]",
+					"strict" : false
+				},
+				{
+					"name" : "ir_in_p2[3]",
+					"strict" : false
+				},
+				{
+					"name" : "ir_in_p2[8]",
+					"strict" : false
+				},
+				{
+					"name" : "ir_in_p2[15]",
+					"strict" : false
+				},
+				{
+					"name" : "ir_in_p2[12]",
+					"strict" : false
+				},
+				{
+					"name" : "ir_in_p2[13]",
+					"strict" : false
+				},
+				{
+					"name" : "ir_in_p2[2]",
+					"strict" : false
+				},
+				{
+					"name" : "ir_in_p2[6]",
+					"strict" : false
+				},
+				{
+					"name" : "ir_in_p2[7]",
+					"strict" : false
+				},
+				{
+					"name" : "ir_in_p2[10]",
+					"strict" : false
+				},
+				{
+					"name" : "ir_in_p2[11]",
+					"strict" : false
+				},
+				{
+					"name" : "ir_in_p2[14]",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

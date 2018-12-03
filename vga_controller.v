@@ -6,13 +6,12 @@ module vga_controller(iRST_n,
                       b_data,
                       g_data,
                       r_data,
-							 ir_in_p1, ir_in_p2,
+							 ir_in,
 							 gryffindor1, slytherin1, hufflepuff1, ravenclaw1,
 							 gryffindor2, slytherin2, hufflepuff2, ravenclaw2,
 							 two_player_mode,
 					  leaderboard, get_ready, times_up, logo,
-					  crest_out, crest_index,
-					  snitch_powerup, time_turner_powerup, lightning_powerup, broom_powerup);
+					  crest_out, crest_index);
 
 	
 input iRST_n;
@@ -24,9 +23,7 @@ input gryffindor1, slytherin1, hufflepuff1, ravenclaw1;
 input gryffindor2, slytherin2, hufflepuff2, ravenclaw2;
 reg player;
 // wand inputs
-input[15:0] ir_in_p1, ir_in_p2;
-// powerup flag
-input snitch_powerup, time_turner_powerup, lightning_powerup, broom_powerup;
+input[24:0] ir_in;
 
 /*******ADDED**********/
 // leaderboard inputs
@@ -106,10 +103,6 @@ reg [12:0] Gscore_pixel, Sscore_pixel, Hscore_pixel, Rscore_pixel;
 // leaderboard stuff
 reg Gr, Hr, Rr, Sr;
 
-// sparkles
-reg sparkle;
-reg [11:0] sparkel_pixel;
-
 always@(posedge iVGA_CLK)
 begin
 	
@@ -144,6 +137,11 @@ begin
 		
 	if((crest1 & ~logo))
 		crest_pixel <= crest_pixel + 1;
+		
+//	if((row == 10 && col == 10))
+//		crest_pixel <= 0;
+//	else if((crest_pixel+1) % 100 == 0)
+//		crest_pixel <= (row-10)*100;
 	
 	//	player 2
 	if (((row >=10 && row <= 109) && (col >=530 && col <= 629) & two_player_mode)
@@ -239,58 +237,38 @@ background bckgrd(.G(gryffindor1), .H(hufflepuff1),
 				  .S(slytherin1), .R(ravenclaw1), 
 				  .color_index(bckgrd_color), .clk(iVGA_CLK));
 
-/*********PLAYER TRACE**********/
-// player 1
-wire [7:0] p1_box_color;
-wire p1_traced, reset_p2;
-wire [15:0] p1_trace;
-four_by_four boxp1(.row(row), .col(col),  
-						.color_in_box(p1_traced), .box_color(p1_box_color), 
-						.clk(iVGA_CLK), .ir_in(ir_in_p1),
-						.R(ravenclaw1), .S(slytherin1), .G(gryffindor1), 
-						.H(hufflepuff1),
-						.already_traced(p1_trace), 
-						.broom_powerup(broom_powerup & ~(p1_trace[6] | p2_trace[6])), .two_player_mode(two_player_mode), 
-						.reset_other_player_trace(reset_p2), .clear_my_trace(reset_p1), .snitch_location(snitch_location));
-					
-// player 2
-wire [7:0] p2_box_color;
-wire p2_traced, reset_p1;
-wire [15:0] p2_trace;
-four_by_four boxp2(.row(row), .col(col),  
-						.color_in_box(p2_traced), .box_color(p2_box_color), 
-						.clk(iVGA_CLK), .ir_in(ir_in_p2),
-						.R(ravenclaw2), .S(slytherin2), .G(gryffindor2), 
-						.H(hufflepuff2),
-						.already_traced(p2_trace), 
-						.broom_powerup(broom_powerup & ~(p1_trace[6] | p2_trace[6])), .two_player_mode(two_player_mode), 
-						.reset_other_player_trace(reset_p1), .clear_my_trace(reset_p2));
-
-wire trace_color;
-display_trace tracez(.row(row), .col(col), .trace(16'h0231), 
-							.trace_color(trace_color), .clk(iVGA_CLK));
+wire [7:0] box_color;
+wire traced;
 					 
-/*********COLORS**********/
+four_by_four boxz(.row(row), .col(col),  
+						.color_in_box(traced), .box_color(box_color), 
+						.clk(iVGA_CLK), .ir_in(ir_in),
+						.R(ravenclaw1), .S(slytherin1), .G(gryffindor1), 
+						.H(hufflepuff1));
+
+/*five_by_five boxz(.row(row), .col(col), .color_in_box(traced), 
+					.box_color(box_color), .clk(iVGA_CLK), .ir_in(ir_in),
+					.R(ravenclaw), .S(slytherin), .G(gryffindor), 
+					.H(hufflepuff));*/
+					 
+
 // background color					 
 assign color_index = ~in_trace ? bckgrd_color : 8'dz;
 // untraced box
-assign color_index = in_trace & ~p1_traced & ~trace_color ? 8'd7 : 8'dz;
+assign color_index = in_trace & ~traced ? 8'd7 : 8'dz;
 // traced box
-assign color_index = ~two_player_mode & in_trace & p1_traced & ~(leaderboard)  ? p1_box_color : 8'dz;
-assign color_index = two_player_mode & in_trace & p1_traced & ~p2_traced & ~(leaderboard)  ? p1_box_color : 8'dz;
-assign color_index = two_player_mode & in_trace & ~p1_traced & p2_traced & ~(leaderboard)  ? p2_box_color : 8'dz;
-assign color_index = two_player_mode & in_trace & p1_traced & p2_traced & ~(leaderboard) ? 8'd1 : 8'dz;
-// display trace pattern
-assign color_index = in_trace & trace_color & ~p1_traced & ~p2_traced & ~leaderboard ? 8'd40 : 8'dz;
+assign color_index = in_trace & traced & ~(leaderboard | get_ready | times_up)  ? box_color : 8'dz;
+// otherwise
+//assign color_index = ~traced  ? 8'd0 : 8'dz;
 
 	
-/******OPENING SCREEN**********/
+// instantiate logo ROM
 opening logoz(
 	.address(in_trace_pixel),
 	.clock(iVGA_CLK),
 	.q(logo_index));
 	
-/******LEADERBOARD**********/
+/*******ADDED**********/
 wire Gl, Hl, Rl, Sl, crestl;
 wire [18:0] leader_crest_pixel;
 wire [12:0] leaderboard_score_pixel;
@@ -302,11 +280,12 @@ leaderboard ledaerz(.G(Gl), .H(Hl), .R(Rl), .S(Sl),
 							.score_ADDR(leaderboard_score_pixel));
 /**********************/
 
-/*******SPARKLES**********/
-wire sparks;
-sparkle sparklez(.clk(iVGA_CLK), .row(row), .col(col), .sparkle(sparks));
+/*******ADDED**********/
+//wire border;
+//border borderz(.border(border), .row(row), .col(col), .clk(iVGA_CLK));
+/**********************/
 
-/*******HOUSE CRESTS**********/
+// instantiate crest ROM
 output crest_out;
 crest crestz(.clk(iVGA_CLK), .R1(ravenclaw1), .G1(gryffindor1), 
 					.S1(slytherin1), .H1(hufflepuff1),
@@ -319,7 +298,7 @@ crest crestz(.clk(iVGA_CLK), .R1(ravenclaw1), .G1(gryffindor1),
 					.ADDR(crest_pixel), .crest(crest_out), 
 					.leaderboard(leaderboard), .leader_ADDR(leader_crest_pixel));
 
-/********NUMBERS AND SCORE DISPLAY********/
+// SCORE DISPLAY
 wire num;
 wire [12:0] number_ADDR;
 assign number_ADDR = leaderboard ? leaderboard_score_pixel : num_pixel;
@@ -377,58 +356,25 @@ number numz(.ADDR(number_ADDR),
 			.thousands(thousands | (leaderboard_score == 3'b100)),
 			.ten_thousands(leaderboard_score == 3'b101),
 			.hundred_thousands(leaderboard_score == 3'b110));
-
-/********POWERUPS********/
-// snitch
-wire [7:0] snitch_color;
-wire snitch_here, snitch_caught;
-wire [15:0] snitch_location;
-snitch snitchd(.row(row), .col(col), .clk(iVGA_CLK), .in_trace(in_trace), 
-					.snitch_color(snitch_color), .snitch(snitch_here), 
-					.snitch_powerup(snitch_powerup & ~logo & ~leaderboard & ~snitch_caught & ~two_player_mode), 
-					.snitch_location(snitch_location), .ir_in_p1(ir_in_p1), .snitch_caught(snitch_caught));
-// broom
-wire broom;
-broom broomz(.row(row), .col(col), .broom(broom), .clk(iVGA_CLK), 
-				 .in_trace(in_trace), .broom_powerup(broom_powerup & ~logo & ~leaderboard && ~(p1_trace[6] | p2_trace[6])));
-
-// time turner
-wire time_turner;
-time_turner turnz(.row(row), .col(col), .clk(iVGA_CLK), 
-						.time_turner(time_turner), .in_trace(in_trace), 
-						.time_turner_powerup(time_turner_powerup & ~logo & ~leaderboard));
-
-// lightning						
-wire lightning;
-lightning boltz(.row(row), .col(col), .clk(iVGA_CLK), 
-						.lightning(lightning), .in_trace(in_trace), 
-						.lightning_powerup(lightning_powerup & ~logo & ~leaderboard));
-/*******LETTERS**********/
+			
+/*******ADDED**********/
 wire letter;
 letter letterz(.letter(letter), .clk(iVGA_CLK), .row(row), .col(col),
 			  	.leaderboard(leaderboard));
+				
+//wire messageLetter;
+//message_letter letterm(.letter(messageLetter), .clk(iVGA_CLK), .row(row), .col(col),
+//			  	.get_ready(get_ready), .times_up(times_up));
+/**********************/
 
-/***********MUX IMAGES***************/
-// logo
 assign file_index = logo ? logo_index : 8'dz;
-// crests
 assign file_index = (crest1 | crest2 | leader_crest) & crest_out ? crest_index : 8'dz;
-// numbers
 assign file_index = ~num ? num : 8'dz;
-// powerups
-assign file_index = broom ? 8'b0 : 8'dz;
-assign file_index = time_turner ? 8'b0 : 8'dz;
-assign file_index = lightning ? 8'b0 : 8'dz;
-assign file_index = snitch_here ? snitch_color : 8'dz;
-// sparkle
-assign file_index = ~sparks ? sparks : 8'dz;
-// letters
+/*******ADDED**********/
+//assign file_index = ~border & ~logo & ~leaderboard ? border : 8'dz;
 assign file_index = ~letter & (leaderboard | get_ready | times_up) ? letter : 8'dz;
-// background color / trace
-assign file_index = ~logo & ~crest_out & num & ~leaderboard & sparks & ~snitch_here 
-								  & ~broom & ~lightning & ~time_turner ? color_index : 8'dz;
-// leaderboard
-assign file_index = letter & ~crest_out & leaderboard ? 8'd1 : 8'dz;
+assign file_index = ~logo & ~crest_out & num & ~leaderboard ? color_index : 8'dz;
+assign file_index = letter & ~crest_out & leaderboard & get_ready ? 8'd1 : 8'dz;
 /**********************/
 
 //////Color table output

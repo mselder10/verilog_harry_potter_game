@@ -39,9 +39,9 @@ module letter(letter, clk, row, col,
 		// S
 		if((col>=245 & col <295) & leaderboard & (row>= 0 & row < 50))
 			tletter <= 5'd18;
-		// E (for now C)
+		// E (for now A)
 		if((col>=295 & col <345) & leaderboard & (row>= 0 & row < 50))
-			tletter <= 5'd2;	
+			tletter <= 5'd13;	
 		// SPACE
 		// C
 		if((col>=395 & col <445) & leaderboard & (row>= 0 & row < 50))

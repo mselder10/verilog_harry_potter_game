@@ -1,0 +1,20 @@
+module scoreToDigits(score, digit0, digit1, digit2, digit3, digit4, digit5);
+
+input [31:0] score;
+output reg [3:0] digit [5:0];//, digit1, digit2, digit3, digit4, digit5;
+
+reg [7:0] result;
+reg i=3'b0;
+initial begin
+
+end
+always @(score) begin
+result<=score;
+while(i<6) begin
+digit[i] <= result % 10;
+result<= result /10;
+end
+end
+
+
+endmodule
