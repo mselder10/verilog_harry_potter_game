@@ -1,0 +1,42 @@
+|random_trace_generation
+RBG => trace.DATAB
+RBG => trace.DATAB
+RBG => trace.DATAB
+RBG => trace.DATAB
+RBG => trace.DATAB
+RBG => trace.DATAB
+RBG => trace.DATAB
+RBG => trace.DATAB
+RBG => trace.DATAB
+RBG => trace.DATAB
+RBG => trace.DATAB
+RBG => trace.DATAB
+RBG => trace.DATAB
+RBG => trace.DATAB
+RBG => trace.DATAB
+RBG => trace.DATAB
+RBG => always0.IN1
+RBG => always0.IN1
+RBG => always0.IN1
+RBG => always0.IN1
+clk => always0.IN1
+trace[0] <= trace[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+trace[1] <= trace[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+trace[2] <= trace[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+trace[3] <= trace[3]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+trace[4] <= trace[4]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+trace[5] <= trace[5]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+trace[6] <= trace[6]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+trace[7] <= trace[7]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+trace[8] <= trace[8]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+trace[9] <= trace[9]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+trace[10] <= trace[10]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+trace[11] <= trace[11]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+trace[12] <= trace[12]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+trace[13] <= trace[13]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+trace[14] <= trace[14]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+trace[15] <= trace[15]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+save_trace <= save_trace~reg0.DB_MAX_OUTPUT_PORT_TYPE
+trace_saved => ~NO_FANOUT~
+
+

@@ -1,0 +1,14 @@
+Analysis & Synthesis Status : Successful - Mon Dec 03 03:59:43 2018
+Quartus Prime Version : 16.0.0 Build 211 04/27/2016 SJ Lite Edition
+Revision Name : random_trace_generation
+Top-level Entity Name : random_trace_generation
+Family : Cyclone IV E
+Total logic elements : 749
+    Total combinational functions : 749
+    Dedicated logic registers : 49
+Total registers : 49
+Total pins : 20
+Total virtual pins : 0
+Total memory bits : 0
+Embedded Multiplier 9-bit elements : 0
+Total PLLs : 0

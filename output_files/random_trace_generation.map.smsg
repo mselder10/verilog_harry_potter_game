@@ -1,0 +1,1 @@
+Warning (10268): Verilog HDL information at random_trace_generation.v(18): always construct contains both blocking and non-blocking assignments File: C:/Users/Natalia/Documents/GitHub/final-project-s18-nat-mar-stef/random_trace_generation.v Line: 18

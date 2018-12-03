@@ -1,0 +1,85 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "trace[0]",
+					"strict" : false
+				},
+				{
+					"name" : "trace[1]",
+					"strict" : false
+				},
+				{
+					"name" : "trace[2]",
+					"strict" : false
+				},
+				{
+					"name" : "trace[3]",
+					"strict" : false
+				},
+				{
+					"name" : "trace[4]",
+					"strict" : false
+				},
+				{
+					"name" : "trace[5]",
+					"strict" : false
+				},
+				{
+					"name" : "trace[6]",
+					"strict" : false
+				},
+				{
+					"name" : "trace[7]",
+					"strict" : false
+				},
+				{
+					"name" : "trace[8]",
+					"strict" : false
+				},
+				{
+					"name" : "trace[9]",
+					"strict" : false
+				},
+				{
+					"name" : "trace[10]",
+					"strict" : false
+				},
+				{
+					"name" : "trace[11]",
+					"strict" : false
+				},
+				{
+					"name" : "trace[12]",
+					"strict" : false
+				},
+				{
+					"name" : "trace[13]",
+					"strict" : false
+				},
+				{
+					"name" : "trace[14]",
+					"strict" : false
+				},
+				{
+					"name" : "trace[15]",
+					"strict" : false
+				},
+				{
+					"name" : "save_trace",
+					"strict" : false
+				},
+				{
+					"name" : "RBG",
+					"strict" : false
+				},
+				{
+					"name" : "clk",
+					"strict" : false
+				}
+			]
+		}
+	]
+}
