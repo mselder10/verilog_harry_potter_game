@@ -1,8 +1,8 @@
-module sparkle(row, col, clk, sparkle);
+module sparkle(row, col, clk, sparkle, display_row1, display_col1, display_row2, display_col2);
 
 	input clk;
-	input [8:0] row;
-	input [9:0] col;
+	input [8:0] row, display_row1, display_row2;
+	input [9:0] col, display_col1, display_col2;
 	reg [11:0] offset_ADDR;
 	reg [11:0] ADDR, ADDR2;
 	reg [11:0] offset, offset2;
@@ -22,7 +22,7 @@ module sparkle(row, col, clk, sparkle);
 	
 	always @(posedge clk)
 	begin
-	if((row >= 80 & row < 100) & (col >=90 & col <110))
+	if((row >= display_row1 & row < display_row1+20) & (col >= display_col1 & col <display_col1+20))
 		begin
 			if(update_offset_counter >= 32'd5000)
 				begin
@@ -45,14 +45,14 @@ module sparkle(row, col, clk, sparkle);
 			else
 				update_offset_counter <= update_offset_counter + 1;
 			
-			if(ADDR == 399 || (row == 140 & col == 20))
+			if(ADDR == 399 || (display_row1 == 140 & display_col1 == 20))
 				ADDR <= 0;
 			else 
 				ADDR <= ADDR + 1;
 		offset_ADDR = ADDR + offset;
 		end
 
-	if((row >= 10 & row < 30) & (col >=10 & col <30))
+	if((row >= display_row2 & row < display_row2+20) & (col >= display_col2 & col <display_col2+20))
 		begin
 			if(update_offset_counter2 >= 32'd5000)
 				begin
@@ -73,7 +73,7 @@ module sparkle(row, col, clk, sparkle);
 			else
 				update_offset_counter2 <= update_offset_counter2 + 1;
 			
-			if(ADDR2 == 399 || (row == 10 & col == 30))
+			if(ADDR2 == 399 || (row == display_row2 & display_col2 == 30))
 				ADDR2 <= 0;
 			else 
 				ADDR2 <= ADDR2 + 1;

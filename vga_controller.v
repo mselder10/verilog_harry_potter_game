@@ -13,7 +13,8 @@ module vga_controller(iRST_n,
 					  leaderboard, get_ready, times_up, logo,
 					  crest_out, crest_index,
 					  snitch_powerup, time_turner_powerup, lightning_powerup, broom_powerup,
-					  p1_score_ones, p1_score_tens, p1_score_hundreds, p1_score_thousands);
+					  p1_score_ones, p1_score_tens, p1_score_hundreds, p1_score_thousands,
+					  end_game_early);
 
 	
 input iRST_n;
@@ -49,6 +50,7 @@ output reg oVS;
 output [7:0] b_data;
 output [7:0] g_data;  
 output [7:0] r_data; 
+output end_game_early;
 
 // where am I on the screem                  
 reg [18:0] ADDR;
@@ -232,7 +234,7 @@ begin
 	end
 	
 	// reset score pixel counter
-	if((num_pixel+1) % 30 == 0 | logo)
+	if((num_pixel+1) % 30 == 0 | logo | col == 520 || col == 550 || col == 580 || col ==610)
 		num_pixel <= row*30;
 	
 	counter <= counter +1;
@@ -256,7 +258,9 @@ four_by_four boxp1(.row(row), .col(col),
 						.H(hufflepuff1),
 						.already_traced(p1_trace), 
 						.broom_powerup(broom_powerup & ~(p1_trace[6] | p2_trace[6])), .two_player_mode(two_player_mode), 
-						.reset_other_player_trace(reset_p2), .clear_my_trace(reset_p1), .snitch_location(snitch_location));
+						.reset_other_player_trace(reset_p2), .clear_my_trace(reset_p1), 
+						.snitch_location(snitch_location), .reset_trace((p1_trace & trace_displayed)==trace_displayed),
+						.displayed_trace(trace_displayed));
 					
 // player 2
 wire [7:0] p2_box_color;
@@ -269,11 +273,23 @@ four_by_four boxp2(.row(row), .col(col),
 						.H(hufflepuff2),
 						.already_traced(p2_trace), 
 						.broom_powerup(broom_powerup & ~(p1_trace[6] | p2_trace[6])), .two_player_mode(two_player_mode), 
-						.reset_other_player_trace(reset_p1), .clear_my_trace(reset_p2));
-
+						.reset_other_player_trace(reset_p1), .clear_my_trace(reset_p2), 
+						.reset_trace((p2_trace & trace_displayed)==trace_displayed),
+						.displayed_trace(trace_displayed));
+				
+/*********TRACE DISPLAY**********/
 wire trace_color;
-display_trace tracez(.row(row), .col(col), .trace(16'h0231), 
+display_trace tracez(.row(row), .col(col), .trace(trace_displayed), 
 							.trace_color(trace_color), .clk(iVGA_CLK));
+
+wire [15:0] trace_displayed, previous_trace_displayed;	
+wire end_game_early, changed_trace;
+wire [3:0] trace_count;				
+trace_change changez(.trace_to_display(trace_displayed), .clk(iVGA_CLK), 
+							.p1_traced(p1_trace), .p2_traced(p2_trace), 
+							.trace_screen_on(~logo & ~leaderboard), 
+							.end_game_early(end_game_early), .trace_count(trace_count),
+							.two_player_mode(two_player_mode));
 					 
 /*********COLORS**********/
 // background color					 
@@ -309,7 +325,9 @@ leaderboard ledaerz(.G(Gl), .H(Hl), .R(Rl), .S(Sl),
 
 /*******SPARKLES**********/
 wire sparks;
-sparkle sparklez(.clk(iVGA_CLK), .row(row), .col(col), .sparkle(sparks));
+sparkle sparklez(.clk(iVGA_CLK), .row(row), .col(col), .sparkle(sparks),
+					  .display_row1(8'd80), .display_col1(9'd90), 
+					  .display_row2(8'd10), .display_col2(9'd10));
 
 /*******HOUSE CRESTS**********/
 output crest_out;
@@ -323,6 +341,9 @@ crest crestz(.clk(iVGA_CLK), .R1(ravenclaw1), .G1(gryffindor1),
 					.crest_index(crest_index),
 					.ADDR(crest_pixel), .crest(crest_out), 
 					.leaderboard(leaderboard), .leader_ADDR(leader_crest_pixel));
+/*************COUNTDOWN TIMER*************/
+wire countdown;
+countdown downz(.row(row), .col(col), .clk(iVGA_CLK), .countdown(countdown), .logo(logo));
 
 /********NUMBERS AND SCORE DISPLAY********/
 wire num;
@@ -420,18 +441,19 @@ assign file_index = logo ? logo_index : 8'dz;
 assign file_index = (crest1 | crest2 | leader_crest) & crest_out ? crest_index : 8'dz;
 // numbers
 assign file_index = ~num ? num : 8'dz;
+assign file_index = ~countdown & ~logo & ~leaderboard ? countdown : 8'dz;
 // powerups
 assign file_index = broom ? 8'b0 : 8'dz;
 assign file_index = time_turner ? 8'b0 : 8'dz;
 assign file_index = lightning ? 8'b0 : 8'dz;
 assign file_index = snitch_here ? snitch_color : 8'dz;
 // sparkle
-assign file_index = ~sparks ? sparks : 8'dz;
+assign file_index = ~sparks & ~leaderboard & ~logo ? sparks : 8'dz;
 // letters
 assign file_index = ~letter & (leaderboard | get_ready | times_up) ? letter : 8'dz;
 // background color / trace
 assign file_index = ~logo & ~crest_out & num & ~leaderboard & sparks & ~snitch_here 
-								  & ~broom & ~lightning & ~time_turner ? color_index : 8'dz;
+								  & ~broom & ~lightning & ~time_turner & countdown ? color_index : 8'dz;
 // leaderboard
 assign file_index = letter & ~crest_out & leaderboard ? 8'd1 : 8'dz;
 /**********************/
