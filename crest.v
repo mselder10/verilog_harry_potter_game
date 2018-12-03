@@ -34,7 +34,7 @@ crest_index, ADDR, crest, leader_ADDR, player, leaderboard);
 	assign crest_index = (S1) & ~leaderboard & ~player & crest & out[0] ? 8'hff : 8'dz; //inside
 	
 	// two colors of ravenclaw
-	assign crest_index = (R1) & ~leaderboard & ~player & crest & ~out[0] ? 8'h10 : 8'dz; //outside
+	assign crest_index = (R1) & ~leaderboard & ~player & crest & ~out[0] ? 8'h9a : 8'dz; //outside
 	assign crest_index = (R1) & ~leaderboard & ~player & crest & out[0] ? 8'h99 : 8'dz; //inside
 	
 	// two colors of hufflepuff
@@ -54,7 +54,7 @@ crest_index, ADDR, crest, leader_ADDR, player, leaderboard);
 	assign crest_index = (S2) & ~leaderboard & player & crest & out[0] ? 8'hff : 8'dz; //inside
 	
 	// two colors of ravenclaw
-	assign crest_index = (R2) & ~leaderboard & player & crest & ~out[0] ? 8'h10 : 8'dz; //outside
+	assign crest_index = (R2) & ~leaderboard & player & crest & ~out[0] ? 8'h9a : 8'dz; //outside
 	assign crest_index = (R2) & ~leaderboard & player & crest & out[0] ? 8'h99 : 8'dz; //inside
 	
 	// two colors of hufflepuff
@@ -74,7 +74,7 @@ crest_index, ADDR, crest, leader_ADDR, player, leaderboard);
 	assign crest_index = (Sl) & leaderboard & crest & out[0] ? 8'hff : 8'dz; //inside
 	
 	// two colors of ravenclaw
-	assign crest_index = (Rl) & leaderboard & crest & ~out[0] ? 8'h10 : 8'dz; //outside
+	assign crest_index = (Rl) & leaderboard & crest & ~out[0] ? 8'h9a : 8'dz; //outside
 	assign crest_index = (Rl) & leaderboard & crest & out[0] ? 8'h99 : 8'dz; //inside
 	
 	// two colors of hufflepuff

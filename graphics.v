@@ -71,6 +71,7 @@ module graphics(resetn,
 	assign leds = 8'b00101011;
 		
 	// VGA
+	wire end_game_early;
 	Reset_Delay			r0	(.iCLK(CLOCK_50),.oRESET(DLY_RST)	);
 	VGA_Audio_PLL 		p1	(.areset(~DLY_RST),.inclk0(CLOCK_50),.c0(VGA_CTRL_CLK),.c1(AUD_CTRL_CLK),.c2(VGA_CLK)	);
 	vga_controller vga_ins(.iRST_n(DLY_RST),
@@ -87,10 +88,10 @@ module graphics(resetn,
 								 .slytherin1(S1),
 								 .hufflepuff1(H1),
 								 .ravenclaw1(R1),
-								 .p1_score_ones(digit0),
-								 .p1_score_tens(digit1),
-								 .p1_score_hundreds(digit2),
-								 .p1_score_thousands(digit3),
+								 .p1_score_ones(4'd7),
+								 .p1_score_tens(4'd1),
+								 .p1_score_hundreds(4'd6),
+								 .p1_score_thousands(4'd9),
 								 .two_player_mode(two_player_mode),
 								 .gryffindor2(G2),
 								 .slytherin2(S2),
@@ -100,9 +101,10 @@ module graphics(resetn,
 								 .time_turner_powerup(1'b0), 
 								 .lightning_powerup(1'b0), 
 								 .broom_powerup(1'b1),
-								 .leaderboard(1'b0), 
+								 .leaderboard(EOG | end_game_early), 
 								 .get_ready(1'b0), .times_up(1'b0),
-								 .logo(/*screen[0]*/ 1'b0)
+								 .logo(screen[0]),
+								 .end_game_early(end_game_early)
 								 );
 	
 	

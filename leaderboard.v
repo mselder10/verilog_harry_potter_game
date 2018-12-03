@@ -90,42 +90,42 @@ module leaderboard(G, H, R, S, row, col, clk, leaderboard, crest, crest_ADDR, lo
 			begin
 				scores <= 3'b110; //
 				gryffindor_house_score_pixel <= gryffindor_house_score_pixel + 1;
-				if(((gryffindor_house_score_pixel+1) % 30) == 0)
+				if((((gryffindor_house_score_pixel+1) % 30) == 0) || col == 280)
 					gryffindor_house_score_pixel <= (row%75)*30;
 			end
 		if (col>=310 & col < 340) // ten thousands
 			begin
 				scores <= 3'b101; //
 				gryffindor_house_score_pixel <= gryffindor_house_score_pixel + 1;
-				if(((gryffindor_house_score_pixel+1) % 30) == 0)
+				if((((gryffindor_house_score_pixel+1) % 30) == 0) || col == 310)
 					gryffindor_house_score_pixel <= (row%75)*30;
 			end
 		if (col>=340 & col < 370) // thousands
 			begin
 				scores <= 3'b100; //
 				gryffindor_house_score_pixel <= gryffindor_house_score_pixel + 1;
-				if(((gryffindor_house_score_pixel+1) % 30) == 0)
+				if((((gryffindor_house_score_pixel+1) % 30) == 0) || col == 340)
 					gryffindor_house_score_pixel <= (row%75)*30;
 			end
 		if (col>=370 & col < 400)
 			begin 
 				scores <= 3'b011; // hundreds
 				gryffindor_house_score_pixel <= gryffindor_house_score_pixel + 1;
-				if(((gryffindor_house_score_pixel+1) % 30) == 0)
+				if((((gryffindor_house_score_pixel+1) % 30) == 0) || col == 370)
 					gryffindor_house_score_pixel <= (row%75)*30;
 			end
 		if (col>=400 & col < 430) // tens
 			begin 
 				scores <= 3'b010;
 				gryffindor_house_score_pixel <= gryffindor_house_score_pixel + 1;
-				if(((gryffindor_house_score_pixel+1) % 30) == 0)
+				if((((gryffindor_house_score_pixel+1) % 30) == 0) || col == 400)
 					gryffindor_house_score_pixel <= (row%75)*30;
 			end
 		if (col>=430 & col < 460) // ones
 			begin 
 				scores <= 3'b001;
 				gryffindor_house_score_pixel <= gryffindor_house_score_pixel + 1;
-				if(((gryffindor_house_score_pixel+1) % 30) == 0)
+				if((((gryffindor_house_score_pixel+1) % 30) == 0) || col == 430)
 					gryffindor_house_score_pixel <= (row%75)*30;
 			end
 	end
@@ -135,42 +135,42 @@ module leaderboard(G, H, R, S, row, col, clk, leaderboard, crest, crest_ADDR, lo
 			begin
 				scores <= 3'b110; //
 				slytherin_house_score_pixel <= slytherin_house_score_pixel + 1;
-				if(((slytherin_house_score_pixel+1) % 30) == 0)
+				if((((slytherin_house_score_pixel+1) % 30) == 0 || col == 280))
 					slytherin_house_score_pixel <= (row%175)*30;
 			end
 		if (col>=310 & col < 340) // ten thousands
 			begin
 				scores <= 3'b101; //
 				slytherin_house_score_pixel <= slytherin_house_score_pixel + 1;
-				if(((slytherin_house_score_pixel+1) % 30) == 0)
+				if((((slytherin_house_score_pixel+1) % 30) == 0 || col == 310))
 					slytherin_house_score_pixel <= (row%175)*30;
 			end
 		if (col>=340 & col < 370) // thousands
 			begin
 				scores <= 3'b100; //
 				slytherin_house_score_pixel <= slytherin_house_score_pixel + 1;
-				if(((slytherin_house_score_pixel+1) % 30) == 0)
+				if((((slytherin_house_score_pixel+1) % 30) == 0 || col == 340))
 					slytherin_house_score_pixel <= (row%175)*30;
 			end
 		if (col>=370 & col < 400)
 			begin 
 				scores <= 3'b011; // hundreds
 				slytherin_house_score_pixel <= slytherin_house_score_pixel + 1;
-				if(((slytherin_house_score_pixel+1) % 30) == 0)
+				if((((slytherin_house_score_pixel+1) % 30) == 0 || col == 370))
 					slytherin_house_score_pixel <= (row%175)*30;
 			end
 		if (col>=400 & col < 430) // tens
 			begin 
 				scores <= 3'b010;
 				slytherin_house_score_pixel <= slytherin_house_score_pixel + 1;
-				if(((slytherin_house_score_pixel+1) % 30) == 0)
+				if((((slytherin_house_score_pixel+1) % 30) == 0 || col == 400))
 					slytherin_house_score_pixel <= (row%175)*30;
 			end
 		if (col>=430 & col < 460) // ones
 			begin 
 				scores <= 3'b001;
 				slytherin_house_score_pixel <= slytherin_house_score_pixel + 1;
-				if(((slytherin_house_score_pixel+1) % 30) == 0)
+				if((((slytherin_house_score_pixel+1) % 30) == 0 || col == 430))
 					slytherin_house_score_pixel <= (row%175)*30;
 			end
 	end
@@ -180,42 +180,42 @@ module leaderboard(G, H, R, S, row, col, clk, leaderboard, crest, crest_ADDR, lo
 			begin
 				scores <= 3'b110; //
 				ravenclaw_house_score_pixel <= ravenclaw_house_score_pixel + 1;
-				if(((ravenclaw_house_score_pixel+1) % 30) == 0)
+				if((((ravenclaw_house_score_pixel+1) % 30) == 0) || col == 280)
 					ravenclaw_house_score_pixel <= (row%275)*30;
 			end
 		if (col>=310 & col < 340) // ten thousands
 			begin
 				scores <= 3'b101; //
 				ravenclaw_house_score_pixel <= ravenclaw_house_score_pixel + 1;
-				if(((ravenclaw_house_score_pixel+1) % 30) == 0)
+				if((((ravenclaw_house_score_pixel+1) % 30) == 0) || col == 310)
 					ravenclaw_house_score_pixel <= (row%275)*30;
 			end
 		if (col>=340 & col < 370) // thousands
 			begin
 				scores <= 3'b100; //
 				ravenclaw_house_score_pixel <= ravenclaw_house_score_pixel + 1;
-				if(((ravenclaw_house_score_pixel+1) % 30) == 0)
+				if((((ravenclaw_house_score_pixel+1) % 30) == 0) || col == 340)
 					ravenclaw_house_score_pixel <= (row%275)*30;
 			end
 		if (col>=370 & col < 400)
 			begin 
 				scores <= 3'b011; // hundreds
 				ravenclaw_house_score_pixel <= ravenclaw_house_score_pixel + 1;
-				if(((ravenclaw_house_score_pixel+1) % 30) == 0)
+				if((((ravenclaw_house_score_pixel+1) % 30) == 0) || col == 370)
 					ravenclaw_house_score_pixel <= (row%275)*30;
 			end
 		if (col>=400 & col < 430) // tens
 			begin 
 				scores <= 3'b010;
 				ravenclaw_house_score_pixel <= ravenclaw_house_score_pixel + 1;
-				if(((ravenclaw_house_score_pixel+1) % 30) == 0)
+				if((((ravenclaw_house_score_pixel+1) % 30) == 0) || col == 400)
 					ravenclaw_house_score_pixel <= (row%275)*30;
 			end
 		if (col>=430 & col < 460) // ones
 			begin 
 				scores <= 3'b001;
 				ravenclaw_house_score_pixel <= ravenclaw_house_score_pixel + 1;
-				if(((ravenclaw_house_score_pixel+1) % 30) == 0)
+				if((((ravenclaw_house_score_pixel+1) % 30) == 0) || col == 430)
 					ravenclaw_house_score_pixel <= (row%275)*30;
 			end
 	end
@@ -225,42 +225,42 @@ module leaderboard(G, H, R, S, row, col, clk, leaderboard, crest, crest_ADDR, lo
 			begin
 				scores <= 3'b110; //
 				hufflepuff_house_score_pixel <= hufflepuff_house_score_pixel + 1;
-				if(((hufflepuff_house_score_pixel+1) % 30) == 0)
+				if((((hufflepuff_house_score_pixel+1) % 30) == 0) || col == 280)
 					hufflepuff_house_score_pixel <= (row%375)*30;
 			end
 		if (col>=310 & col < 340) // ten thousands
 			begin
 				scores <= 3'b101; //
 				hufflepuff_house_score_pixel <= hufflepuff_house_score_pixel + 1;
-				if(((hufflepuff_house_score_pixel+1) % 30) == 0)
+				if((((hufflepuff_house_score_pixel+1) % 30) == 0) || col == 310)
 					hufflepuff_house_score_pixel <= (row%375)*30;
 			end
 		if (col>=340 & col < 370) // thousands
 			begin
 				scores <= 3'b100; //
 				hufflepuff_house_score_pixel <= hufflepuff_house_score_pixel + 1;
-				if(((hufflepuff_house_score_pixel+1) % 30) == 0)
+				if((((hufflepuff_house_score_pixel+1) % 30) == 0) || col == 340)
 					hufflepuff_house_score_pixel <= (row%375)*30;
 			end
 		if (col>=370 & col < 400)
 			begin 
 				scores <= 3'b011; // hundreds
 				hufflepuff_house_score_pixel <= hufflepuff_house_score_pixel + 1;
-				if(((hufflepuff_house_score_pixel+1) % 30) == 0)
+				if((((hufflepuff_house_score_pixel+1) % 30) == 0) || col == 370)
 					hufflepuff_house_score_pixel <= (row%375)*30;
 			end
 		if (col>=400 & col < 430) // tens
 			begin 
 				scores <= 3'b010;
 				hufflepuff_house_score_pixel <= hufflepuff_house_score_pixel + 1;
-				if(((hufflepuff_house_score_pixel+1) % 30) == 0)
+				if((((hufflepuff_house_score_pixel+1) % 30) == 0) || col == 400)
 					hufflepuff_house_score_pixel <= (row%375)*30;
 			end
 		if (col>=430 & col < 460) // ones
 			begin 
 				scores <= 3'b001;
 				hufflepuff_house_score_pixel <= hufflepuff_house_score_pixel + 1;
-				if(((hufflepuff_house_score_pixel+1) % 30) == 0)
+				if((((hufflepuff_house_score_pixel+1) % 30) == 0) || col == 430)
 					hufflepuff_house_score_pixel <= (row%375)*30;
 			end
 	end
