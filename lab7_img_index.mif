@@ -44,7 +44,7 @@ CONTENT BEGIN
 	014  :   0000D7;
 	015  :   0000FF;
 	016  :   005F00;
-	017  :   005F5F;
+	017  :   789978;
 	018  :   005F87;
 	019  :   005FAF;
 	01A  :   005FD7;
@@ -95,7 +95,7 @@ CONTENT BEGIN
 	047  :   5FAF5F;
 	048  :   5FAF87;
 	049  :   AA0000;
-	04A  :   5FAFD7;
+	04A  :   CC8080;
 	04B  :   5FAFFF;
 	04C  :   5FD700;
 	04D  :   5FD75F;
@@ -174,8 +174,8 @@ CONTENT BEGIN
 	096  :   AFD787;
 	097  :   EDE0B7;
 	098  :   CE7D00;
-	099  :   AFD7FF;
-	09A  :   AFFF00;
+	099  :   BFDEFF;
+	09A  :   003670;
 	09B  :   AFFF5F;
 	09C  :   AFFF87;
 	09D  :   AFFFAF;
@@ -242,7 +242,7 @@ CONTENT BEGIN
 	0DA  :   FFAFD7;
 	0DB  :   FFAFFF;
 	0DC  :   FFD700;
-	0DD  :   FFD75F;
+	0DD  :   F2E8B3;
 	0DE  :   FFD787;
 	0DF  :   FFD7AF;
 	0E0  :   FFD7D7;
