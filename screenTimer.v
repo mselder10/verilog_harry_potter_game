@@ -28,7 +28,7 @@ always @(posedge clock) begin
 		  
     if (curr_screen == 1)
 	 begin
-	    if(cycle_count == 1250000000) begin
+	    if(cycle_count == 12500000) begin
 		   // sec_count <= sec_count +1;
 			 cycle_count<=0;
 			 curr_screen <= curr_screen + 4'b1;

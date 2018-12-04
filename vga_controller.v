@@ -259,7 +259,8 @@ four_by_four boxp1(.row(row), .col(col),
 						.already_traced(p1_trace), 
 						.broom_powerup(broom_powerup & ~(p1_trace[6] | p2_trace[6])), .two_player_mode(two_player_mode), 
 						.reset_other_player_trace(reset_p2), .clear_my_trace(reset_p1), 
-						.snitch_location(snitch_location), .reset_trace((p1_trace & trace_displayed)==trace_displayed),
+						.snitch_location(snitch_location), 
+						.reset_trace(((p1_trace & trace_displayed)==trace_displayed) || (((p2_trace & trace_displayed)==trace_displayed) & two_player_mode)),
 						.displayed_trace(trace_displayed));
 					
 // player 2
@@ -274,7 +275,7 @@ four_by_four boxp2(.row(row), .col(col),
 						.already_traced(p2_trace), 
 						.broom_powerup(broom_powerup & ~(p1_trace[6] | p2_trace[6])), .two_player_mode(two_player_mode), 
 						.reset_other_player_trace(reset_p1), .clear_my_trace(reset_p2), 
-						.reset_trace((p2_trace & trace_displayed)==trace_displayed),
+						.reset_trace(((p2_trace & trace_displayed)==trace_displayed) || ((p1_trace & trace_displayed)==trace_displayed)),
 						.displayed_trace(trace_displayed));
 				
 /*********TRACE DISPLAY**********/
@@ -295,12 +296,12 @@ trace_change changez(.trace_to_display(trace_displayed), .clk(iVGA_CLK),
 // background color					 
 assign color_index = ~in_trace ? bckgrd_color : 8'dz;
 // untraced box
-assign color_index = in_trace & ~p1_traced & ~trace_color ? 8'd7 : 8'dz;
+assign color_index = in_trace & ~p1_traced & (~p2_traced & two_player_mode) & ~trace_color ? 8'd7 : 8'dz;
 // traced box
-assign color_index = ~two_player_mode & in_trace & p1_traced & ~(leaderboard)  ? p1_box_color : 8'dz;
-assign color_index = two_player_mode & in_trace & p1_traced & ~p2_traced & ~(leaderboard)  ? p1_box_color : 8'dz;
-assign color_index = two_player_mode & in_trace & ~p1_traced & p2_traced & ~(leaderboard)  ? p2_box_color : 8'dz;
-assign color_index = two_player_mode & in_trace & p1_traced & p2_traced & ~(leaderboard) ? 8'd1 : 8'dz;
+assign color_index = ~two_player_mode & in_trace &  p1_traced 				    ? p1_box_color : 8'dz;
+assign color_index =  two_player_mode & in_trace &  p1_traced & ~p2_traced  & ~leaderboard ? p1_box_color : 8'dz;
+assign color_index =  two_player_mode & in_trace & ~p1_traced &  p2_traced  & ~leaderboard ? p2_box_color : 8'dz;
+assign color_index =  two_player_mode & in_trace &  p1_traced &  p2_traced  & ~leaderboard ? 8'h10 : 8'dz;
 // display trace pattern
 assign color_index = in_trace & trace_color & ~p1_traced & ~p2_traced & ~leaderboard ? 8'd40 : 8'dz;
 
@@ -343,7 +344,7 @@ crest crestz(.clk(iVGA_CLK), .R1(ravenclaw1), .G1(gryffindor1),
 					.leaderboard(leaderboard), .leader_ADDR(leader_crest_pixel));
 /*************COUNTDOWN TIMER*************/
 wire countdown;
-countdown downz(.row(row), .col(col), .clk(iVGA_CLK), .countdown(countdown), .logo(logo));
+//countdown downz(.row(row), .col(col), .clk(iVGA_CLK), .countdown(countdown), .logo(logo));
 
 /********NUMBERS AND SCORE DISPLAY********/
 wire num;
@@ -441,7 +442,7 @@ assign file_index = logo ? logo_index : 8'dz;
 assign file_index = (crest1 | crest2 | leader_crest) & crest_out ? crest_index : 8'dz;
 // numbers
 assign file_index = ~num ? num : 8'dz;
-assign file_index = ~countdown & ~logo & ~leaderboard ? countdown : 8'dz;
+//assign file_index = ~countdown & ~logo & ~leaderboard ? countdown : 8'dz;
 // powerups
 assign file_index = broom ? 8'b0 : 8'dz;
 assign file_index = time_turner ? 8'b0 : 8'dz;
@@ -453,9 +454,9 @@ assign file_index = ~sparks & ~leaderboard & ~logo ? sparks : 8'dz;
 assign file_index = ~letter & (leaderboard | get_ready | times_up) ? letter : 8'dz;
 // background color / trace
 assign file_index = ~logo & ~crest_out & num & ~leaderboard & sparks & ~snitch_here 
-								  & ~broom & ~lightning & ~time_turner & countdown ? color_index : 8'dz;
+								  & ~broom & ~lightning & ~time_turner /*& countdown*/ ? color_index : 8'dz;
 // leaderboard
-assign file_index = letter & ~crest_out & leaderboard ? 8'd1 : 8'dz;
+assign file_index = letter & ~leader_crest & leaderboard ? 8'd1 : 8'dz;
 /**********************/
 
 //////Color table output
