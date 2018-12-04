@@ -225,7 +225,7 @@ module four_by_four(row, col, color_in_box, box_color, clk, ir_in, R, S, G, H, a
 	assign box_color = S & ~snitch & did_player_hit_trace ? 8'h16 : 8'bz;
 	assign box_color = R & ~snitch & did_player_hit_trace ? 8'h9a : 8'bz;
 	// did not hit target
-	assign box_color = G & ~snitch & ~did_player_hit_trace ? 8'h50 : 8'bz;
+	assign box_color = G & ~snitch & ~did_player_hit_trace ? 8'h4a : 8'bz;
 	assign box_color = H & ~snitch & ~did_player_hit_trace ? 8'hdd	: 8'bz;
 	assign box_color = S & ~snitch & ~did_player_hit_trace ? 8'h17 : 8'bz;
 	assign box_color = R & ~snitch & ~did_player_hit_trace ? 8'h99 : 8'bz;
