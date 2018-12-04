@@ -1,0 +1,3 @@
+module sparkle(clk, sparkle);
+
+endmodule 
