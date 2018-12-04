@@ -1,0 +1,5 @@
+module wand_animationx (origin, next_box)
+
+input origin, next_box;
+
+endmodule
