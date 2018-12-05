@@ -10,7 +10,7 @@ module ordering(clk, trace_ADDR, next, now, tutorial);
 	output reg [4:0] next;
 	output reg [3:0] now;
 	
-	tutorial_trace_order orderz(.address(trace_ADDR), 
+	trace_order orderz(.address(trace_ADDR), 
 							 .clock(clk),
 							 .q(trace_order));
 	

@@ -1,0 +1,7 @@
+module stack(clk, d, q, full, empty, push, pull);
+
+	input clk;
+	input [3:0] d;
+	
+
+endmodule 
