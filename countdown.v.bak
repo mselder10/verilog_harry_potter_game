@@ -1,0 +1,8 @@
+module countdown(row, col, seconds_left, countdown, clock);
+
+	input clock;
+	input [9:0] col;
+	input [8:0] row;
+
+
+endmodule 

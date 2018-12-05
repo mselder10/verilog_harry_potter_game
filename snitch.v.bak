@@ -1,0 +1,5 @@
+module snitch(row, col, clk, snitch);
+
+	input 
+
+endmodule 
