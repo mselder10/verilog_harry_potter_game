@@ -106,22 +106,13 @@ reg					done_dac_channel_sync;
 
 
 /*****************************************************************************
- *                         Instantiate Music Module(s)                           *
+ *                         Finite State Machine(s)                           *
  *****************************************************************************/
 
-wire flip;
-music_notes songz(.clk(CLOCK_50), .flip(flip));
 
-wire [31:0] amplitude = flip ? 32'd100000000 : 32'd100000000;
-assign read_aufio_in = audio_in_available & audio_out_allowed;
-wire [31:0] left_in, right_in, left_out, right_out;
-
-assign left_in = left_channel_audio_in;
-assign right_in = right_channel_audio_in;
-
-assign left_channel_audio_out = amplitude;
-assign right_channel_audio_out = amplitude;
-assign wire_audio_out = audio_in_available & audio_out_allowed;
+/*****************************************************************************
+ *                             Sequential logic                              *
+ *****************************************************************************/
 
 // Output Registers
 always @ (posedge CLOCK_50)

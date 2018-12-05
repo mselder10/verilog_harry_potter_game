@@ -24,9 +24,9 @@ end
 
 always @ (negedge clk)
 begin
-	if(note_length_timer>=duration)
+	if(note_length_timer>=duration){
 		index <= index + 1;
-	
+	}
 end
 
 always@(posedge clk)
