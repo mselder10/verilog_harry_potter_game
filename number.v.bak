@@ -1,0 +1,10 @@
+module number(ADDR, out, clk);
+
+input here, clk, ADDR
+
+numbers numberz(
+		.address(ADDR),
+		.clock(clk),
+		.q(out));
+
+endmodule 
