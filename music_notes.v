@@ -1,12 +1,13 @@
 module music_notes(clk, flip);
 
 input clk;
+output flip;
 
 reg [8:0] index;
 reg [18:0] inverting_counter;
 reg [25:0] note_length_timer;
 
-output wave;
+reg wave;
 
 theme_song_notes notez(.address(index),
 					   .clock(clk),
@@ -30,8 +31,8 @@ begin
 end
 
 always@(posedge clk)
-	inverting_counter <= inverting_counter + 1;
 	begin
+	inverting_counter <= inverting_counter + 1;
 		case (note)
 			0: begin //Eb4
 				if(inverting_counter >= 160705)
