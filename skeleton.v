@@ -12,10 +12,12 @@
 module skeleton(clock, reset, score_player1,
 	 score_player2,
 	 score_player3,
-	 score_player4, reg1_data,           //these registers used to access the score of each player
+	 score_player4, 
+	     reg1_data,           //these registers used to access the score of each player
 		  reg2_data,
 		  reg3_data,
-		  reg4_data);
+		  reg4_data, 
+		  reg5_data);
     
 	 input clock, reset;
 	 //output checkrd;
@@ -54,7 +56,7 @@ module skeleton(clock, reset, score_player1,
 	 wire [4:0] ctrl_writeReg;
     wire [31:0] data_writeReg;
     wire [31:0] data_readRegA, data_readRegB;
-	 output [31:0] reg1_data, reg2_data, reg3_data, reg4_data;
+	 output [31:0] reg1_data, reg2_data, reg3_data, reg4_data, reg5_data;
     regfile my_regfile(
         ~clock,
         ctrl_writeEnable,
@@ -68,7 +70,8 @@ module skeleton(clock, reset, score_player1,
 		  reg1_data,           //these registers used to access the score of each player
 		  reg2_data,
 		  reg3_data,
-		  reg4_data
+		  reg4_data,
+		  reg5_data
     );
 
 
@@ -103,3 +106,4 @@ module skeleton(clock, reset, score_player1,
     );
 
 endmodule
+
