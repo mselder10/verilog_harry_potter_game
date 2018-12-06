@@ -1,4 +1,4 @@
-module trace_generation(RBG, clk, trace);
+module trace_generation(RBG, clk, trace)
 
 input RBG;
 integer k;

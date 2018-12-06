@@ -1,12 +1,14 @@
-module random_trace_generation(RBG, clk, trace, save_trace, trace_saved);
+module random_trace_generation(RBG, clk, trace, save_trace, CLK_5Hz/*, trace_saved*/);
 
 input RBG, clk;
-input trace_saved;
+//input trace_saved;
 integer k;
 integer trace_count;
 
 output reg [15:0] trace;
 output reg save_trace;
+
+output CLK_5Hz;
 
 initial
 begin
@@ -14,8 +16,10 @@ begin
 	save_trace = 0;
 end
 
+freq_div	my_freq_div(.clk_in(clk), .clk_out(CLK_5Hz));
 
-always@(posedge clk & ~save_trace)
+
+always@(posedge CLK_5Hz & ~save_trace)
 	begin
 		// reset counter and stop data gathering until trace is saved
 		if(k == 16)
@@ -25,6 +29,9 @@ always@(posedge clk & ~save_trace)
 			save_trace = 1;
 		end
 		// if row 0
+		
+		trace[k] <= RBG;
+		/*
 		else if(k/4==0)
 			trace[k] <= RBG;
 		// if row 1
@@ -55,7 +62,8 @@ always@(posedge clk & ~save_trace)
 				else
 					trace[k] <= 0;
 			end
-
+		*/
+		
 		k = k + 1;
 
 	end
