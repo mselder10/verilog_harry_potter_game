@@ -6,6 +6,7 @@ module vga_controller(iRST_n,
                       b_data,
                       g_data,
                       r_data,
+							 learn_mode,
 							 ir_in_p1, ir_in_p2,
 							 gryffindor1, slytherin1, hufflepuff1, ravenclaw1,
 							 gryffindor2, slytherin2, hufflepuff2, ravenclaw2,
@@ -19,6 +20,9 @@ module vga_controller(iRST_n,
 	
 input iRST_n;
 input iVGA_CLK;
+
+// learn mode
+input learn_mode;
 
 // house customization (player 1 and 2)
 input two_player_mode;
@@ -279,18 +283,29 @@ four_by_four boxp2(.row(row), .col(col),
 						.displayed_trace(trace_displayed));
 				
 /*********TRACE DISPLAY**********/
+wire [15:0] trace_displayed;
+assign trace_displayed = learn_mode ? tutorial_trace : gameplay_trace;
 wire trace_color;
 display_trace tracez(.row(row), .col(col), .trace(trace_displayed), 
 							.trace_color(trace_color), .clk(iVGA_CLK));
 
-wire [15:0] trace_displayed, previous_trace_displayed;	
+wire [15:0] gameplay_trace;	
 wire end_game_early, changed_trace;
 wire [3:0] trace_count;				
-trace_change changez(.trace_to_display(trace_displayed), .clk(iVGA_CLK), 
+trace_change changez(.trace_to_display(gameplay_trace), .clk(iVGA_CLK), 
 							.p1_traced(p1_trace), .p2_traced(p2_trace), 
 							.trace_screen_on(~logo & ~leaderboard), 
 							.end_game_early(end_game_early), .trace_count(trace_count),
 							.two_player_mode(two_player_mode));
+
+wire end_tutorial;
+wire [5:0] tutorial_trace_count;
+wire [15:0] tutorial_trace;
+tutorial_traces tutz(.learn_mode(learn_mode), 
+							.trace_to_display(tutorial_trace), 
+							.clk(iVGA_CLK), .p1_traced(p1_trace), 
+							.trace_screen_on(~logo & ~leaderboard), 
+							.end_game_early(end_tutorial), .trace_count(tutorial_trace_count));
 					 
 /*********COLORS**********/
 // background color					 
@@ -438,9 +453,36 @@ letter letterz(.letter(letter), .clk(iVGA_CLK), .row(row), .col(col),
 			  	.leaderboard(leaderboard), .play_again(play_again));
 
 /*************LEARN MODE*************/
-wire wand_here;
-wand_animation wandzz(.row(row), .col(col), .wand_here(wand_here), .clk(iVGA_CLK), .learn_mode(1'b1));
+wire wand_here, wand_here1, wand_here2, wand_here3, wand_here4, wand_here5;
+wire wand_on, wand_on1, wand_on2, wand_on3, wand_on4, wand_on5;
+// tutorial trace 0 (in excel 2/in mif 1)
+wand_animation wandz0(.row(row), .col(col), .wand_here(wand_here1), .clk(iVGA_CLK), 
+							 .learn_mode(learn_mode & (tutorial_trace_count == 0)), .wand_on(wand_on1),
+							 .init_row(8'd190), .init_col(9'd270),
+							 .trace_order(64'b0000000000000000000000010010000000000100001100000000000000000000), .trace_boxes(6'd4));
+// tutorial trace 1 (in excel 1/in mif 0)
+wand_animation wandz1(.row(row), .col(col), .wand_here(wand_here2), .clk(iVGA_CLK), 
+							 .learn_mode(learn_mode & (tutorial_trace_count == 1)), .wand_on(wand_on2),
+							 .init_row(8'd90), .init_col(9'd170),
+							 .trace_order(64'b0001001000110100110000000000010110110000000001101010100110000111), .trace_boxes(6'd12));
+//// tutorial trace 2 (in excel 3/in mif 2)						 
+wand_animation wandz2(.row(row), .col(col), .wand_here(wand_here3), .clk(iVGA_CLK), 
+							 .learn_mode(learn_mode & (tutorial_trace_count == 2)), .wand_on(wand_on3),
+							 .init_row(8'd90), .init_col(9'd170),
+							 .trace_order(64'b0001001000110100000000001000010100000000011101100000000000000000), .trace_boxes(6'd8));
+//// tutorial trace 3	(in excel 5/in mif 4)				 
+wand_animation wandz3(.row(row), .col(col), .wand_here(wand_here4), .clk(iVGA_CLK), 
+							 .learn_mode(learn_mode & (tutorial_trace_count == 3)), .wand_on(wand_on4),
+							 .init_row(8'd90), .init_col(9'd370),
+							 .trace_order(64'b0011001000010000010001010000000000000110000000000000011110001001), .trace_boxes(6'd9));
+//// tutorial trace 4 (in excel 9/ in mif 5)
+wand_animation wandz4(.row(row), .col(col), .wand_here(wand_here5), .clk(iVGA_CLK), 
+							 .learn_mode(learn_mode & (tutorial_trace_count == 4)), .wand_on(wand_on5),
+							 .init_row(8'd90), .init_col(9'd370),
+							 .trace_order(64'b0000000000010000000000110010000001010100000000000110000000000000), .trace_boxes(6'd6));
 
+//assign wand_here = wand_here1 | wand_here2 | wand_here3 | wand_here4 | wand_here5;
+//assign wand_on = wand_on1 | wand_on2 | wand_on3 | wand_on4 | wand_on5;
 /************************************/
 /***********MUX IMAGES***************/
 // logo
@@ -461,7 +503,12 @@ assign file_index = ~sparks & ~logo & ~play_again ? sparks : 8'dz;
 assign file_index = ~letter & (leaderboard | play_again) ? letter : 8'dz;
 // background color / trace
 assign file_index = ~logo & ~crest_out & num & ~leaderboard & sparks & ~snitch_here 
-								  & ~broom & ~lightning & ~time_turner & countdown & ~play_again & wand_here ? color_index : 8'dz;
+								  & ~broom & ~lightning & ~time_turner & countdown & ~play_again & 
+								  (wand_here1 | (~wand_here1 & ~wand_on1)) & 
+								  (wand_here2 | (~wand_here2 & ~wand_on2)) & 
+								  (wand_here3 | (~wand_here3 & ~wand_on3)) &
+								  (wand_here4 | (~wand_here4 & ~wand_on4)) &
+								  (wand_here5 | (~wand_here5 & ~wand_on5))   ? color_index : 8'dz;
 // leaderboard
 assign file_index = letter & ~leader_crest & leaderboard ? 8'd1 : 8'dz;
 
@@ -469,7 +516,11 @@ assign file_index = letter & ~leader_crest & leaderboard ? 8'd1 : 8'dz;
 assign file_index = letter & play_again & ~leaderboard ? 8'd1 : 8'dz;
 
 // learn mode
-assign file_index = ~wand_here ? wand_here : 8'dz;
+assign file_index = (~wand_here1 & wand_on1) ? wand_here1 : 8'dz;
+assign file_index = (~wand_here2 & wand_on2) ? wand_here2 : 8'dz;
+assign file_index = (~wand_here3 & wand_on3) ? wand_here3 : 8'dz;
+assign file_index = (~wand_here4 & wand_on4) ? wand_here4 : 8'dz;
+assign file_index = (~wand_here5 & wand_on5) ? wand_here5 : 8'dz;
 /**********************/
 
 //////Color table output

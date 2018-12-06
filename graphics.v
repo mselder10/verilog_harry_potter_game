@@ -12,7 +12,9 @@ module graphics(resetn,
 	G1, S1, H1, R1,												// house color control player 1
 	G2, S2, H2, R2,												// house color control player 2
 	two_player_mode,												// dual mode
-	leaderboard,  times_up);
+	leaderboard,  
+	learn_mode
+	);
 		
 	////////////////////////	VGA	////////////////////////////
 	output			VGA_CLK;   				//	VGA Clock
@@ -33,7 +35,8 @@ module graphics(resetn,
 	input 			resetn;
 
 	////////////////////////	Controls (sent from processor)	////////////////////////////
-	input leaderboard, times_up;
+	input leaderboard;
+	input learn_mode;
 	wire			 clock;
 	
 	// clock divider (by 5, i.e., 10 MHz)
@@ -83,6 +86,7 @@ module graphics(resetn,
 								 .b_data(VGA_B),
 								 .g_data(VGA_G),
 								 .r_data(VGA_R),
+								 .learn_mode(learn_mode),
 								 .ir_in_p1(ir_in_p1),
 								 .ir_in_p2(ir_in_p2),
 								 .gryffindor1(G1),
@@ -101,7 +105,7 @@ module graphics(resetn,
 								 .snitch_powerup(1'b0),
 								 .time_turner_powerup(1'b0), 
 								 .lightning_powerup(1'b0), 
-								 .broom_powerup(1'b1),
+								 .broom_powerup(1'b0),
 								 .leaderboard(/*EOG | end_game_early*/ 1'b0), 
 								 .play_again(/*play_again*/ 1'b0), .times_up(1'b0),
 								 .logo(/*screen[0]*/ 1'b0),

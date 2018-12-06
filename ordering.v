@@ -1,18 +1,14 @@
-module ordering(clk, trace_ADDR, next, now, tutorial);
+module ordering(clk, trace_order, next, now, tutorial);
 
 	input clk, tutorial;
-	input [3:0] trace_ADDR;
-	wire [63:0] trace_order;
+	//input [3:0] trace_ADDR;
+	input [63:0] trace_order;
 	
 	reg [15:0] counter0, counter1, counter2, counter3, counter4, counter5, counter6, counter7, counter8,
 				  counter9, counter10, counter11, counter12, counter13, counter14, counter15;
 	
-	output reg [4:0] next;
+	output reg [3:0] next;
 	output reg [3:0] now;
-	
-	tutorial_trace_order orderz(.address(trace_ADDR), 
-							 .clock(clk),
-							 .q(trace_order));
 	
 	initial
 	begin	
@@ -34,7 +30,7 @@ module ordering(clk, trace_ADDR, next, now, tutorial);
 		counter15 <= 1;
 	end
 	
-	always @(negedge clk & tutorial)
+	always @(posedge clk & tutorial)
 	begin
 		// box 0
 		if(counter0 == trace_order[63:60])

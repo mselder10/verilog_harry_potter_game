@@ -1,7 +1,9 @@
-module wand_animation(row, col, wand_here, clk, learn_mode, switch_dest_counter);
+module wand_animation(row, col, wand_here, clk, learn_mode, switch_dest_counter, origin, next, wand_on, trace_order, trace_boxes, init_row, init_col);
 
 	input clk, learn_mode;
-	reg [4:0] origin, next; // change to inputs
+	input [9:0] init_col;
+	input [8:0] init_row;
+	output [3:0] origin, next; // change to inputs
 	input [8:0] row;
 	input [9:0] col;
 	reg [16:0] ADDR;
@@ -12,7 +14,12 @@ module wand_animation(row, col, wand_here, clk, learn_mode, switch_dest_counter)
 	reg [31:0] update_location_counter, update_offset_counter/*, switch_dest_counter*/;
 	output reg [31:0] switch_dest_counter;
 	reg switch_dest_clk;
+	output reg wand_on;
 	reg [3:0] cycle_counter;
+	input [63:0] trace_order;
+	reg [5:0] boxes_reached;
+	input [5:0] trace_boxes;
+	wire out;
 	
 	output wand_here;
 	
@@ -23,18 +30,17 @@ module wand_animation(row, col, wand_here, clk, learn_mode, switch_dest_counter)
 	
 	assign offset_ADDR = ADDR + offset*10000;
 	
-//	ordering orderz(.clk(switch_dest_clk), .trace_ADDR(4'b1), 
-//						 .next(next), .now(origin), .tutorial(learn_mode));
+	ordering orderz(.clk(switch_dest_clk), .trace_order(trace_order), 
+						 .next(next), .now(origin), .tutorial(learn_mode));
 	
 	initial
 	begin
 		offset <= 0;
-		wand_row <= 190;
-		wand_col <= 270;
-		switch_dest_clk <= 1;
-		origin <= 5;
-		next <= 6;
-		// initial location of wand
+		//wand_row <= 90;
+		//wand_col <= 170;
+		//origin <= 5;
+		//next <= 6;
+		boxes_reached <= 0;
 	end
 	
 	always@(posedge clk & learn_mode)
@@ -127,34 +133,43 @@ module wand_animation(row, col, wand_here, clk, learn_mode, switch_dest_counter)
 //			end
 //		end
 		
-		if(switch_dest_counter == 6)
+		if(switch_dest_counter == 25)
 		begin
-			origin <= next;
-			next <= origin;
 			switch_dest_counter <= 0;
 			switch_dest_clk <= ~switch_dest_clk;
+			boxes_reached <= boxes_reached + 1;
 		end
-			
+		
+		if(boxes_reached > trace_boxes*2)
+			wand_on <= 1'b0;
+		else
+			wand_on <= 1'b1;
+		
 		// move wand
-		if(update_location_counter >= 32'd10000000)
+		if(update_location_counter >= 32'd2000000)
 		begin
 			// to the right
 			if(origin == 0 & next == 0)
 			begin
+				wand_row <= init_row;
+				wand_col <= init_col;
+			end
+			else if(next-origin == 1)
+				wand_col <= wand_col + 2;
+			// to the left
+			else if(next-origin == -1)
+				wand_col <= wand_col - 2;
+			// down
+			else if(next-origin == 4)
+				wand_row <= wand_row + 2;
+			// up
+			else if(next-origin == -4)
+				wand_row <= wand_row - 2;
+			else
+			begin
 				wand_row <= wand_row;
 				wand_col <= wand_col;
 			end
-			else if(next-origin == 1)
-				wand_col <= wand_col + 20;
-			// to the left
-			else if(next-origin == -1)
-				wand_col <= wand_col - 20;
-			// down
-			else if(next-origin == 4)
-				wand_row <= wand_row + 20;
-			// up
-			else if(next-origin == -4)
-				wand_row <= wand_row - 20;
 			
 			switch_dest_counter <= switch_dest_counter + 1;
 			update_location_counter <= 32'd0;
