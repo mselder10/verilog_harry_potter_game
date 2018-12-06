@@ -151,13 +151,19 @@ module processor(
 	 wire check_rd;
 	 wire [31:0] score1, score2, score3;
 	 wire [31:0] score;
-	 or orScore(check_rd, q_imem[26:22]== 5'b1, q_imem[26:22]== 5'b00010, q_imem[26:22]== 5'b00011, q_imem[26:22]== 5'b00100);
-	 and andScore(enable_immediate, check_rd, q_imem[31:27] == 5'd5);
+	 wire q1, q2, q3, q4, q5;
+	 assign q1 = q_imem[26:22]== 5'b1;
+	 assign q2 = q_imem[26:22]== 5'd2;
+	 assign q3 = q_imem[26:22]== 5'd3;
+	 assign q4 = q_imem[26:22]== 5'd4;
+	 assign q5 = q_imem[31:27]== 5'd5;
+	 or orScore(check_rd, q1, q2, q3, q4);
+	 and andScore(enable_immediate, check_rd, q5);
 	 
-	 assign score1 = q_imem[26:22]== 5'b1 ? score_player1 : score_player2;
-	 assign score2 = q_imem[26:22]== 5'd3 ? score_player3 : score1;
-	 assign score3 = q_imem[26:22]== 5'd4 ? score_player4 : score2;
-	 assign score = check_rd ? score3 : 5'b0;
+	 assign score1 = q1 ? score_player1 : score_player2;
+	 assign score2 = q3 ? score_player3 : score1;
+	 assign score3 = q4 ? score_player4 : score2;
+	 assign score = check_rd ? score3 : 32'b0;
 	 assign extended_immediate = enable_immediate ? score : extended_immediate1;
 	
 	
