@@ -44,26 +44,28 @@ module graphics(resetn,
 	wire [31:0] seconds;
 	wire EOG;
 	wire [31:0] score_player1, score_player2, score_player3, score_player4;
-	wire [31:0] data_readReg1, data_readReg2, data_readReg3, data_readReg4;
+	wire [31:0] data_readReg1, data_readReg2, data_readReg3, data_readReg4, data_readReg5;
 	wire [2:0] powerUp1, powerUp2, powerUp3, powerUp4;
 	wire scoreOption1, scoreOption2, scoreOption3, scoreOption4;
 	wire inTrace1, inTrace2, inTrace3, inTrace4;
 	wire play_again;
+	wire snitch;
 	///////////////////// Screen Timer ////////////////////////////////////////
 	screenTimer timez(.clock(clock), .total_screens(4'd4), .curr_screen(screen), 
-							.time_out(seconds), .end_of_game(EOG), .play_again(play_again));
+							.time_out(seconds), .end_of_game(EOG), .snitch_powerup(snitch), .play_again(play_again), .random(data_readReg5));
 							
 							
 	////////////////////// Processor /////////////////////////////////////////
    skeleton processor(clock, resetn, score_player1, score_player2, score_player3, score_player4, data_readReg1, data_readReg2,
-	data_readReg3, data_readReg4);	
+	data_readReg3, data_readReg4, data_readReg5);	
 	
 	
 	/////////////////////// Score Calculation //////////////////////////////
-	scoreCalc s1(clock, ir_in_p1[0], 1'b1, 1'b0,  1'b0, score_player1);
-	scoreCalc s2(inTrace, scoreOption2, powerUp2, score_player2);
-	scoreCalc s3(inTrace, scoreOption3, powerUp3, score_player3);
-	scoreCalc s4(inTrace, scoreOption4, powerUp4, score_player4);
+	//clock, inTrace, scoreOption, powerUp1, powerUp4, result);
+	scoreCalc s1(clock, ir_in_p1[0], snitch,  1'b0, score_player1); //read reg 4
+	scoreCalc s2(clock, ir_in_p1[1], snitch,  1'b0, score_player3); //read reg 2
+//	scoreCalc s3(clock, ir_in_p1[2], scoreOption3, powerUp3, score_player3);
+//	scoreCalc s4(clock, ir_in_p1[3], scoreOption4, powerUp4, score_player4);
 	
 	wire [31:0] digit0, digit1, digit2, digit3, digit4, digit5;
 	scoreToDigits convert(clock, score_player1, digit0, digit1, digit2, digit3, digit4, digit5);
