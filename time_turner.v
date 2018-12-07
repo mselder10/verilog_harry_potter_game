@@ -1,6 +1,6 @@
-module time_turner(row, col, clk, time_turner, in_trace, time_turner_powerup);
+module time_turner(row, col, clk, time_turner, in_trace, time_turner_powerup, already_traced_12, time_turner, time_turner_caught);
 
-	input clk, in_trace, time_turner_powerup;
+	input clk, in_trace, time_turner_powerup, already_traced_12;
 	input [8:0] row;
 	input [9:0] col;
 	reg [18:0] time_turner_col, time_turner_row;
@@ -9,6 +9,7 @@ module time_turner(row, col, clk, time_turner, in_trace, time_turner_powerup);
 	reg cycle_counter;
 	wire out;
 	output time_turner;
+	output reg time_turner_caught;
 	
 	time_turn time_turnz(.address(ADDR),
 		.clock(~clk),
@@ -19,10 +20,17 @@ module time_turner(row, col, clk, time_turner, in_trace, time_turner_powerup);
 	begin
 		time_turner_col <= 120;
 		time_turner_row <= 340;
+		time_turner_caught <= 0;
 	end
 	
-	always @(posedge clk & time_turner_powerup)
+	always @(posedge clk & time_turner_powerup & ~time_turner_caught)
 	begin
+	
+	if(already_traced_12)
+		time_turner_caught <= 1'b1;
+	else
+		time_turner_caught <= 1'b0;
+
 	if(update_location_counter >= 32'd10000000)
 		begin
 			if(cycle_counter == 0)

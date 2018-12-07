@@ -19,7 +19,7 @@ module select_mode_screen(two_player_mode, clk, learn, ir_in_p1, select_mode_scr
 			learn <= 1'b1;
 			selected_a_mode <= 1'b1;
 		end
-		else if (|(ir_in_p1[15:9]))
+		else if (|(ir_in_p1[13:8]) | ir_in_p1[15])
 		begin
 			learn <= 1'b0;
 			selected_a_mode <= 1'b1;

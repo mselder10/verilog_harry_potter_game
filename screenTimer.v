@@ -51,12 +51,12 @@ always @(posedge clock) begin
 	 else if (counter >= 2500000000 & (selected_a_mode || two_player_mode))
 	 begin
 		select_mode_screen <= 1'b0;
-		game_counter <= 5000000000;
+		game_counter <= 2500000000;
 	 end
 	 else
 		select_mode_screen <= 1'b0;
 		
-	 if(game_counter > 5000000000)
+	 if(game_counter < 2000000000 & game_counter > 1800000000)
 		snitch_powerup <= 1'b1;
 	 else
 		snitch_powerup <= 1'b0;
@@ -80,42 +80,6 @@ always @(posedge clock) begin
 	 end
 	 else if (end_tutorial)
 		play_again <= 1'b1;
-		
-		  
-//    if (curr_screen == 1)
-//	 begin
-//	    if(cycle_count == 12500000) begin
-//		   // sec_count <= sec_count +1;
-//			 cycle_count<=0;
-//			 curr_screen <= curr_screen + 4'b1;
-//			 end
-//		else
-//		   cycle_count <= cycle_count +1;
-//	 end
-//	 
-//	 else if(curr_screen % 2 == 0 && curr_screen < total_screens ) begin
-//		//mod by two means we are displaying a trace
-//		if(cycle_count == 5000000000) begin
-//		  // sec_count <= sec_count +1;
-//		   cycle_count<=0;
-//			curr_screen <= curr_screen + 4'b1;
-//		end
-//		else
-//		   cycle_count <= cycle_count +1;
-//			
-////		if(sec_pulse >= 8 & sec_pulse < 15)
-////			snitch_powerup <= 1'b1;
-////		else
-////			snitch_powerup <= 1'b0;
-//	 end	
-//	 //displaying a message?
-//	 else if(curr_screen % 2 == 1 && curr_screen < total_screens ) begin
-//	      if(cycle_count >= 2500000000) begin
-//				//sec_count <= sec_count +1;
-//				cycle_count<=0;
-//				curr_screen <= curr_screen + 4'b1;
-//		end 
-//	 end
 	
 
 end

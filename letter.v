@@ -120,8 +120,7 @@ module letter(letter, clk, row, col,
 		if((col>=130 & col <180) & (row>= 0 & row < 50) & select_mode)
 			tletter <= 5'd13;
 		// E (C)
-		if((col>=180 & col <230) & (row>= 0 & row < 50)
-				& select_mode)
+		if((col>=180 & col <230) & (row>= 0 & row < 50) & select_mode)
 			tletter <= 5'd2;
 		//SPACE
 		// W
@@ -173,51 +172,6 @@ module letter(letter, clk, row, col,
 		// Y
 		if((col>=370 & col <420) & (row>= 345 & row < 395) & select_mode)
 			tletter <= 5'd24;
-			
-//		// welcome to
-//		// W
-//		if((col>=10 & col <60) & (row>= 10 & row < 60) & logo)
-//			tletter <= 5'd22;
-//		// E x2
-//		if(((col>=60 & col <110) || (col>= 310 & col <= 360)) & (row>= 10 & row < 60) & logo)
-//			tletter <= 5'd2;
-//		// L
-//		if((col>=110 & col <160) & (row>= 10 & row < 60) & logo)
-//			tletter <= 5'd11;
-//		// C
-//		if((col>=160 & col <210) & (row>= 10 & row < 60) & logo)
-//			tletter <= 5'd2;
-//		// O x2
-//		if(((col>=210 & col <260) | (col>=460 & col <510)) & (row>= 10 & row < 60) & logo)
-//			tletter <= 5'd14;
-//		// M
-//		if((col>=260 & col <310) & (row>= 10 & row < 60) & logo)
-//			tletter <= 5'd12;
-//		// SPACE (360-410)
-//		// T
-//		if((col>=410 & col <460) & (row>= 10 & row < 60) & logo)
-//			tletter <= 5'd2;
-//		
-//			
-//		// wizard
-//		// W
-//		if((col>=280 & col <330) & (row>= 360 & row < 410) & logo)
-//			tletter <= 5'd22;
-//		// I
-//		if((col>=330 & col <380) & (row>= 360 & row < 410) & logo)
-//			tletter <= 5'd8;
-//		// Z
-//		if((col>=380 & col <430) & (row>= 360 & row < 410) & logo)
-//			tletter <= 5'd25;
-//		// A
-//		if((col>=430 & col <480) & (row>= 360 & row < 410) & logo)
-//			tletter <= 5'd0;
-//		// R
-//		if((col>=480 & col <530) & (row>= 360 & row < 410) & logo)
-//			tletter <= 5'd17;
-//		// D
-//		if((col>=530 & col <580) & (row>= 360 & row < 410) & logo)
-//			tletter <= 5'd3;
 		
 		
 	end

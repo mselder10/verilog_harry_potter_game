@@ -6,19 +6,22 @@ module countdown(row, col, countdown, clk, logo, counter, seconds_left);
 	output reg [3:0] seconds_left;
 	reg [18:0] ADDR;
 	output reg [31:0] counter;
-	wire [31:0] offset_ADDR;
+	reg [31:0] offset_ADDR;
 	output countdown;
+	wire out;
 	
-	assign offset_ADDR = ADDR + seconds_left*900;
+	//assign offset_ADDR = ADDR + seconds_left*900;
 	
 	numbers numberz(
 		.address(offset_ADDR),
 		.clock(~clk),
-		.q(countdown));
+		.q(out));
+		
+	assign countdown = ~out & (seconds_left <= 8);
 		
 	initial
 	begin
-		seconds_left <= 8;
+		seconds_left <= 101;
 	end
 	
 	always @(posedge clk & ~logo)
@@ -36,6 +39,9 @@ module countdown(row, col, countdown, clk, logo, counter, seconds_left);
 		end
 		else
 			counter <= counter + 1;
+		
+		if(seconds_left <= 8);
+			offset_ADDR = ADDR + seconds_left*900;
 			
 	end
 

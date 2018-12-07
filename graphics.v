@@ -13,8 +13,7 @@ module graphics(resetn,
 	G2, S2, H2, R2,												// house color control player 2
 	two_player_mode,												// dual mode
 	leaderboard,  
-	learn_mode,
-	random_bit_pin
+	learn_mode
 	);
 		
 	////////////////////////	VGA	////////////////////////////
@@ -31,7 +30,6 @@ module graphics(resetn,
 	input 			G1, S1, H1, R1;				// house color controls player 1
 	input				two_player_mode;				// two players
 	input [15:0] ir_in_p1, ir_in_p2;						// ir readings for player 1 and 2
-	input				random_bit_pin;
 
 	////////////////////////	PS2	////////////////////////////
 	input 			resetn;
@@ -80,11 +78,13 @@ module graphics(resetn,
 	assign leds = 8'b00101011;
 		
 	// VGA
-	wire end_game_early, end_tutorial;
+	wire end_game_early, end_tutorial, snitch_caught, time_turner_caught;
 	wire selected_a_mode;
 	Reset_Delay			r0	(.iCLK(CLOCK_50),.oRESET(DLY_RST)	);
 	VGA_Audio_PLL 		p1	(.areset(~DLY_RST),.inclk0(CLOCK_50),.c0(VGA_CTRL_CLK),.c1(AUD_CTRL_CLK),.c2(VGA_CLK)	);
-	vga_controller vga_ins(.iRST_n(DLY_RST),
+	vga_controller vga_ins(
+								 /*******VGA STUFF*******/
+								 .iRST_n(DLY_RST),
 								 .iVGA_CLK(VGA_CLK),
 								 .oBLANK_n(VGA_BLANK),
 								 .oHS(VGA_HS),
@@ -92,33 +92,65 @@ module graphics(resetn,
 								 .b_data(VGA_B),
 								 .g_data(VGA_G),
 								 .r_data(VGA_R),
+								 /******IR READINGS******/
 								 .ir_in_p1(ir_in_p1),
 								 .ir_in_p2(ir_in_p2),
+								 /*******PLAYER 1 HOUSE COLOR*******/
 								 .gryffindor1(G1),
 								 .slytherin1(S1),
 								 .hufflepuff1(H1),
 								 .ravenclaw1(R1),
+								 /*****PLAYER 1 SCORE******/
 								 .p1_score_ones(4'd7),
 								 .p1_score_tens(4'd1),
 								 .p1_score_hundreds(4'd6),
-								 .p1_score_thousands(4'd9),
+								 .p1_score_thousands(4'd7),
+								 /*****PLAYER 2 SCORE******/
+								 .p2_score_ones(4'd1),
+								 .p2_score_tens(4'd2),
+								 .p2_score_hundreds(4'd3),
 								 .two_player_mode(two_player_mode),
+								 /*****RAVENCLAW HOUSE SCORE*****/
+								 .ravenclaw_score_ones(4'd6), 
+								 .ravenclaw_score_tens(4'd1), 
+								 .ravenclaw_score_hundreds(4'd7), 
+								 .ravenclaw_score_thousands(4'd1),
+								 /*****GRYFFINDOR HOUSE SCORE********/
+								 .gryffindor_score_ones(4'd5), 
+								 .gryffindor_score_tens(4'd8), 
+								 .gryffindor_score_hundreds(4'd3), 
+								 .gryffindor_score_thousands(4'd4),
+								 /*****HUFFLEPUFF HOUSE SCORE********/
+								 .hufflepuff_score_ones(4'd6), 
+								 .hufflepuff_score_tens(4'd8), 
+								 .hufflepuff_score_hundreds(4'd2), 
+								 .hufflepuff_score_thousands(4'd4),
+								/*****SLYTHERIN HOUSE SCORE********/
+								 .slytherin_score_ones(4'd1), 
+								 .slytherin_score_tens(4'd1), 
+								 .slytherin_score_hundreds(4'd1), 
+								 .slytherin_score_thousands(4'd1),
+								/*******PLAYER 2 HOUSE COLOR*******/
 								 .gryffindor2(G2),
 								 .slytherin2(S2),
 								 .hufflepuff2(H2),
 								 .ravenclaw2(R2),
-								 .snitch_powerup(1'b0),
-								 .time_turner_powerup(1'b0), 
+								 /*******POWERUPS*******/
+								 .snitch_powerup(snitch_powerup),
+								 .time_turner_powerup(1'b1), 
 								 .lightning_powerup(1'b0), 
-								 .broom_powerup(1'b0),
-								 .leaderboard(/*EOG | end_game_early*/ 1'b0), 
-								 .play_again(/*play_again*/ 1'b0), 
-								 .select_mode(/*select_mode*/),
+								 .broom_powerup(1'b1),
+								 .snitch_caught(snitch_caught),
+								 .time_turner_caught(time_turner_caught),
+								 /*******CHANGING SCREENS*******/
+								 .leaderboard(EOG | end_game_early), 
+								 .play_again(play_again), 
+								 .select_mode(select_mode),
 								 .selected_a_mode(selected_a_mode),
-								 .logo(/*logo*/ 1'b0),
+								 .logo(logo),
+								 /*******ENDING GAME EARLY*******/
 								 .end_game_early(end_game_early),
-								 .end_tutorial(end_tutorial),
-								 .random_bit_pin(random_bit_pin)
+								 .end_tutorial(end_tutorial)
 								 );
 	
 	
