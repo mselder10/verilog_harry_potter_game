@@ -6,23 +6,27 @@ module vga_controller(iRST_n,
                       b_data,
                       g_data,
                       r_data,
-							 /*learn_mode,*/
 							 selected_a_mode,
 							 ir_in_p1, ir_in_p2,
 							 gryffindor1, slytherin1, hufflepuff1, ravenclaw1,
 							 gryffindor2, slytherin2, hufflepuff2, ravenclaw2,
 							 two_player_mode,
-					  leaderboard, play_again, select_mode, logo,
-					  crest_out, crest_index,
-					  snitch_powerup, time_turner_powerup, lightning_powerup, broom_powerup,
-					  p1_score_ones, p1_score_tens, p1_score_hundreds, p1_score_thousands,
-					  end_game_early, end_tutorial, random_bit_pin);
+							  leaderboard, play_again, select_mode, logo,
+							  crest_out, crest_index,
+							  snitch_powerup, time_turner_powerup, lightning_powerup, broom_powerup,
+							  ravenclaw_score_ones, ravenclaw_score_tens, ravenclaw_score_hundreds, ravenclaw_score_thousands,
+							  gryffindor_score_ones, gryffindor_score_tens, gryffindor_score_hundreds, gryffindor_score_thousands,
+							  hufflepuff_score_ones, hufflepuff_score_tens, hufflepuff_score_hundreds, hufflepuff_score_thousands,
+							  slytherin_score_ones, slytherin_score_tens, slytherin_score_hundreds, slytherin_score_thousands,
+							  p1_score_ones, p1_score_tens, p1_score_hundreds, p1_score_thousands,
+							  p2_score_ones, p2_score_tens, p2_score_hundreds,
+							  end_game_early, end_tutorial,
+							  snitch_caught, time_turner_caught);
 
 	
 input iRST_n;
 input iVGA_CLK;
-// random bit
-input random_bit_pin;
+
 // learn mode
 wire learn_mode;
 
@@ -39,6 +43,11 @@ input snitch_powerup, time_turner_powerup, lightning_powerup, broom_powerup;
 // scoring
 // scoring
 input [4:0] p1_score_ones, p1_score_tens, p1_score_hundreds, p1_score_thousands;
+input [4:0] p2_score_ones, p2_score_tens, p2_score_hundreds;
+input [4:0] ravenclaw_score_ones, ravenclaw_score_tens, ravenclaw_score_hundreds, ravenclaw_score_thousands,
+				gryffindor_score_ones, gryffindor_score_tens, gryffindor_score_hundreds, gryffindor_score_thousands,
+				hufflepuff_score_ones, hufflepuff_score_tens, hufflepuff_score_hundreds, hufflepuff_score_thousands,
+				slytherin_score_ones, slytherin_score_tens, slytherin_score_hundreds, slytherin_score_thousands;
 /*******ADDED**********/
 // screen inputs
 input leaderboard, logo, play_again;
@@ -46,7 +55,7 @@ input leaderboard, logo, play_again;
 
 /*******ADDED**********/
 // change screen input
-input select_mode;
+inout select_mode;
 /**********************/
 
 // VGA stuff
@@ -263,10 +272,11 @@ four_by_four boxp1(.row(row), .col(col),
 						.R(ravenclaw1), .S(slytherin1), .G(gryffindor1), 
 						.H(hufflepuff1),
 						.already_traced(p1_trace), 
-						.broom_powerup(broom_powerup & ~(p1_trace[6] | p2_trace[6])), .two_player_mode(two_player_mode), 
+						.broom_powerup(broom_powerup & ~(p1_trace[6] | p2_trace[6]) & ((~trace_displayed[6] & ~two_player_mode) | (trace_displayed[6] & two_player_mode))), 
+						.two_player_mode(two_player_mode), 
 						.reset_other_player_trace(reset_p2), .clear_my_trace(reset_p1), 
 						.snitch_location(snitch_location), 
-						.reset_trace(((p1_trace & trace_displayed)==trace_displayed) || (((p2_trace & trace_displayed)==trace_displayed) & two_player_mode)),
+						.reset_trace((((p1_trace & trace_displayed)==trace_displayed) || (((p2_trace & trace_displayed)==trace_displayed) & two_player_mode)) | select_mode),
 						.displayed_trace(trace_displayed));
 					
 // player 2
@@ -279,9 +289,10 @@ four_by_four boxp2(.row(row), .col(col),
 						.R(ravenclaw2), .S(slytherin2), .G(gryffindor2), 
 						.H(hufflepuff2),
 						.already_traced(p2_trace), 
-						.broom_powerup(broom_powerup & ~(p1_trace[6] | p2_trace[6])), .two_player_mode(two_player_mode), 
+						.broom_powerup(broom_powerup & ~(p1_trace[6] | p2_trace[6]) & ((~trace_displayed[6] & ~two_player_mode) | (trace_displayed[6] & two_player_mode))), 
+						.two_player_mode(two_player_mode), 
 						.reset_other_player_trace(reset_p1), .clear_my_trace(reset_p2), 
-						.reset_trace(((p2_trace & trace_displayed)==trace_displayed) || ((p1_trace & trace_displayed)==trace_displayed)),
+						.reset_trace((((p2_trace & trace_displayed)==trace_displayed) || ((p1_trace & trace_displayed)==trace_displayed)) | select_mode),
 						.displayed_trace(trace_displayed));
 				
 /*********TRACE DISPLAY**********/
@@ -296,10 +307,9 @@ wire end_game_early, changed_trace;
 wire [3:0] trace_count;				
 trace_change changez(.trace_to_display(gameplay_trace), .clk(iVGA_CLK), 
 							.p1_traced(p1_trace), .p2_traced(p2_trace), 
-							.trace_screen_on(/*~logo & ~leaderboard & ~select_mode*/ 1'b0), 
+							.trace_screen_on(~logo & ~leaderboard & ~select_mode), 
 							.end_game_early(end_game_early), .trace_count(trace_count),
-							.two_player_mode(two_player_mode), 
-							.TRACE_GEN(1'b1), .random_bit_pin(random_bit_pin));
+							.two_player_mode(two_player_mode));
 
 output end_tutorial;
 wire [5:0] tutorial_trace_count;
@@ -378,32 +388,32 @@ wire [12:0] number_ADDR;
 assign number_ADDR = leaderboard ? leaderboard_score_pixel : num_pixel;
 wire [3:0] ones_place, tens_place, hundreds_place, thousands_place, ten_thousands_place, hundred_thousands_place;
 // gryffindor house points	
-assign ones_place 					= ~play_again & leaderboard & row < 140 ? 4'd0 : 4'bz;
-assign tens_place 					= ~play_again & leaderboard & row < 140 ? 4'd1 : 4'bz;
-assign hundreds_place				= ~play_again & leaderboard & row < 140 ? 4'd0 : 4'bz;
-assign thousands_place 				= ~play_again & leaderboard & row < 140 ? 4'd0 : 4'bz;
+assign ones_place 					= ~play_again & leaderboard & row < 140 ? gryffindor_score_ones : 4'bz;
+assign tens_place 					= ~play_again & leaderboard & row < 140 ? gryffindor_score_tens : 4'bz;
+assign hundreds_place				= ~play_again & leaderboard & row < 140 ? gryffindor_score_hundreds : 4'bz;
+assign thousands_place 				= ~play_again & leaderboard & row < 140 ? gryffindor_score_thousands : 4'bz;
 assign ten_thousands_place 		= ~play_again & leaderboard & row < 140 ? 4'd0 : 4'bz;
 assign hundred_thousands_place 	= ~play_again & leaderboard & row < 140 ? 4'd0 : 4'bz;
 // slytherin house points
-assign ones_place 					= ~play_again & leaderboard & row > 140 & row < 240 ? 4'd0 : 4'bz;
-assign tens_place 					= ~play_again & leaderboard & row > 140 & row < 240 ? 4'd7 : 4'bz;
-assign hundreds_place				= ~play_again & leaderboard & row > 140 & row < 240 ? 4'd0 : 4'bz;
-assign thousands_place 				= ~play_again & leaderboard & row > 140 & row < 240 ? 4'd2 : 4'bz;
+assign ones_place 					= ~play_again & leaderboard & row > 140 & row < 240 ? slytherin_score_ones : 4'bz;
+assign tens_place 					= ~play_again & leaderboard & row > 140 & row < 240 ? slytherin_score_tens : 4'bz;
+assign hundreds_place				= ~play_again & leaderboard & row > 140 & row < 240 ? slytherin_score_hundreds : 4'bz;
+assign thousands_place 				= ~play_again & leaderboard & row > 140 & row < 240 ? slytherin_score_thousands : 4'bz;
 assign ten_thousands_place 		= ~play_again & leaderboard & row > 140 & row < 240 ? 4'd0 : 4'bz;
 assign hundred_thousands_place 	= ~play_again & leaderboard & row > 140 & row < 240 ? 4'd0 : 4'bz;
 // ravenclaw house points
-assign ones_place 					= ~play_again & leaderboard & row > 240 & row < 340 ? 4'd1 : 4'bz;
-assign tens_place 					= ~play_again & leaderboard & row > 240 & row < 340 ? 4'd3 : 4'bz;
-assign hundreds_place				= ~play_again & leaderboard & row > 240 & row < 340 ? 4'd8 : 4'bz;
-assign thousands_place 				= ~play_again & leaderboard & row > 240 & row < 340 ? 4'd0 : 4'bz;
-assign ten_thousands_place 		= ~play_again & leaderboard & row > 240 & row < 340 ? 4'd3 : 4'bz;
+assign ones_place 					= ~play_again & leaderboard & row > 240 & row < 340 ? ravenclaw_score_ones : 4'bz;
+assign tens_place 					= ~play_again & leaderboard & row > 240 & row < 340 ? ravenclaw_score_tens : 4'bz;
+assign hundreds_place				= ~play_again & leaderboard & row > 240 & row < 340 ? ravenclaw_score_hundreds : 4'bz;
+assign thousands_place 				= ~play_again & leaderboard & row > 240 & row < 340 ? ravenclaw_score_thousands : 4'bz;
+assign ten_thousands_place 		= ~play_again & leaderboard & row > 240 & row < 340 ? 4'd0 : 4'bz;
 assign hundred_thousands_place 	= ~play_again & leaderboard & row > 240 & row < 340 ? 4'd0 : 4'bz;
 // hufflepuff house points
-assign ones_place 					= ~play_again & leaderboard & row > 340 ? 4'd0 : 4'bz;
-assign tens_place 					= ~play_again & leaderboard & row > 340 ? 4'd5 : 4'bz;
-assign hundreds_place				= ~play_again & leaderboard & row > 340 ? 4'd7 : 4'bz;
-assign thousands_place 				= ~play_again & leaderboard & row > 340 ? 4'd0 : 4'bz;
-assign ten_thousands_place 		= ~play_again & leaderboard & row > 340 ? 4'd8 : 4'bz;
+assign ones_place 					= ~play_again & leaderboard & row > 340 ? hufflepuff_score_ones : 4'bz;
+assign tens_place 					= ~play_again & leaderboard & row > 340 ? hufflepuff_score_tens : 4'bz;
+assign hundreds_place				= ~play_again & leaderboard & row > 340 ? hufflepuff_score_hundreds : 4'bz;
+assign thousands_place 				= ~play_again & leaderboard & row > 340 ? hufflepuff_score_thousands : 4'bz;
+assign ten_thousands_place 		= ~play_again & leaderboard & row > 340 ? 4'd0 : 4'bz;
 assign hundred_thousands_place 	= ~play_again & leaderboard & row > 340 ? 4'd0 : 4'bz;
 // GAMEPLAY SCORE
 // player 1
@@ -412,9 +422,9 @@ assign tens_place 				= ~play_again & ~leaderboard & ~player ? p1_score_tens : 4
 assign hundreds_place			= ~play_again & ~leaderboard & ~player ? p1_score_hundreds : 4'bz;
 assign thousands_place 			= ~play_again & ~leaderboard & ~player & ~two_player_mode ? p1_score_thousands : 4'bz;
 // player 2
-assign ones_place 				= ~play_again & ~leaderboard & player ? 4'd5 : 4'bz;
-assign tens_place 				= ~play_again & ~leaderboard & player ? 4'd6 : 4'bz;
-assign hundreds_place			= ~play_again & ~leaderboard & player ? 4'd7 : 4'bz;
+assign ones_place 				= ~play_again & ~leaderboard & player ? p2_score_ones : 4'bz;
+assign tens_place 				= ~play_again & ~leaderboard & player ? p2_score_tens : 4'bz;
+assign hundreds_place			= ~play_again & ~leaderboard & player ? p2_score_hundreds : 4'bz;
 
 number numz(.ADDR(number_ADDR), 
 			.clk(iVGA_CLK), .num(num), 
@@ -434,7 +444,8 @@ number numz(.ADDR(number_ADDR),
 /********POWERUPS********/
 // snitch
 wire [7:0] snitch_color;
-wire snitch_here, snitch_caught;
+wire snitch_here; 
+output snitch_caught;
 wire [15:0] snitch_location;
 snitch snitchd(.row(row), .col(col), .clk(iVGA_CLK), .in_trace(in_trace), 
 					.snitch_color(snitch_color), .snitch(snitch_here), 
@@ -443,19 +454,21 @@ snitch snitchd(.row(row), .col(col), .clk(iVGA_CLK), .in_trace(in_trace),
 // broom
 wire broom;
 broom broomz(.row(row), .col(col), .broom(broom), .clk(iVGA_CLK), 
-				 .in_trace(in_trace), .broom_powerup(broom_powerup & ~logo & ~leaderboard && ~(p1_trace[6] | p2_trace[6])));
+				 .in_trace(in_trace), 
+				 .broom_powerup(broom_powerup & ~logo & ~leaderboard && ~(p1_trace[6] | p2_trace[6]) & ~learn_mode & ((~trace_displayed[6] & ~two_player_mode) | (trace_displayed[6] & two_player_mode))));
 
 // time turner
 wire time_turner;
+output time_turner_caught;
 time_turner turnz(.row(row), .col(col), .clk(iVGA_CLK), 
-						.time_turner(time_turner), .in_trace(in_trace), 
-						.time_turner_powerup(time_turner_powerup & ~logo & ~leaderboard));
+						.time_turner(time_turner), .in_trace(in_trace), .time_turner_caught(time_turner_caught),
+						.time_turner_powerup(time_turner_powerup & ~logo & ~leaderboard & ~learn_mode & trace_displayed[12]), .already_traced_12(p1_trace[12]));
 
 // lightning						
 wire lightning;
 lightning boltz(.row(row), .col(col), .clk(iVGA_CLK), 
 						.lightning(lightning), .in_trace(in_trace), 
-						.lightning_powerup(lightning_powerup & ~logo & ~leaderboard));
+						.lightning_powerup(lightning_powerup & ~logo & ~leaderboard & ~learn_mode));
 /*******LETTERS**********/
 wire letter;
 letter letterz(.letter(letter), .clk(iVGA_CLK), .row(row), .col(col), .logo(logo),
@@ -498,7 +511,7 @@ assign file_index = logo ? logo_index : 8'dz;
 assign file_index = (crest1 | crest2 | leader_crest) & ~play_again & crest_out ? crest_index : 8'dz;
 // numbers
 assign file_index = ~num & ~play_again ? num : 8'dz;
-assign file_index = ~countdown & ~logo & ~leaderboard & ~play_again & ~select_mode ? countdown : 8'dz;
+assign file_index = countdown & ~logo & ~leaderboard & ~play_again & ~select_mode ? 8'd0 : 8'dz;
 // powerups
 assign file_index = broom & ~play_again & ~select_mode ? 8'b0 : 8'dz;
 assign file_index = time_turner & ~play_again & ~select_mode ? 8'b0 : 8'dz;
@@ -507,21 +520,21 @@ assign file_index = snitch_here & ~play_again & ~select_mode ? snitch_color : 8'
 // sparkle
 assign file_index = ~sparks & ~logo & ~play_again ? sparks : 8'dz;
 // letters
-assign file_index = ~letter & (leaderboard | play_again | select_mode | logo) ? letter : 8'dz;
+assign file_index = ~letter & (leaderboard | play_again | select_mode) ? letter : 8'dz;
 // background color / trace
 assign file_index = ~logo & ~crest_out & num & ~leaderboard & sparks & ~snitch_here 
-								  & ~broom & ~lightning & ~time_turner & countdown & ~play_again & ~select_mode &
+								  & ~broom & ~lightning & ~time_turner & ~countdown & ~play_again & ~select_mode &
 								  (wand_here1 | (~wand_here1 & ~wand_on1)) & 
 								  (wand_here2 | (~wand_here2 & ~wand_on2)) & 
 								  (wand_here3 | (~wand_here3 & ~wand_on3)) &
 								  (wand_here4 | (~wand_here4 & ~wand_on4)) &
 								  (wand_here5 | (~wand_here5 & ~wand_on5))   ? color_index : 8'dz;
 // leaderboard
-assign file_index = letter & ~leader_crest & leaderboard & sparks ? 8'd1 : 8'dz;
+assign file_index = letter & ~leader_crest & leaderboard & ~play_again & sparks ? 8'd1 : 8'dz;
 
 // text screens
-assign file_index = letter & play_again & ~leaderboard ?  8'd1 : 8'dz;
-assign file_index = letter & select_mode & ~leaderboard & sparks & ~logo ? 8'd1 : 8'dz;
+assign file_index = letter & play_again & ~select_mode ?  8'd1 : 8'dz;
+assign file_index = letter & select_mode & ~leaderboard & sparks & ~crest_out & ~play_again & ~two_player_mode ? 8'd1 : 8'dz;
 
 // learn mode
 assign file_index = (~wand_here1 & wand_on1) & ~play_again ? wand_here1 : 8'dz;
