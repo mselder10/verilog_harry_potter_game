@@ -3,7 +3,7 @@ module regfile (
     ctrl_writeEnable,
     ctrl_reset, ctrl_writeReg,
     ctrl_readRegA, ctrl_readRegB, data_writeReg,
-    data_readRegA, data_readRegB, reg1_data, reg2_data, reg3_data, reg4_data
+    data_readRegA, data_readRegB, reg1_data, reg2_data, reg3_data, reg4_data, reg5_data
 );
 
    input clock, ctrl_writeEnable, ctrl_reset;
@@ -25,13 +25,14 @@ module regfile (
 	mytri32 my_triB0(.enable(readRegB[0]), .in(32'h00000000), .out(data_readRegB));
 	
 	// register 1, 2, 3, 4 - will be reserved for the different players and it's data will always be readable
-	output [31:0] reg1_data, reg2_data, reg3_data, reg4_data;
+	output [31:0] reg1_data, reg2_data, reg3_data, reg4_data, reg5_data;
 	//wire [31:0] data_readReg1, data_readReg2, data_readReg3, data_readReg4;
-	wire WE1, WE2, WE3, WE4;
+	wire WE1, WE2, WE3, WE4, WE5;
 	and enableWrite1(WE1, ctrl_writeEnable, writeReg[1]);
 	and enableWrite2(WE2, ctrl_writeEnable, writeReg[2]);
 	and enableWrite3(WE3, ctrl_writeEnable, writeReg[3]);
 	and enableWrite4(WE4, ctrl_writeEnable, writeReg[4]);
+	and enableWrite5(WE5, ctrl_writeEnable, writeReg[5]);
 	
 	register reg1(clock, WE1, ctrl_reset, data_writeReg, reg1_data);
 	mytri32 my_triA01(.enable(readRegA[1]), .in(reg1_data), .out(data_readRegA));
@@ -49,12 +50,14 @@ module regfile (
 	mytri32 my_triA04(.enable(readRegA[4]), .in(reg4_data), .out(data_readRegA));
 	mytri32 my_triB04(.enable(readRegB[4]), .in(reg4_data), .out(data_readRegB));
 	
-	
+	register reg5(clock, WE5, ctrl_reset, data_writeReg,reg5_data);
+	mytri32 my_triA05(.enable(readRegA[5]), .in(reg5_data), .out(data_readRegA));
+	mytri32 my_triB05(.enable(readRegB[5]), .in(reg5_data), .out(data_readRegB));
 	
 	
 	genvar r;
 	generate
-		for(r = 5; r<32; r=r+1) begin: register_loop			
+		for(r =6; r<32; r=r+1) begin: register_loop			
 			wire [31:0] temp; // for register output
 			// set write enable flag
 			wire WE;
