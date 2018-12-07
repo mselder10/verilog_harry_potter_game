@@ -1,0 +1,798 @@
+// Copyright (C) 1991-2016 Altera Corporation. All rights reserved.
+// Your use of Altera Corporation's design tools, logic functions 
+// and other software and tools, and its AMPP partner logic 
+// functions, and any output files from any of the foregoing 
+// (including device programming or simulation files), and any 
+// associated documentation or information are expressly subject 
+// to the terms and conditions of the Altera Program License 
+// Subscription Agreement, the Altera Quartus Prime License Agreement,
+// the Altera MegaCore Function License Agreement, or other 
+// applicable license agreement, including, without limitation, 
+// that your use is for the sole purpose of programming logic 
+// devices manufactured by Altera and sold by Altera or its 
+// authorized distributors.  Please refer to the applicable 
+// agreement for further details.
+
+// *****************************************************************************
+// This file contains a Verilog test bench with test vectors .The test vectors  
+// are exported from a vector file in the Quartus Waveform Editor and apply to  
+// the top level entity of the current Quartus project .The user can use this   
+// testbench to simulate his design using a third-party simulation tool .       
+// *****************************************************************************
+// Generated on "12/01/2018 10:13:24"
+                                                                                
+// Verilog Test Bench (with test vectors) for design :                          skeleton
+// 
+// Simulation tool : 3rd Party
+// 
+
+`timescale 1 ps/ 1 ps
+module skeleton_vlg_vec_tst();
+// constants                                           
+// general purpose registers
+reg clock;
+reg reset;
+reg [31:0] score_player1;
+reg [31:0] score_player2;
+reg [31:0] score_player3;
+reg [31:0] score_player4;
+// wires                                               
+wire [31:0] reg1_data;
+wire [31:0] reg2_data;
+wire [31:0] reg3_data;
+wire [31:0] reg4_data;
+
+// assign statements (if any)                          
+skeleton i1 (
+// port map - connection between master ports and signals/registers   
+	.clock(clock),
+	.reg1_data(reg1_data),
+	.reg2_data(reg2_data),
+	.reg3_data(reg3_data),
+	.reg4_data(reg4_data),
+	.reset(reset),
+	.score_player1(score_player1),
+	.score_player2(score_player2),
+	.score_player3(score_player3),
+	.score_player4(score_player4)
+);
+initial 
+begin 
+#1000000 $finish;
+end 
+
+// clock
+initial
+begin
+	clock = 1'b1;
+	# 20000;
+	repeat(24)
+	begin
+		clock = 1'b0;
+		clock = #20000 1'b1;
+		# 20000;
+	end
+	clock = 1'b0;
+end 
+
+// reset
+initial
+begin
+	reset = 1'b0;
+end 
+// score_player1[ 31 ]
+initial
+begin
+	score_player1[31] = 1'b0;
+end 
+// score_player1[ 30 ]
+initial
+begin
+	score_player1[30] = 1'b0;
+end 
+// score_player1[ 29 ]
+initial
+begin
+	score_player1[29] = 1'b0;
+end 
+// score_player1[ 28 ]
+initial
+begin
+	score_player1[28] = 1'b0;
+end 
+// score_player1[ 27 ]
+initial
+begin
+	score_player1[27] = 1'b0;
+end 
+// score_player1[ 26 ]
+initial
+begin
+	score_player1[26] = 1'b0;
+end 
+// score_player1[ 25 ]
+initial
+begin
+	score_player1[25] = 1'b0;
+end 
+// score_player1[ 24 ]
+initial
+begin
+	score_player1[24] = 1'b0;
+end 
+// score_player1[ 23 ]
+initial
+begin
+	score_player1[23] = 1'b0;
+end 
+// score_player1[ 22 ]
+initial
+begin
+	score_player1[22] = 1'b0;
+end 
+// score_player1[ 21 ]
+initial
+begin
+	score_player1[21] = 1'b0;
+end 
+// score_player1[ 20 ]
+initial
+begin
+	score_player1[20] = 1'b0;
+end 
+// score_player1[ 19 ]
+initial
+begin
+	score_player1[19] = 1'b0;
+end 
+// score_player1[ 18 ]
+initial
+begin
+	score_player1[18] = 1'b0;
+end 
+// score_player1[ 17 ]
+initial
+begin
+	score_player1[17] = 1'b0;
+end 
+// score_player1[ 16 ]
+initial
+begin
+	score_player1[16] = 1'b0;
+end 
+// score_player1[ 15 ]
+initial
+begin
+	score_player1[15] = 1'b0;
+end 
+// score_player1[ 14 ]
+initial
+begin
+	score_player1[14] = 1'b0;
+end 
+// score_player1[ 13 ]
+initial
+begin
+	score_player1[13] = 1'b0;
+end 
+// score_player1[ 12 ]
+initial
+begin
+	score_player1[12] = 1'b0;
+end 
+// score_player1[ 11 ]
+initial
+begin
+	score_player1[11] = 1'b0;
+end 
+// score_player1[ 10 ]
+initial
+begin
+	score_player1[10] = 1'b0;
+end 
+// score_player1[ 9 ]
+initial
+begin
+	score_player1[9] = 1'b0;
+end 
+// score_player1[ 8 ]
+initial
+begin
+	score_player1[8] = 1'b0;
+	score_player1[8] = #80000 1'b1;
+	score_player1[8] = #40000 1'b0;
+end 
+// score_player1[ 7 ]
+initial
+begin
+	score_player1[7] = 1'b0;
+end 
+// score_player1[ 6 ]
+initial
+begin
+	score_player1[6] = 1'b0;
+	score_player1[6] = #40000 1'b1;
+	score_player1[6] = #40000 1'b0;
+end 
+// score_player1[ 5 ]
+initial
+begin
+	score_player1[5] = 1'b0;
+	score_player1[5] = #40000 1'b1;
+	score_player1[5] = #80000 1'b0;
+	score_player1[5] = #160000 1'b1;
+	score_player1[5] = #50000 1'b0;
+end 
+// score_player1[ 4 ]
+initial
+begin
+	score_player1[4] = 1'b0;
+	score_player1[4] = #280000 1'b1;
+	score_player1[4] = #50000 1'b0;
+end 
+// score_player1[ 3 ]
+initial
+begin
+	score_player1[3] = 1'b0;
+	score_player1[3] = #80000 1'b1;
+	score_player1[3] = #40000 1'b0;
+end 
+// score_player1[ 2 ]
+initial
+begin
+	score_player1[2] = 1'b0;
+	score_player1[2] = #40000 1'b1;
+	score_player1[2] = #80000 1'b0;
+end 
+// score_player1[ 1 ]
+initial
+begin
+	score_player1[1] = 1'b0;
+	score_player1[1] = #280000 1'b1;
+	score_player1[1] = #50000 1'b0;
+end 
+// score_player1[ 0 ]
+initial
+begin
+	score_player1[0] = 1'b0;
+end 
+// score_player2[ 31 ]
+initial
+begin
+	score_player2[31] = 1'b0;
+end 
+// score_player2[ 30 ]
+initial
+begin
+	score_player2[30] = 1'b0;
+end 
+// score_player2[ 29 ]
+initial
+begin
+	score_player2[29] = 1'b0;
+end 
+// score_player2[ 28 ]
+initial
+begin
+	score_player2[28] = 1'b0;
+end 
+// score_player2[ 27 ]
+initial
+begin
+	score_player2[27] = 1'b0;
+end 
+// score_player2[ 26 ]
+initial
+begin
+	score_player2[26] = 1'b0;
+end 
+// score_player2[ 25 ]
+initial
+begin
+	score_player2[25] = 1'b0;
+end 
+// score_player2[ 24 ]
+initial
+begin
+	score_player2[24] = 1'b0;
+end 
+// score_player2[ 23 ]
+initial
+begin
+	score_player2[23] = 1'b0;
+end 
+// score_player2[ 22 ]
+initial
+begin
+	score_player2[22] = 1'b0;
+end 
+// score_player2[ 21 ]
+initial
+begin
+	score_player2[21] = 1'b0;
+end 
+// score_player2[ 20 ]
+initial
+begin
+	score_player2[20] = 1'b0;
+end 
+// score_player2[ 19 ]
+initial
+begin
+	score_player2[19] = 1'b0;
+end 
+// score_player2[ 18 ]
+initial
+begin
+	score_player2[18] = 1'b0;
+end 
+// score_player2[ 17 ]
+initial
+begin
+	score_player2[17] = 1'b0;
+end 
+// score_player2[ 16 ]
+initial
+begin
+	score_player2[16] = 1'b0;
+end 
+// score_player2[ 15 ]
+initial
+begin
+	score_player2[15] = 1'b0;
+end 
+// score_player2[ 14 ]
+initial
+begin
+	score_player2[14] = 1'b0;
+end 
+// score_player2[ 13 ]
+initial
+begin
+	score_player2[13] = 1'b0;
+end 
+// score_player2[ 12 ]
+initial
+begin
+	score_player2[12] = 1'b0;
+end 
+// score_player2[ 11 ]
+initial
+begin
+	score_player2[11] = 1'b0;
+end 
+// score_player2[ 10 ]
+initial
+begin
+	score_player2[10] = 1'b0;
+end 
+// score_player2[ 9 ]
+initial
+begin
+	score_player2[9] = 1'b0;
+end 
+// score_player2[ 8 ]
+initial
+begin
+	score_player2[8] = 1'b0;
+	score_player2[8] = #80000 1'b1;
+	score_player2[8] = #40000 1'b0;
+end 
+// score_player2[ 7 ]
+initial
+begin
+	score_player2[7] = 1'b0;
+	score_player2[7] = #40000 1'b1;
+	score_player2[7] = #40000 1'b0;
+end 
+// score_player2[ 6 ]
+initial
+begin
+	score_player2[6] = 1'b0;
+	score_player2[6] = #40000 1'b1;
+	score_player2[6] = #40000 1'b0;
+end 
+// score_player2[ 5 ]
+initial
+begin
+	score_player2[5] = 1'b0;
+	score_player2[5] = #80000 1'b1;
+	score_player2[5] = #40000 1'b0;
+	score_player2[5] = #160000 1'b1;
+	score_player2[5] = #50000 1'b0;
+end 
+// score_player2[ 4 ]
+initial
+begin
+	score_player2[4] = 1'b0;
+	score_player2[4] = #280000 1'b1;
+	score_player2[4] = #50000 1'b0;
+end 
+// score_player2[ 3 ]
+initial
+begin
+	score_player2[3] = 1'b0;
+	score_player2[3] = #40000 1'b1;
+	score_player2[3] = #80000 1'b0;
+end 
+// score_player2[ 2 ]
+initial
+begin
+	score_player2[2] = 1'b0;
+	score_player2[2] = #80000 1'b1;
+	score_player2[2] = #40000 1'b0;
+end 
+// score_player2[ 1 ]
+initial
+begin
+	score_player2[1] = 1'b0;
+	score_player2[1] = #280000 1'b1;
+	score_player2[1] = #50000 1'b0;
+end 
+// score_player2[ 0 ]
+initial
+begin
+	score_player2[0] = 1'b0;
+end 
+// score_player3[ 31 ]
+initial
+begin
+	score_player3[31] = 1'b0;
+end 
+// score_player3[ 30 ]
+initial
+begin
+	score_player3[30] = 1'b0;
+end 
+// score_player3[ 29 ]
+initial
+begin
+	score_player3[29] = 1'b0;
+end 
+// score_player3[ 28 ]
+initial
+begin
+	score_player3[28] = 1'b0;
+end 
+// score_player3[ 27 ]
+initial
+begin
+	score_player3[27] = 1'b0;
+end 
+// score_player3[ 26 ]
+initial
+begin
+	score_player3[26] = 1'b0;
+end 
+// score_player3[ 25 ]
+initial
+begin
+	score_player3[25] = 1'b0;
+end 
+// score_player3[ 24 ]
+initial
+begin
+	score_player3[24] = 1'b0;
+end 
+// score_player3[ 23 ]
+initial
+begin
+	score_player3[23] = 1'b0;
+end 
+// score_player3[ 22 ]
+initial
+begin
+	score_player3[22] = 1'b0;
+end 
+// score_player3[ 21 ]
+initial
+begin
+	score_player3[21] = 1'b0;
+end 
+// score_player3[ 20 ]
+initial
+begin
+	score_player3[20] = 1'b0;
+end 
+// score_player3[ 19 ]
+initial
+begin
+	score_player3[19] = 1'b0;
+end 
+// score_player3[ 18 ]
+initial
+begin
+	score_player3[18] = 1'b0;
+end 
+// score_player3[ 17 ]
+initial
+begin
+	score_player3[17] = 1'b0;
+end 
+// score_player3[ 16 ]
+initial
+begin
+	score_player3[16] = 1'b0;
+end 
+// score_player3[ 15 ]
+initial
+begin
+	score_player3[15] = 1'b0;
+end 
+// score_player3[ 14 ]
+initial
+begin
+	score_player3[14] = 1'b0;
+end 
+// score_player3[ 13 ]
+initial
+begin
+	score_player3[13] = 1'b0;
+end 
+// score_player3[ 12 ]
+initial
+begin
+	score_player3[12] = 1'b0;
+end 
+// score_player3[ 11 ]
+initial
+begin
+	score_player3[11] = 1'b0;
+end 
+// score_player3[ 10 ]
+initial
+begin
+	score_player3[10] = 1'b0;
+end 
+// score_player3[ 9 ]
+initial
+begin
+	score_player3[9] = 1'b0;
+end 
+// score_player3[ 8 ]
+initial
+begin
+	score_player3[8] = 1'b0;
+	score_player3[8] = #80000 1'b1;
+	score_player3[8] = #40000 1'b0;
+end 
+// score_player3[ 7 ]
+initial
+begin
+	score_player3[7] = 1'b0;
+	score_player3[7] = #40000 1'b1;
+	score_player3[7] = #40000 1'b0;
+end 
+// score_player3[ 6 ]
+initial
+begin
+	score_player3[6] = 1'b0;
+end 
+// score_player3[ 5 ]
+initial
+begin
+	score_player3[5] = 1'b0;
+	score_player3[5] = #80000 1'b1;
+	score_player3[5] = #40000 1'b0;
+	score_player3[5] = #160000 1'b1;
+	score_player3[5] = #50000 1'b0;
+end 
+// score_player3[ 4 ]
+initial
+begin
+	score_player3[4] = 1'b0;
+	score_player3[4] = #40000 1'b1;
+	score_player3[4] = #40000 1'b0;
+	score_player3[4] = #200000 1'b1;
+	score_player3[4] = #50000 1'b0;
+end 
+// score_player3[ 3 ]
+initial
+begin
+	score_player3[3] = 1'b0;
+	score_player3[3] = #80000 1'b1;
+	score_player3[3] = #40000 1'b0;
+end 
+// score_player3[ 2 ]
+initial
+begin
+	score_player3[2] = 1'b0;
+	score_player3[2] = #40000 1'b1;
+	score_player3[2] = #80000 1'b0;
+end 
+// score_player3[ 1 ]
+initial
+begin
+	score_player3[1] = 1'b0;
+	score_player3[1] = #40000 1'b1;
+	score_player3[1] = #40000 1'b0;
+	score_player3[1] = #200000 1'b1;
+	score_player3[1] = #50000 1'b0;
+end 
+// score_player3[ 0 ]
+initial
+begin
+	score_player3[0] = 1'b0;
+end 
+// score_player4[ 31 ]
+initial
+begin
+	score_player4[31] = 1'b0;
+end 
+// score_player4[ 30 ]
+initial
+begin
+	score_player4[30] = 1'b0;
+end 
+// score_player4[ 29 ]
+initial
+begin
+	score_player4[29] = 1'b0;
+end 
+// score_player4[ 28 ]
+initial
+begin
+	score_player4[28] = 1'b0;
+end 
+// score_player4[ 27 ]
+initial
+begin
+	score_player4[27] = 1'b0;
+end 
+// score_player4[ 26 ]
+initial
+begin
+	score_player4[26] = 1'b0;
+end 
+// score_player4[ 25 ]
+initial
+begin
+	score_player4[25] = 1'b0;
+end 
+// score_player4[ 24 ]
+initial
+begin
+	score_player4[24] = 1'b0;
+end 
+// score_player4[ 23 ]
+initial
+begin
+	score_player4[23] = 1'b0;
+end 
+// score_player4[ 22 ]
+initial
+begin
+	score_player4[22] = 1'b0;
+end 
+// score_player4[ 21 ]
+initial
+begin
+	score_player4[21] = 1'b0;
+end 
+// score_player4[ 20 ]
+initial
+begin
+	score_player4[20] = 1'b0;
+end 
+// score_player4[ 19 ]
+initial
+begin
+	score_player4[19] = 1'b0;
+end 
+// score_player4[ 18 ]
+initial
+begin
+	score_player4[18] = 1'b0;
+end 
+// score_player4[ 17 ]
+initial
+begin
+	score_player4[17] = 1'b0;
+end 
+// score_player4[ 16 ]
+initial
+begin
+	score_player4[16] = 1'b0;
+end 
+// score_player4[ 15 ]
+initial
+begin
+	score_player4[15] = 1'b0;
+end 
+// score_player4[ 14 ]
+initial
+begin
+	score_player4[14] = 1'b0;
+end 
+// score_player4[ 13 ]
+initial
+begin
+	score_player4[13] = 1'b0;
+end 
+// score_player4[ 12 ]
+initial
+begin
+	score_player4[12] = 1'b0;
+end 
+// score_player4[ 11 ]
+initial
+begin
+	score_player4[11] = 1'b0;
+end 
+// score_player4[ 10 ]
+initial
+begin
+	score_player4[10] = 1'b0;
+end 
+// score_player4[ 9 ]
+initial
+begin
+	score_player4[9] = 1'b0;
+end 
+// score_player4[ 8 ]
+initial
+begin
+	score_player4[8] = 1'b0;
+	score_player4[8] = #80000 1'b1;
+	score_player4[8] = #40000 1'b0;
+end 
+// score_player4[ 7 ]
+initial
+begin
+	score_player4[7] = 1'b0;
+	score_player4[7] = #40000 1'b1;
+	score_player4[7] = #40000 1'b0;
+end 
+// score_player4[ 6 ]
+initial
+begin
+	score_player4[6] = 1'b0;
+end 
+// score_player4[ 5 ]
+initial
+begin
+	score_player4[5] = 1'b0;
+	score_player4[5] = #80000 1'b1;
+	score_player4[5] = #40000 1'b0;
+	score_player4[5] = #160000 1'b1;
+	score_player4[5] = #50000 1'b0;
+end 
+// score_player4[ 4 ]
+initial
+begin
+	score_player4[4] = 1'b0;
+	score_player4[4] = #40000 1'b1;
+	score_player4[4] = #40000 1'b0;
+	score_player4[4] = #200000 1'b1;
+	score_player4[4] = #50000 1'b0;
+end 
+// score_player4[ 3 ]
+initial
+begin
+	score_player4[3] = 1'b0;
+	score_player4[3] = #80000 1'b1;
+	score_player4[3] = #40000 1'b0;
+end 
+// score_player4[ 2 ]
+initial
+begin
+	score_player4[2] = 1'b0;
+	score_player4[2] = #40000 1'b1;
+	score_player4[2] = #80000 1'b0;
+end 
+// score_player4[ 1 ]
+initial
+begin
+	score_player4[1] = 1'b0;
+	score_player4[1] = #40000 1'b1;
+	score_player4[1] = #40000 1'b0;
+	score_player4[1] = #200000 1'b1;
+	score_player4[1] = #50000 1'b0;
+end 
+// score_player4[ 0 ]
+initial
+begin
+	score_player4[0] = 1'b0;
+end 
+endmodule
+

@@ -1,0 +1,4 @@
+addi $r2, $r0, 100
+jal 256
+add $r3, $r2, $r1
+add $r4, $r31, $r0

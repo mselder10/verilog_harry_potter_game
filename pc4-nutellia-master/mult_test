@@ -1,0 +1,11 @@
+addi $r4, $r0, 12;
+addi $r5, $r0, 10;
+nop
+nop
+nop
+nop
+nop
+nop
+mul $r6, $r4, $r5;
+addi $r7, $r0, 15;
+sub $r17, $r5, $r4;

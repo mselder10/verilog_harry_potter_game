@@ -1,0 +1,135 @@
+Info (10281): Verilog HDL Declaration information at add32.v(3): object "g" differs only in case from object "G" in the same scope File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/add32.v Line: 3
+Info (10281): Verilog HDL Declaration information at add32.v(3): object "p" differs only in case from object "P" in the same scope File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/add32.v Line: 3
+Info (10281): Verilog HDL Declaration information at alu.v(8): object "ZERO" differs only in case from object "zero" in the same scope File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/alu.v Line: 8
+Info (10281): Verilog HDL Declaration information at count_32.v(43): object "dffw" differs only in case from object "dffW" in the same scope File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/count_32.v Line: 43
+Warning (10273): Verilog HDL warning at DX_control.v(32): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/DX_control.v Line: 32
+Warning (10273): Verilog HDL warning at DX_control.v(33): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/DX_control.v Line: 33
+Warning (10273): Verilog HDL warning at DX_control.v(34): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/DX_control.v Line: 34
+Warning (10273): Verilog HDL warning at DX_control.v(35): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/DX_control.v Line: 35
+Warning (10273): Verilog HDL warning at DX_control.v(37): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/DX_control.v Line: 37
+Warning (10273): Verilog HDL warning at DX_control.v(40): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/DX_control.v Line: 40
+Warning (10273): Verilog HDL warning at DX_control.v(42): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/DX_control.v Line: 42
+Warning (10273): Verilog HDL warning at DX_control.v(44): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/DX_control.v Line: 44
+Warning (10273): Verilog HDL warning at DX_control.v(46): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/DX_control.v Line: 46
+Warning (10273): Verilog HDL warning at FD_control.v(24): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/FD_control.v Line: 24
+Warning (10273): Verilog HDL warning at FD_control.v(25): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/FD_control.v Line: 25
+Warning (10273): Verilog HDL warning at FD_control.v(26): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/FD_control.v Line: 26
+Warning (10273): Verilog HDL warning at FD_control.v(27): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/FD_control.v Line: 27
+Info (10281): Verilog HDL Declaration information at mini_ALU.v(7): object "ZERO" differs only in case from object "zero" in the same scope File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/mini_ALU.v Line: 7
+Info (10281): Verilog HDL Declaration information at multdiv.v(5): object "MULT_out" differs only in case from object "mult_out" in the same scope File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/multdiv.v Line: 5
+Info (10281): Verilog HDL Declaration information at multdiv.v(5): object "DIV_out" differs only in case from object "div_out" in the same scope File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/multdiv.v Line: 5
+Warning (10273): Verilog HDL warning at MW_control.v(27): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/MW_control.v Line: 27
+Warning (10273): Verilog HDL warning at MW_control.v(28): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/MW_control.v Line: 28
+Warning (10273): Verilog HDL warning at MW_control.v(29): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/MW_control.v Line: 29
+Warning (10273): Verilog HDL warning at MW_control.v(30): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/MW_control.v Line: 30
+Info (10281): Verilog HDL Declaration information at MW_control.v(15): object "NOTnop" differs only in case from object "notnop" in the same scope File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/MW_control.v Line: 15
+Warning (10273): Verilog HDL warning at vga_controller.v(297): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 297
+Warning (10273): Verilog HDL warning at vga_controller.v(299): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 299
+Warning (10273): Verilog HDL warning at vga_controller.v(300): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 300
+Warning (10273): Verilog HDL warning at vga_controller.v(302): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 302
+Warning (10273): Verilog HDL warning at vga_controller.v(303): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 303
+Warning (10273): Verilog HDL warning at vga_controller.v(304): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 304
+Warning (10273): Verilog HDL warning at vga_controller.v(305): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 305
+Warning (10273): Verilog HDL warning at vga_controller.v(307): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 307
+Warning (10273): Verilog HDL warning at vga_controller.v(357): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 357
+Warning (10273): Verilog HDL warning at vga_controller.v(358): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 358
+Warning (10273): Verilog HDL warning at vga_controller.v(359): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 359
+Warning (10273): Verilog HDL warning at vga_controller.v(360): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 360
+Warning (10273): Verilog HDL warning at vga_controller.v(361): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 361
+Warning (10273): Verilog HDL warning at vga_controller.v(362): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 362
+Warning (10273): Verilog HDL warning at vga_controller.v(364): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 364
+Warning (10273): Verilog HDL warning at vga_controller.v(365): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 365
+Warning (10273): Verilog HDL warning at vga_controller.v(366): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 366
+Warning (10273): Verilog HDL warning at vga_controller.v(367): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 367
+Warning (10273): Verilog HDL warning at vga_controller.v(368): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 368
+Warning (10273): Verilog HDL warning at vga_controller.v(369): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 369
+Warning (10273): Verilog HDL warning at vga_controller.v(371): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 371
+Warning (10273): Verilog HDL warning at vga_controller.v(372): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 372
+Warning (10273): Verilog HDL warning at vga_controller.v(373): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 373
+Warning (10273): Verilog HDL warning at vga_controller.v(374): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 374
+Warning (10273): Verilog HDL warning at vga_controller.v(375): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 375
+Warning (10273): Verilog HDL warning at vga_controller.v(376): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 376
+Warning (10273): Verilog HDL warning at vga_controller.v(378): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 378
+Warning (10273): Verilog HDL warning at vga_controller.v(379): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 379
+Warning (10273): Verilog HDL warning at vga_controller.v(380): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 380
+Warning (10273): Verilog HDL warning at vga_controller.v(381): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 381
+Warning (10273): Verilog HDL warning at vga_controller.v(382): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 382
+Warning (10273): Verilog HDL warning at vga_controller.v(383): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 383
+Warning (10273): Verilog HDL warning at vga_controller.v(386): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 386
+Warning (10273): Verilog HDL warning at vga_controller.v(387): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 387
+Warning (10273): Verilog HDL warning at vga_controller.v(388): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 388
+Warning (10273): Verilog HDL warning at vga_controller.v(389): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 389
+Warning (10273): Verilog HDL warning at vga_controller.v(391): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 391
+Warning (10273): Verilog HDL warning at vga_controller.v(392): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 392
+Warning (10273): Verilog HDL warning at vga_controller.v(393): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 393
+Warning (10273): Verilog HDL warning at vga_controller.v(442): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 442
+Warning (10273): Verilog HDL warning at vga_controller.v(444): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 444
+Warning (10273): Verilog HDL warning at vga_controller.v(446): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 446
+Warning (10273): Verilog HDL warning at vga_controller.v(447): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 447
+Warning (10273): Verilog HDL warning at vga_controller.v(449): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 449
+Warning (10273): Verilog HDL warning at vga_controller.v(450): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 450
+Warning (10273): Verilog HDL warning at vga_controller.v(451): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 451
+Warning (10273): Verilog HDL warning at vga_controller.v(452): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 452
+Warning (10273): Verilog HDL warning at vga_controller.v(454): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 454
+Warning (10273): Verilog HDL warning at vga_controller.v(456): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 456
+Warning (10273): Verilog HDL warning at vga_controller.v(459): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 459
+Warning (10273): Verilog HDL warning at vga_controller.v(461): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 461
+Warning (10273): Verilog HDL warning at vga_controller.v(464): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/vga_controller.v Line: 464
+Info (10281): Verilog HDL Declaration information at graphics.v(28): object "S1" differs only in case from object "s1" in the same scope File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/graphics.v Line: 28
+Info (10281): Verilog HDL Declaration information at graphics.v(27): object "S2" differs only in case from object "s2" in the same scope File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/graphics.v Line: 27
+Warning (10273): Verilog HDL warning at four_by_four.v(223): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/four_by_four.v Line: 223
+Warning (10273): Verilog HDL warning at four_by_four.v(224): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/four_by_four.v Line: 224
+Warning (10273): Verilog HDL warning at four_by_four.v(225): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/four_by_four.v Line: 225
+Warning (10273): Verilog HDL warning at four_by_four.v(226): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/four_by_four.v Line: 226
+Warning (10273): Verilog HDL warning at four_by_four.v(228): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/four_by_four.v Line: 228
+Warning (10273): Verilog HDL warning at four_by_four.v(229): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/four_by_four.v Line: 229
+Warning (10273): Verilog HDL warning at four_by_four.v(230): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/four_by_four.v Line: 230
+Warning (10273): Verilog HDL warning at four_by_four.v(231): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/four_by_four.v Line: 231
+Warning (10273): Verilog HDL warning at four_by_four.v(233): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/four_by_four.v Line: 233
+Warning (10273): Verilog HDL warning at four_by_four.v(235): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/four_by_four.v Line: 235
+Warning (10268): Verilog HDL information at sparkle.v(26): always construct contains both blocking and non-blocking assignments File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/sparkle.v Line: 26
+Warning (10273): Verilog HDL warning at crest.v(29): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/crest.v Line: 29
+Warning (10273): Verilog HDL warning at crest.v(30): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/crest.v Line: 30
+Warning (10273): Verilog HDL warning at crest.v(33): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/crest.v Line: 33
+Warning (10273): Verilog HDL warning at crest.v(34): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/crest.v Line: 34
+Warning (10273): Verilog HDL warning at crest.v(37): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/crest.v Line: 37
+Warning (10273): Verilog HDL warning at crest.v(38): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/crest.v Line: 38
+Warning (10273): Verilog HDL warning at crest.v(41): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/crest.v Line: 41
+Warning (10273): Verilog HDL warning at crest.v(42): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/crest.v Line: 42
+Warning (10273): Verilog HDL warning at crest.v(45): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/crest.v Line: 45
+Warning (10273): Verilog HDL warning at crest.v(49): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/crest.v Line: 49
+Warning (10273): Verilog HDL warning at crest.v(50): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/crest.v Line: 50
+Warning (10273): Verilog HDL warning at crest.v(53): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/crest.v Line: 53
+Warning (10273): Verilog HDL warning at crest.v(54): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/crest.v Line: 54
+Warning (10273): Verilog HDL warning at crest.v(57): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/crest.v Line: 57
+Warning (10273): Verilog HDL warning at crest.v(58): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/crest.v Line: 58
+Warning (10273): Verilog HDL warning at crest.v(61): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/crest.v Line: 61
+Warning (10273): Verilog HDL warning at crest.v(62): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/crest.v Line: 62
+Warning (10273): Verilog HDL warning at crest.v(65): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/crest.v Line: 65
+Warning (10273): Verilog HDL warning at crest.v(69): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/crest.v Line: 69
+Warning (10273): Verilog HDL warning at crest.v(70): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/crest.v Line: 70
+Warning (10273): Verilog HDL warning at crest.v(73): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/crest.v Line: 73
+Warning (10273): Verilog HDL warning at crest.v(74): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/crest.v Line: 74
+Warning (10273): Verilog HDL warning at crest.v(77): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/crest.v Line: 77
+Warning (10273): Verilog HDL warning at crest.v(78): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/crest.v Line: 78
+Warning (10273): Verilog HDL warning at crest.v(81): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/crest.v Line: 81
+Warning (10273): Verilog HDL warning at crest.v(82): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/crest.v Line: 82
+Warning (10273): Verilog HDL warning at number.v(19): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/number.v Line: 19
+Warning (10273): Verilog HDL warning at number.v(20): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/number.v Line: 20
+Warning (10273): Verilog HDL warning at number.v(21): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/number.v Line: 21
+Warning (10273): Verilog HDL warning at number.v(22): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/number.v Line: 22
+Warning (10273): Verilog HDL warning at number.v(23): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/number.v Line: 23
+Warning (10273): Verilog HDL warning at number.v(24): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/number.v Line: 24
+Warning (10273): Verilog HDL warning at house_cup.v(13): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/house_cup.v Line: 13
+Warning (10273): Verilog HDL warning at house_cup.v(14): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/house_cup.v Line: 14
+Warning (10273): Verilog HDL warning at house_cup.v(15): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/house_cup.v Line: 15
+Warning (10273): Verilog HDL warning at house_cup.v(16): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/house_cup.v Line: 16
+Warning (10273): Verilog HDL warning at house_cup.v(17): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/house_cup.v Line: 17
+Warning (10273): Verilog HDL warning at leaderboard.v(28): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/leaderboard.v Line: 28
+Warning (10273): Verilog HDL warning at leaderboard.v(29): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/leaderboard.v Line: 29
+Warning (10273): Verilog HDL warning at leaderboard.v(30): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/leaderboard.v Line: 30
+Warning (10273): Verilog HDL warning at leaderboard.v(31): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/leaderboard.v Line: 31
+Warning (10273): Verilog HDL warning at snitch.v(21): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/snitch.v Line: 21
+Warning (10273): Verilog HDL warning at snitch.v(22): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/snitch.v Line: 22
+Warning (10273): Verilog HDL warning at snitch.v(23): extended using "x" or "z" File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/snitch.v Line: 23
+Warning (10268): Verilog HDL information at trace_change.v(22): always construct contains both blocking and non-blocking assignments File: C:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/trace_change.v Line: 22

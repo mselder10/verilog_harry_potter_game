@@ -1,0 +1,50 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/simulation/qsim
+vskeleton
+Z1 !s110 1544099521
+!i10b 1
+!s100 R7540]RW9E0JGQFJ92>ng2
+IDWMN2>h?cdkjTag6PTY_?0
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+R0
+w1544099518
+8graphics.vo
+Fgraphics.vo
+L0 32
+Z3 OV;L;10.4d;61
+r1
+!s85 0
+31
+!s108 1544099520.000000
+!s107 graphics.vo|
+!s90 -work|work|graphics.vo|
+!i113 1
+Z4 o-work work
+vskeleton_vlg_vec_tst
+R1
+!i10b 1
+!s100 Zd7WJBSBS]9XhAICiQ6PK2
+IzlP7K5<S96A9GagdiDMEn1
+R2
+R0
+w1544099516
+8Waveform.vwf.vt
+FWaveform.vwf.vt
+L0 30
+R3
+r1
+!s85 0
+31
+!s108 1544099521.000000
+!s107 Waveform.vwf.vt|
+!s90 -work|work|Waveform.vwf.vt|
+!i113 1
+R4

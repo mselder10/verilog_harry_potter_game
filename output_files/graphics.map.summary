@@ -1,0 +1,14 @@
+Analysis & Synthesis Status : Successful - Thu Dec 06 07:51:04 2018
+Quartus Prime Version : 16.0.0 Build 211 04/27/2016 SJ Lite Edition
+Revision Name : graphics
+Top-level Entity Name : graphics
+Family : Cyclone IV E
+Total logic elements : 4,200
+    Total combinational functions : 4,158
+    Dedicated logic registers : 849
+Total registers : 849
+Total pins : 74
+Total virtual pins : 0
+Total memory bits : 459,940
+Embedded Multiplier 9-bit elements : 3
+Total PLLs : 1

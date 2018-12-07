@@ -1,0 +1,90 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/altera_lite/16.0/ECE350/FinalProject/final-project-s18-nat-mar-stef/pc4-nutellia-master/simulation/qsim
+vregfile
+!s110 1543782927
+!i10b 1
+!s100 KVo]E1m?`FOdoCXizn:Hl2
+I[??cl:=JfCeSIfj:<LhVe1
+Z1 VDg1SIo80bB@j0V0VzS_@n1
+R0
+w1543782925
+Z2 8skeleton.vo
+Z3 Fskeleton.vo
+Z4 L0 32
+Z5 OV;L;10.4d;61
+r1
+!s85 0
+31
+!s108 1543782927.000000
+Z6 !s107 skeleton.vo|
+Z7 !s90 -work|work|skeleton.vo|
+!i113 1
+Z8 o-work work
+vregfile_vlg_vec_tst
+!s110 1543782928
+!i10b 1
+!s100 LP_ZinCLY4@=I52_ShzB00
+IZ5XYl[TTRSde6dG<:]A6K0
+R1
+R0
+w1543782922
+8testreg.vwf.vt
+Ftestreg.vwf.vt
+Z9 L0 30
+R5
+r1
+!s85 0
+31
+!s108 1543782928.000000
+!s107 testreg.vwf.vt|
+!s90 -work|work|testreg.vwf.vt|
+!i113 1
+R8
+vskeleton
+Z10 !s110 1543791795
+!i10b 1
+!s100 SH<`6o1P9NROa5o693<GB0
+IfV7Gb;[b1c8EimG[dFbRY3
+R1
+R0
+w1543791787
+R2
+R3
+R4
+R5
+r1
+!s85 0
+31
+!s108 1543791794.000000
+R6
+R7
+!i113 1
+R8
+vskeleton_vlg_vec_tst
+R10
+!i10b 1
+!s100 deobRKABW8U;62@UeVRcR3
+In`Y55ojgi]gVRQh=WfcXA3
+R1
+R0
+w1543791784
+8ProcessorScoreTest.vwf.vt
+FProcessorScoreTest.vwf.vt
+R9
+R5
+r1
+!s85 0
+31
+!s108 1543791795.000000
+!s107 ProcessorScoreTest.vwf.vt|
+!s90 -work|work|ProcessorScoreTest.vwf.vt|
+!i113 1
+R8
