@@ -1,0 +1,11 @@
+Wand controllers: 30 points
+2 player: 10-20 points
+Generating traces: 20 points (pseudo random) (30 is random)
+Powerups: 10 points
+Show user trace: 20 points
+Animations/Visuals: 10 points/20 points
+MIF music/sound effects: 20 points
+
+
+
+

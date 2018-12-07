@@ -1,0 +1,22 @@
+module freq_div(clk_in, clk_out);
+
+	input clk_in;
+	output clk_out;
+	
+	reg count;
+	
+	initial
+		count = 0;
+	
+	always@(posedge clk_in)
+		begin
+			if(count >= 4)
+			begin
+				count = 0;
+				clk_out = ~clk_out;
+			end
+			else
+				count = count + 1;
+		end
+
+endmodule
