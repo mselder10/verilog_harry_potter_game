@@ -16,12 +16,13 @@ module vga_controller(iRST_n,
 					  crest_out, crest_index,
 					  snitch_powerup, time_turner_powerup, lightning_powerup, broom_powerup,
 					  p1_score_ones, p1_score_tens, p1_score_hundreds, p1_score_thousands,
-					  end_game_early, end_tutorial);
+					  end_game_early, end_tutorial, random_bit_pin);
 
 	
 input iRST_n;
 input iVGA_CLK;
-
+// random bit
+input random_bit_pin;
 // learn mode
 wire learn_mode;
 
@@ -45,7 +46,7 @@ input leaderboard, logo, play_again;
 
 /*******ADDED**********/
 // change screen input
-inout select_mode;
+input select_mode;
 /**********************/
 
 // VGA stuff
@@ -295,9 +296,10 @@ wire end_game_early, changed_trace;
 wire [3:0] trace_count;				
 trace_change changez(.trace_to_display(gameplay_trace), .clk(iVGA_CLK), 
 							.p1_traced(p1_trace), .p2_traced(p2_trace), 
-							.trace_screen_on(~logo & ~leaderboard & ~select_mode), 
+							.trace_screen_on(/*~logo & ~leaderboard & ~select_mode*/ 1'b0), 
 							.end_game_early(end_game_early), .trace_count(trace_count),
-							.two_player_mode(two_player_mode));
+							.two_player_mode(two_player_mode), 
+							.TRACE_GEN(1'b1), .random_bit_pin(random_bit_pin));
 
 output end_tutorial;
 wire [5:0] tutorial_trace_count;
