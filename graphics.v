@@ -13,7 +13,8 @@ module graphics(resetn,
 	G2, S2, H2, R2,												// house color control player 2
 	two_player_mode,												// dual mode
 	leaderboard,  
-	learn_mode
+	learn_mode,
+	random_bit_pin
 	);
 		
 	////////////////////////	VGA	////////////////////////////
@@ -30,6 +31,7 @@ module graphics(resetn,
 	input 			G1, S1, H1, R1;				// house color controls player 1
 	input				two_player_mode;				// two players
 	input [15:0] ir_in_p1, ir_in_p2;						// ir readings for player 1 and 2
+	input				random_bit_pin;
 
 	////////////////////////	PS2	////////////////////////////
 	input 			resetn;
@@ -90,7 +92,6 @@ module graphics(resetn,
 								 .b_data(VGA_B),
 								 .g_data(VGA_G),
 								 .r_data(VGA_R),
-								 /*.learn_mode(learn_mode),*/
 								 .ir_in_p1(ir_in_p1),
 								 .ir_in_p2(ir_in_p2),
 								 .gryffindor1(G1),
@@ -106,17 +107,18 @@ module graphics(resetn,
 								 .slytherin2(S2),
 								 .hufflepuff2(H2),
 								 .ravenclaw2(R2),
-								 .snitch_powerup(snitch_powerup),
+								 .snitch_powerup(1'b0),
 								 .time_turner_powerup(1'b0), 
 								 .lightning_powerup(1'b0), 
 								 .broom_powerup(1'b0),
-								 .leaderboard(EOG | end_game_early), 
-								 .play_again(play_again), 
-								 .select_mode(select_mode),
+								 .leaderboard(/*EOG | end_game_early*/ 1'b0), 
+								 .play_again(/*play_again*/ 1'b0), 
+								 .select_mode(/*select_mode*/),
 								 .selected_a_mode(selected_a_mode),
-								 .logo(logo),
+								 .logo(/*logo*/ 1'b0),
 								 .end_game_early(end_game_early),
-								 .end_tutorial(end_tutorial)
+								 .end_tutorial(end_tutorial),
+								 .random_bit_pin(random_bit_pin)
 								 );
 	
 	
