@@ -1,0 +1,12 @@
+module set_mode_screen(two_player_mode, clk, learn, ir_in_p1, set_mode);
+
+	input two_player_mode, clk;
+	input [15:0] ir_in_p1;
+	output reg learn;
+	
+	always@(posedge clk & set_mode)
+	begin
+	
+	end
+
+endmodule 

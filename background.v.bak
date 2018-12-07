@@ -1,0 +1,3 @@
+module background(row, col, in_trace, color_index);
+
+endmodule

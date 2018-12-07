@@ -1,0 +1,8 @@
+module broom_powerup(row, col, clk, broom, in_trace, broom_powerup);
+
+	input clk, in_trace, snitch_powerup;
+	input [8:0] row;
+	input [9:0] col;
+
+
+endmodule 
